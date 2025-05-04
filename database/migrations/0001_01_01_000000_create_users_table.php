@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->enum('role', ['member', 'trainer', 'admin'])->default('user');
+            $table->enum('membership_registered', ['unregistered', 'registered'])->default('$unregistered');
+            $table->enum('membership_status', ['active', 'inactive'])->default('inactive');
+            $table->text('profile_bio')->nullable();
+            $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
