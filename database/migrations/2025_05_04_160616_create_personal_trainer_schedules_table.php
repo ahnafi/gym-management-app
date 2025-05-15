@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('scheduled_at');
             $table->enum('status', ['scheduled', 'completed', 'cancelled', 'missed'])->default('scheduled');
-            $table->time('check_int_time');
+            $table->time('check_in_time');
             $table->time('check_out_time')->nullable();
             $table->json('training_log')->nullable();
             $table->text('trainer_notes')->nullable();

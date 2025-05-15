@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('price')->default(0);
             $table->string('images')->nullable();
+            $table->string('personal_trainer_id')->constrained();
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('role', ['member', 'trainer', 'admin'])->default('user');
             $table->enum('membership_registered', ['unregistered', 'registered'])->default('$unregistered');
             $table->enum('membership_status', ['active', 'inactive'])->default('inactive');
+            $table->datetime('membership_end_date')->nullable();
             $table->text('profile_bio')->nullable();
             $table->string('profile_image')->nullable();
             $table->rememberToken();

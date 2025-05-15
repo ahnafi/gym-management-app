@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('amount')->default(0);
 
             $table->string('payment_method')->nullable();
-            $table->string('midtrans_transaction_id')->nullable();
+            $table->string('midtrans_transaction_id')->unique()->nullable();
             $table->string('payment_channel')->nullable();
             $table->string('payment_token')->nullable();
             $table->string('redirect_url')->nullable();
