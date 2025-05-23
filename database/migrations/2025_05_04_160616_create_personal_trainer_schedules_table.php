@@ -20,9 +20,16 @@ return new class extends Migration
             $table->json('training_log')->nullable();
             $table->text('trainer_notes')->nullable();
             $table->text('member_feedback')->nullable();
-            $table->foreignId('personal_trainer_assignment_id')->constrained();
+
+            $table->foreignId('personal_trainer_assignment_id');
+
+            $table->foreign('personal_trainer_assignment_id', 'fk_pts_pta')
+                ->references('id')->on('personal_trainer_assignments')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
+
     }
 
     /**

@@ -11,6 +11,7 @@ class PersonalTrainerAssignment extends Model
     protected $table = 'personal_trainer_assignments';
 
     protected $fillable = [
+        'day_left',
         'start_date',
         'end_date',
         'status',

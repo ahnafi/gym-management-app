@@ -15,6 +15,7 @@ class PersonalTrainerPackage extends Model
         'code',
         'name',
         'description',
+        'day_duration',
         'price',
         'images',
         'personal_trainer_id'
@@ -23,6 +24,15 @@ class PersonalTrainerPackage extends Model
     protected $casts = [
         'images' => 'array',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->code = 'PTP-' . strtoupper(uniqid());
+        });
+    }
 
     public function transactions(): MorphMany
     {

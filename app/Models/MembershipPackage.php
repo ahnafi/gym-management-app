@@ -25,6 +25,15 @@ class MembershipPackage extends Model
         'images' => 'array',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->code = 'MP-' . strtoupper(uniqid());
+        });
+    }
+
     public function membershipHistories(): HasMany
     {
         return $this->hasMany(MembershipHistory::class);

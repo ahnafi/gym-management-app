@@ -22,6 +22,15 @@ class GymClass extends Model
         'images' => 'array',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->code = 'GC-' . strtoupper(uniqid());
+        });
+    }
+
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'purchasable');

@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('personal_trainer_assignments', function (Blueprint $table) {
             $table->id();
+            $table->integer('day_left');
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->enum('status', ['active', 'cancelled', 'completed'])->default('active');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('personal_trainer_id')->constrained();
-            $table->foreignId('personal_trainer_package_id')->constrained();
+
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('personal_trainer_id')->constrained('users');
+            $table->foreignId('personal_trainer_package_id')->constrained('personal_trainer_packages');
+
             $table->timestamps();
         });
+
     }
 
     /**
