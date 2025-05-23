@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('profile_bio')->nullable();
             $table->string('profile_image')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 
