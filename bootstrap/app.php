@@ -21,7 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
-            EnsureUserIsTrainer::class
+        ]);
+
+        $middleware->alias([
+            'trainer' => EnsureUserIsTrainer::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
