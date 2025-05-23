@@ -23,7 +23,9 @@ class CatalogController extends Controller
 
     }
 
-    public function personalTrainers() {}
+    public function personalTrainers() {
+        return Inertia::render('personalTrainer/index');
+    }
 
     public function trainerPackages()
     {
