@@ -1,27 +1,133 @@
-import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import {
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { type NavItem, SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
+import {
+    LayoutGrid,
+    Boxes,
+    PersonStanding,
+    BicepsFlexed,
+    CalendarDays,
+    ShoppingCart,
+    History,
+    CreditCard,
+    Dumbbell
+} from 'lucide-react';
 
-export function NavMain({ items = [] }: { items: NavItem[] }) {
+type NavGroup = {
+    label?: string;
+    items: NavItem[];
+};
+
+const dashboardItem: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+        icon: LayoutGrid,
+    },
+];
+
+const katalogItems: NavItem[] = [
+    {
+        title: 'Paket Membership',
+        href: '/membership-packages',
+        icon: Boxes,
+    },
+    {
+        title: 'Personal Trainer',
+        href: '/personal-trainers',
+        icon: BicepsFlexed,
+    },
+    {
+        title: 'Kelas Gym',
+        href: '/gym-classes',
+        icon: Dumbbell,
+    },
+];
+
+const pembayaranItems: NavItem[] = [
+    {
+        title: 'Pembayaran',
+        href: '/payments',
+        icon: CreditCard,
+    },
+];
+
+const riwayatItems: NavItem[] = [
+    {
+        title: 'Riwayat Pembayaran',
+        href: '/payment-history',
+        icon: History,
+    },
+    {
+        title: 'Riwayat Membership',
+        href: '/membership-history',
+        icon: History,
+    },
+    {
+        title: 'Riwayat Kelas Gym',
+        href: '/gym-class-history',
+        icon: History,
+    },
+    {
+        title: 'Riwayat Personal Training',
+        href: '/personal-training-history',
+        icon: History,
+    },
+];
+
+const personalTrainerItems: NavItem[] = [
+    {
+        title: 'Personal Trainer Dashboard',
+        href: '/personal-trainer-dashboard',
+        icon: PersonStanding,
+    }
+];
+
+export function NavMain() {
+    const { auth } = usePage<SharedData>().props;
+    const user = auth.user;
     const page = usePage();
+
+    const groups: NavGroup[] = [
+        { items: dashboardItem }, // Dashboard without label
+        { label: 'Katalog', items: katalogItems },
+        { label: 'Pembayaran', items: pembayaranItems },
+        { label: 'Riwayat', items: riwayatItems },
+    ];
+
+    if (user.role === 'trainer') {
+        groups.push({ label: 'Personal Trainer', items: personalTrainerItems });
+    }
+
     return (
-        <SidebarGroup className="px-2 py-0">
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
-            <SidebarMenu>
-                {items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton  
-                            asChild isActive={item.href === page.url}
-                            tooltip={{ children: item.title }}
-                        >
-                            <Link href={item.href} prefetch>
-                                {item.icon && <item.icon />}
-                                <span>{item.title}</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                ))}
-            </SidebarMenu>
-        </SidebarGroup>
+        <>
+            {groups.map(({ label, items }, i) => (
+                <SidebarGroup className="px-2 py-0" key={i}>
+                    {label && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
+                    <SidebarMenu>
+                        {items.map((item) => (
+                            <SidebarMenuItem key={item.title}>
+                                <SidebarMenuButton
+                                    asChild
+                                    isActive={item.href === page.url}
+                                    tooltip={{ children: item.title }}
+                                >
+                                    <Link href={item.href} prefetch>
+                                        {item.icon && <item.icon />}
+                                        <span>{item.title}</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        ))}
+                    </SidebarMenu>
+                </SidebarGroup>
+            ))}
+        </>
     );
 }
