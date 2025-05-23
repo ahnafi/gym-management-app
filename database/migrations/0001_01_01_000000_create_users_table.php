@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->enum('role', ['member', 'trainer', 'admin'])->default('user');
-            $table->enum('membership_registered', ['unregistered', 'registered'])->default('$unregistered');
+            $table->enum('role', ['member', 'trainer', 'admin'])->default('member');
+            $table->enum('membership_registered', ['unregistered', 'registered'])->default('unregistered');
             $table->enum('membership_status', ['active', 'inactive'])->default('inactive');
             $table->datetime('membership_end_date')->nullable();
             $table->text('profile_bio')->nullable();
