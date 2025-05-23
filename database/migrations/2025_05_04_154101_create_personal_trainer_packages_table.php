@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->integer('day_duration')->default(0);
             $table->integer('price')->default(0);
             $table->string('images')->nullable();
             $table->string('personal_trainer_id')->constrained();
