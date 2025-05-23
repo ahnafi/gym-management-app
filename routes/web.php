@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\PersonalTrainerController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -13,18 +14,24 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // General authenticated routes
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('dashboard/membership-history', [DashboardController::class, 'membershipHistory'])->name('dashboard.history');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Catalog routes (gym classes, trainers, packages, memberships, etc.)
-    Route::prefix('catalog')->name('catalog.')->group(function () {
-        Route::get('gym-classes', [CatalogController::class, 'gymClasses'])->name('gym-classes.index');
-        Route::get('gym-classes/schedule', [CatalogController::class, 'gymClassSchedule'])->name('gym-classes.schedule');
+    Route::controller(CatalogController::class)->group(function () {
+        Route::get('gym-classes', 'gymClasses')->name('gym-classes.index');
+        Route::get('gym-classes/schedule', 'gymClassSchedule')->name('gym-classes.schedule');
 
-        Route::get('personal-trainers', [CatalogController::class, 'personalTrainers'])->name('personal-trainers.index');
-        Route::get('trainer-packages', [CatalogController::class, 'trainerPackages'])->name('trainer-packages.index');
+        Route::get('personal-trainers', 'personalTrainers')->name('personal-trainers.index');
+        Route::get('personal-trainers/packages', 'trainerPackages')->name('personal-trainers.package');
 
-        Route::get('membership-packages', [CatalogController::class, 'membershipPackages'])->name('membership-packages.index');
+        Route::get('membership-packages', 'membershipPackages')->name('membership-packages.index');
+    });
+
+    Route::controller(HistoryController::class)->group(function () {
+       Route::get('payment-history','paymentHistory')->name('payment-history');
+       Route::get('membership-history','membershipHistory')->name('membership-history');
+       Route::get('gym-class-history','gymClassHistory')->name('gym-class-history');
+       Route::get('personal-training-history','personalTrainingHistory')->name('personal-training-history');
     });
 
     // Payment route
