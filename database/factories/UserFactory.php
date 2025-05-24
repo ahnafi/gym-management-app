@@ -29,6 +29,13 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'phone' => fake()->phoneNumber(),
+            'role' => fake()->randomElement(['member', 'trainer', 'admin']),
+            'membership_registered' => fake()->randomElement(['registered', 'unregistered']),
+            'membership_status' => fake()->randomElement(['active', 'inactive']),
+            'membership_end_date' => fake()->optional()->dateTimeBetween('+1 week', '+1 year'),
+            'profile_bio' => fake()->optional()->paragraph(),
+            'profile_image' => 'images/profile/' . fake()->image('public/storage/images/profile', 400, 400, null, false),
         ];
     }
 
