@@ -36,6 +36,14 @@ class PersonalTrainer extends Model
             $user->role = 'trainer';
             $user->save();
         });
+
+        static::deleting(function ($model) {
+            $user = User::find($model->user_personal_trainer_id);
+            if ($user) {
+                $user->role = 'member';
+                $user->save();
+            }
+        });
     }
 
     public function userPersonalTrainer(): BelongsTo
