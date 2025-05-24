@@ -41,7 +41,7 @@ class PersonalTrainerPackage extends Model
 
     public function personalTrainer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'personal_trainer_id');
+        return $this->belongsTo(PersonalTrainer::class, 'personal_trainer_id');
     }
 
     public function personalTrainerAssignments(): HasMany
