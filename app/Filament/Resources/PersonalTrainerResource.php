@@ -9,9 +9,11 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Forms\Components\KeyValue;
 use App\Models\PersonalTrainer;
 
 class PersonalTrainerResource extends Resource
@@ -44,17 +46,16 @@ class PersonalTrainerResource extends Resource
                 FileUpload::make('images')
                     ->label('Gambar')
                     ->image()
+                    ->multiple()
                     ->directory('personal-trainers')
                     ->imagePreviewHeight('150'),
 
-                TextInput::make('metadata')
+                KeyValue::make('metadata')
                     ->label('Metadata')
-                    ->json()
-                    ->required()
-                    ->maxLength(65535)
-                    ->placeholder('{"key": "value"}')
-                    ->helperText('Masukkan metadata dalam format JSON. Contoh: {"key": "value"}'),
-            ]);
+                    ->keyLabel('Kunci')
+                    ->valueLabel('Isi')
+                    ->addActionLabel('Tambah Data')
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -79,8 +80,18 @@ class PersonalTrainerResource extends Resource
 
                 TextColumn::make('metadata')
                     ->label('Metadata')
-                    ->limit(30),
-            ])
+                    ->formatStateUsing(function ($state, $record) {
+                        $decoded = $record->metadata; // use casted model field
+
+                        if (!is_array($decoded)) return '-';
+
+                        return collect($decoded)
+                            ->map(fn($value, $key) => "<strong>{$key}</strong>: {$value}")
+                            ->implode('<br>');
+                    })
+                    ->html()
+                    ->wrap()
+        ])
 
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
