@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PersonalTrainer extends Model
 {
-    protected $table = 'personal_trainer';
+    protected $table = 'personal_trainers';
 
     protected $fillable = [
         'code',
@@ -31,6 +31,10 @@ class PersonalTrainer extends Model
 
         static::creating(function ($model) {
             $model->code = 'PT-' . strtoupper(uniqid());
+            $userId = $model->user_personal_trainer_id;
+            $user = User::find($userId);
+            $user->role = 'trainer';
+            $user->save();
         });
     }
 
