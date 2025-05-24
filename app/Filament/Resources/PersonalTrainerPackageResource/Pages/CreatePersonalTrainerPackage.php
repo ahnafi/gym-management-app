@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePersonalTrainerPackage extends CreateRecord
 {
     protected static string $resource = PersonalTrainerPackageResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
 }

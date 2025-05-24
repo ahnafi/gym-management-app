@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GymClassResource\Pages;
+use App\Filament\Resources\GymClassResource\RelationManagers\GymClassSchedulesRelationManager;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,7 +18,7 @@ use App\Models\GymClass;
 class GymClassResource extends Resource
 {
     protected static ?string $model = GymClass::class;
-
+    protected static ?string $label = 'Kelas Gym';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationGroup = 'Manajemen Paket Gym';
@@ -84,7 +85,7 @@ class GymClassResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            GymClassSchedulesRelationManager::class,
         ];
     }
 

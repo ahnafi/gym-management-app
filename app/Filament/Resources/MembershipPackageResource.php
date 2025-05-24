@@ -17,6 +17,7 @@ use App\Models\MembershipPackage;
 class MembershipPackageResource extends Resource
 {
     protected static ?string $model = MembershipPackage::class;
+    protected static ?string $label = 'Paket Membership';
     protected static ?string $navigationGroup = 'Manajemen Paket Gym';
     protected static ?string $navigationLabel = 'Paket Membership';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

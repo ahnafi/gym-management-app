@@ -19,7 +19,7 @@ use App\Models\PersonalTrainer;
 class PersonalTrainerResource extends Resource
 {
     protected static ?string $model = PersonalTrainer::class;
-
+    protected static ?string $label = 'Personal Trainer';
     protected static ?string $navigationGroup = 'Manajemen Pengguna';
     protected static ?string $navigationLabel = 'Personal Trainer';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
@@ -41,6 +41,7 @@ class PersonalTrainerResource extends Resource
                 Select::make('user_personal_trainer_id')
                     ->label('Personal Trainer')
                     ->relationship('userPersonalTrainer', 'name')
+                    ->searchable()
                     ->required(),
 
                 FileUpload::make('images')
@@ -92,7 +93,10 @@ class PersonalTrainerResource extends Resource
                     ->html()
                     ->wrap()
         ])
-
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

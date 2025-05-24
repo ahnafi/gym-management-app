@@ -17,7 +17,7 @@ use App\Models\PersonalTrainerPackage;
 class PersonalTrainerPackageResource extends Resource
 {
     protected static ?string $model = PersonalTrainerPackage::class;
-
+    protected static ?string $label = 'Paket Personal Trainer';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?int $navigationSort = 4;
     protected static ?string $navigationGroup = 'Manajemen Paket Gym';

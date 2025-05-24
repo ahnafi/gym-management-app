@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMembershipPackage extends CreateRecord
 {
     protected static string $resource = MembershipPackageResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
 }
