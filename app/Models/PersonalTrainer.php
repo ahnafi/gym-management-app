@@ -25,12 +25,21 @@ class PersonalTrainer extends Model
         'images' => 'array',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->code = 'PT-' . strtoupper(uniqid());
+        });
+    }
+
     public function userPersonalTrainer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_personal_trainer_id');
     }
 
-    public function personalTrainerPackages(): HasMany
+    public function personalTrainerPackage(): HasMany
     {
         return $this->hasMany(PersonalTrainerPackage::class, 'personal_trainer_id');
     }

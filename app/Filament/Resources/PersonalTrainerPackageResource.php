@@ -48,7 +48,7 @@ class PersonalTrainerPackageResource extends Resource
 
                 Select::make('personal_trainer_id')
                     ->label('Personal Trainer')
-                    ->relationship('personalTrainer', 'name', fn ($query) => $query->where('role', 'trainer'))
+                    ->relationship('personalTrainer', 'nickname')
                     ->required(),
 
                 FileUpload::make('images')
