@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GymClassSchedule extends Model
 {
-    protected $table = 'gym_classes_schedules';
+    protected $table = 'gym_class_schedules';
 
     protected $fillable = [
         'date',
@@ -20,9 +20,8 @@ class GymClassSchedule extends Model
 
     protected $casts = [
         'date' => 'date',
-        'start_time' => 'time',
-        'end_time' => 'time',
     ];
+
 
     public function gymClass(): BelongsTo
     {

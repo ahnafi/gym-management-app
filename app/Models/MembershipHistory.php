@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MembershipHistory extends Model
+class MembershipHistory extends Pivot
 {
+    use SoftDeletes;
+
     protected $table = 'membership_histories';
 
     protected $fillable = [
