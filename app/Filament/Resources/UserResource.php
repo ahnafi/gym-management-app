@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers\GymVisitRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\MembershipHistoriesRelationManager;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,10 +21,10 @@ use Filament\Tables\Table;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
+    protected static ?string $label = 'Pengguna';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Manajemen Pengguna';
     protected static ?string $navigationLabel = 'Pengguna';
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -85,7 +87,15 @@ class UserResource extends Resource
 
                 TextColumn::make('email')->searchable()->sortable(),
 
-                TextColumn::make('role')->badge(),
+                TextColumn::make('role')
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'admin' => 'Admin',
+                        'member' => 'Member',
+                        'trainer' => 'Trainer',
+                        default => ucfirst($state),
+                    })
+                ,
 
                 TextColumn::make('membership_registered')
                     ->label('Status Pendaftaran')
@@ -93,7 +103,12 @@ class UserResource extends Resource
                     ->colors([
                         'success' => 'registered',
                         'danger' => 'unregistered',
-                    ]),
+                    ])
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'registered' => 'Terdaftar',
+                        'unregistered' => 'Tidak Terdaftar',
+                        default => ucfirst($state),
+                    }),
 
                 TextColumn::make('membership_status')
                     ->label('Status Membership')
@@ -101,7 +116,12 @@ class UserResource extends Resource
                     ->colors([
                             'success' => 'active',
                             'danger' => 'inactive',
-                        ]),
+                        ])
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'active' => 'Aktif',
+                        'inactive' => 'Nonaktif',
+                        default => ucfirst($state),
+                    }),
 
                 TextColumn::make('membership_end_date')
                     ->label('Tanggal Berakhir Membership')
@@ -125,7 +145,8 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MembershipHistoriesRelationManager::class,
+            GymVisitRelationManager::class
         ];
     }
 
