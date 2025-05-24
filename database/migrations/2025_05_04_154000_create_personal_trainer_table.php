@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('metadata')->nullable();
             $table->string('images')->nullable();
-            $table->string('user_personal_trainer_id')->constrained('users');
+            $table->foreignId('user_personal_trainer_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

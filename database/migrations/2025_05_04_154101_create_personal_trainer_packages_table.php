@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('day_duration')->default(0);
             $table->integer('price')->default(0);
             $table->string('images')->nullable();
-            $table->string('personal_trainer_id')->constrained();
+            $table->foreignId('personal_trainer_id')->constrained('personal_trainers');
             $table->timestamps();
         });
     }

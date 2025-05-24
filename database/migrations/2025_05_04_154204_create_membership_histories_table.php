@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'expired'])->default('active');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('membership_package_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
