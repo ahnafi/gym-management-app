@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('snap_token')->nullable();
             $table->datetime('payment_date')->nullable();
-            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('unpaid');
+            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
 
             $table->morphs('purchasable');
             $table->foreignId('user_id')->constrained();
