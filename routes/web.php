@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // 👇 Routes for trainers only
-Route::middleware(['auth', 'verified', 'trainer'])->group(function () {
+Route::middleware(['trainer-area'])->group(function () {
     Route::get('personal-trainer-dashboard', [PersonalTrainerController::class, 'dashboard'])
         ->name('personal-trainer-dashboard');
 });

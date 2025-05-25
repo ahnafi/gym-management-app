@@ -1,6 +1,9 @@
 <?php
 
+use App\Filament\Pages\Dashboard;
+
 return [
+    'dashboard' => Dashboard::class,
 
     /*
     |--------------------------------------------------------------------------

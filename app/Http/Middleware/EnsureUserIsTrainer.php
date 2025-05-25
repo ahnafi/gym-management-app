@@ -1,18 +1,18 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserIsTrainer
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->role === 'trainer') {
-            return $next($request);
+        if (auth()->user()->role !== 'trainer') {
+            abort(403, 'Access denied');
         }
 
-        abort(403, 'Access denied');
+        return $next($request);
     }
 }

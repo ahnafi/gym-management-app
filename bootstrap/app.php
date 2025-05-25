@@ -24,9 +24,15 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
-            'trainer' => EnsureUserIsTrainer::class,
+            'trainer' => EnsureUserIsTrainer::class
+        ]);
+
+        $middleware->group('trainer-area', [
+            'web',
+            'auth',
+            'verified',
+            'trainer',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
     })->create();
