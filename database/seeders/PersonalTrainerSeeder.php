@@ -11,22 +11,6 @@ class PersonalTrainerSeeder extends Seeder
     {
         $trainers = [
             [
-                'code' => 'PT001',
-                'nickname' => 'Andi',
-                'description' => 'Ahli kebugaran umum.',
-                'metadata' => json_encode(['experience_years' => 5, 'specialties' => ['cardio', 'strength']]),
-                'images' => ['default.jpg'],
-                'user_personal_trainer_id' => 1,
-            ],
-            [
-                'code' => 'PT002',
-                'nickname' => 'Budi',
-                'description' => 'Spesialis pembentukan otot.',
-                'metadata' => json_encode(['experience_years' => 4, 'specialties' => ['muscle building']]),
-                'images' => ['default.jpg'],
-                'user_personal_trainer_id' => 2,
-            ],
-            [
                 'code' => 'PT003',
                 'nickname' => 'Citra',
                 'description' => 'Fokus pada wanita dan kebugaran pasca melahirkan.',
@@ -66,16 +50,9 @@ class PersonalTrainerSeeder extends Seeder
                 'images' => ['default.jpg'],
                 'user_personal_trainer_id' => 7,
             ],
+
             [
                 'code' => 'PT008',
-                'nickname' => 'Hadi',
-                'description' => 'Ahli pemulihan pasca cedera.',
-                'metadata' => json_encode(['experience_years' => 8, 'specialties' => ['rehab', 'recovery']]),
-                'images' => ['default.jpg'],
-                'user_personal_trainer_id' => 8,
-            ],
-            [
-                'code' => 'PT009',
                 'nickname' => 'Indah',
                 'description' => 'Fokus pelatihan wanita muda.',
                 'metadata' => json_encode(['experience_years' => 2, 'specialties' => ['beginner female fitness']]),
@@ -83,7 +60,7 @@ class PersonalTrainerSeeder extends Seeder
                 'user_personal_trainer_id' => 9,
             ],
             [
-                'code' => 'PT010',
+                'code' => 'PT09',
                 'nickname' => 'Joko',
                 'description' => 'Pelatih senior dengan sertifikasi internasional.',
                 'metadata' => json_encode(['experience_years' => 12, 'certified' => true]),
