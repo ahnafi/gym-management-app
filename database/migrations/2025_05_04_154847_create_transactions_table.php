@@ -16,17 +16,9 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->integer('amount')->default(0);
 
-            $table->string('payment_method')->nullable();
-            $table->string('midtrans_transaction_id')->unique()->nullable();
-            $table->string('payment_channel')->nullable();
-            $table->string('payment_token')->nullable();
-            $table->string('redirect_url')->nullable();
-
-            $table->datetime('payment_deadline');
+            $table->string('snap_token')->nullable();
             $table->datetime('payment_date')->nullable();
-            $table->enum('payment_status', ['unpaid', 'pending', 'paid', 'expired', 'failed', 'refunded'])->default('unpaid');
-
-            $table->json('raw_notification')->nullable();
+            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('unpaid');
 
             $table->morphs('purchasable');
             $table->foreignId('user_id')->constrained();
