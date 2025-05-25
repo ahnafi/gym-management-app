@@ -16,7 +16,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30, // hari
                 'price' => 200000,
                 'status' => 'active',
-                'images' => 'packages/silver.jpg',
+                'images' => ['default.jpg'],
             ],
             [
                 'name' => 'Gold Package',
@@ -24,7 +24,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 350000,
                 'status' => 'active',
-                'images' => 'packages/gold.jpg',
+                'images' => ['default.jpg'],
             ],
             [
                 'name' => 'Platinum Package',
@@ -32,7 +32,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 500000,
                 'status' => 'active',
-                'images' => 'packages/platinum.jpg',
+                'images' => ['default.jpg'],
             ],
             [
                 'name' => 'Student Package',
@@ -40,7 +40,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 150000,
                 'status' => 'active',
-                'images' => 'packages/student.jpg',
+                'images' => ['default.jpg'],
             ],
             [
                 'name' => 'Quarterly Package',
@@ -48,7 +48,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 90,
                 'price' => 900000,
                 'status' => 'inactive',
-                'images' => 'packages/quarterly.jpg',
+                'images' => ['default.jpg'],
             ],
             [
                 'name' => 'Annual Package',
@@ -56,7 +56,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 365,
                 'price' => 3000000,
                 'status' => 'active',
-                'images' => 'packages/annual.jpg',
+                'images' => ['default.jpg'],
             ],
         ];
 

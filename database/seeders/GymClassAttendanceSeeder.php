@@ -4,36 +4,77 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\GymClassAttendance;
-use App\Models\User;
-use App\Models\GymClassSchedule;
 use Carbon\Carbon;
 
 class GymClassAttendanceSeeder extends Seeder
 {
     public function run(): void
     {
-        // Ambil 10 user dengan role 'member'
-        $members = User::where('role', 'member')->inRandomOrder()->take(10)->get();
+        $attendances = [
+            [
+                'status' => 'attended',
+                'attended_at' => Carbon::now()->subDays(10),
+                'user_id' => 1,
+                'gym_class_schedule_id' => 1,
+            ],
+            [
+                'status' => 'missed',
+                'attended_at' => Carbon::now()->subDays(9),
+                'user_id' => 2,
+                'gym_class_schedule_id' => 2,
+            ],
+            [
+                'status' => 'cancelled',
+                'attended_at' => Carbon::now()->subDays(8),
+                'user_id' => 3,
+                'gym_class_schedule_id' => 3,
+            ],
+            [
+                'status' => 'assigned',
+                'attended_at' => Carbon::now()->subDays(7),
+                'user_id' => 4,
+                'gym_class_schedule_id' => 4,
+            ],
+            [
+                'status' => 'attended',
+                'attended_at' => Carbon::now()->subDays(6),
+                'user_id' => 5,
+                'gym_class_schedule_id' => 5,
+            ],
+            [
+                'status' => 'missed',
+                'attended_at' => Carbon::now()->subDays(5),
+                'user_id' => 6,
+                'gym_class_schedule_id' => 6,
+            ],
+            [
+                'status' => 'assigned',
+                'attended_at' => Carbon::now()->subDays(4),
+                'user_id' => 7,
+                'gym_class_schedule_id' => 7,
+            ],
+            [
+                'status' => 'attended',
+                'attended_at' => Carbon::now()->subDays(3),
+                'user_id' => 8,
+                'gym_class_schedule_id' => 8,
+            ],
+            [
+                'status' => 'cancelled',
+                'attended_at' => Carbon::now()->subDays(2),
+                'user_id' => 9,
+                'gym_class_schedule_id' => 9,
+            ],
+            [
+                'status' => 'attended',
+                'attended_at' => Carbon::now()->subDays(1),
+                'user_id' => 10,
+                'gym_class_schedule_id' => 10,
+            ],
+        ];
 
-        // Ambil semua jadwal gym class
-        $schedules = GymClassSchedule::pluck('id')->toArray();
-
-        // Status acak untuk variasi
-        $statuses = ['assigned', 'attended', 'missed', 'cancelled'];
-
-        $attendances = [];
-
-        foreach ($members as $member) {
-            $attendances[] = [
-                'status' => $statuses[array_rand($statuses)],
-                'attended_at' => Carbon::now()->subDays(rand(1, 10))->format('Y-m-d H:i:s'),
-                'user_id' => $member->id,
-                'gym_class_schedule_id' => $schedules[array_rand($schedules)],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+        foreach ($attendances as $attendance) {
+            GymClassAttendance::create($attendance);
         }
-
-        GymClassAttendance::insert($attendances);
     }
 }

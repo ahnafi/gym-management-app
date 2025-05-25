@@ -15,7 +15,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program dasar untuk pemula dalam kebugaran.',
                 'day_duration' => 7,
                 'price' => 300000,
-                'images' => 'pt_packages/basic.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 1,
             ],
             [
@@ -23,7 +23,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program personal trainer untuk penurunan berat badan.',
                 'day_duration' => 14,
                 'price' => 600000,
-                'images' => 'pt_packages/weight_loss.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 2,
             ],
             [
@@ -31,7 +31,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Fokus pada pembentukan massa otot.',
                 'day_duration' => 30,
                 'price' => 1200000,
-                'images' => 'pt_packages/muscle_build.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 3,
             ],
             [
@@ -39,7 +39,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program peningkatan stamina dan kebugaran jantung.',
                 'day_duration' => 10,
                 'price' => 400000,
-                'images' => 'pt_packages/cardio.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 1,
             ],
             [
@@ -47,7 +47,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program khusus untuk pemulihan pasca cedera.',
                 'day_duration' => 21,
                 'price' => 900000,
-                'images' => 'pt_packages/recovery.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 2,
             ],
             [
@@ -55,7 +55,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Latihan kekuatan intensif untuk peningkatan performa.',
                 'day_duration' => 30,
                 'price' => 1300000,
-                'images' => 'pt_packages/strength.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 3,
             ],
             [
@@ -63,7 +63,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Fokus pada peningkatan fleksibilitas dan mobilitas tubuh.',
                 'day_duration' => 10,
                 'price' => 350000,
-                'images' => 'pt_packages/flexibility.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 1,
             ],
             [
@@ -71,7 +71,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program kebugaran untuk lansia.',
                 'day_duration' => 15,
                 'price' => 550000,
-                'images' => 'pt_packages/senior.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 2,
             ],
             [
@@ -79,7 +79,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Latihan untuk pelajar dalam mempersiapkan kompetisi olahraga.',
                 'day_duration' => 20,
                 'price' => 800000,
-                'images' => 'pt_packages/youth.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 3,
             ],
             [
@@ -87,7 +87,7 @@ class PersonalTrainerPackageSeeder extends Seeder
                 'description' => 'Program khusus untuk ibu hamil menjaga kebugaran.',
                 'day_duration' => 14,
                 'price' => 650000,
-                'images' => 'pt_packages/prenatal.jpg',
+                'images' => ['default.jpg'],
                 'personal_trainer_id' => 1,
             ],
         ];
