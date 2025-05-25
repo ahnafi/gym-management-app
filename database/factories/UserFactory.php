@@ -35,7 +35,7 @@ class UserFactory extends Factory
             'membership_status' => fake()->randomElement(['active', 'inactive']),
             'membership_end_date' => fake()->optional()->dateTimeBetween('+1 week', '+1 year'),
             'profile_bio' => fake()->optional()->paragraph(),
-            'profile_image' => 'images/profile/' . fake()->image('public/storage/images/profile', 400, 400, null, false),
+            'profile_image' => 'default.png'
         ];
     }
 

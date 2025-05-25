@@ -16,7 +16,7 @@ class GymVisitSeeder extends Seeder
                 'entry_time' => '08:00:00',
                 'exit_time' => '09:30:00',
                 'status' => 'left',
-                'user_id' => User::where('email', 'member1@example.com')->first()->id,
+                'user_id' => User::where('email', 'member@example.com')->first()->id,
             ],
             [
                 'visit_date' => now()->subDay()->toDateString(),
