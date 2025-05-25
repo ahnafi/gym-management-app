@@ -24,7 +24,7 @@ class PersonalTrainerAssignmentResource extends Resource
     protected static ?string $label = 'Penugasan Personal Trainer';
     protected static ?string $navigationGroup = 'Manajemen Penugasan dan Penjadwalan';
     protected static ?string $navigationLabel = 'Penugasan Personal Trainer';
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 10;
     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
 
     public static function form(Form $form): Form

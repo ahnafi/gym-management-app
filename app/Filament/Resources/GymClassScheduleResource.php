@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GymClassScheduleResource\Pages;
+use App\Filament\Resources\GymClassScheduleResource\RelationManagers\GymClassAttendancesRelationManager;
 use App\Models\GymClassSchedule;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,7 +24,7 @@ class GymClassScheduleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?string $navigationGroup = 'Manajemen Penugasan dan Penjadwalan';
     protected static ?string $navigationLabel = 'Jadwal Kelas Gym';
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 9;
 
     public static function form(Form $form): Form
     {
@@ -99,7 +100,9 @@ class GymClassScheduleResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            GymClassAttendancesRelationManager::class
+        ];
     }
 
     public static function getPages(): array

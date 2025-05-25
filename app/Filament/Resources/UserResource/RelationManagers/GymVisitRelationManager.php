@@ -16,7 +16,7 @@ use Filament\Tables\Table;
 
 class GymVisitRelationManager extends RelationManager
 {
-    protected static ?string $label = 'Riwayar Kunjungan Gym';
+    protected static ?string $label = 'Riwayat Kunjungan Gym';
     protected static string $relationship = 'gymVisits';
     protected static ?string $recordTitleAttribute = 'visit_date';
 

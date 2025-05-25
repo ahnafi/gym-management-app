@@ -20,7 +20,7 @@ class GymClassResource extends Resource
     protected static ?string $model = GymClass::class;
     protected static ?string $label = 'Kelas Gym';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationGroup = 'Manajemen Paket Gym';
     protected static ?string $navigationLabel = 'Kelas Gym';
 

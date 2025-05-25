@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers\GymVisitRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\MembershipHistoriesRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\TransactionRelationManager;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -146,7 +147,8 @@ class UserResource extends Resource
     {
         return [
             MembershipHistoriesRelationManager::class,
-            GymVisitRelationManager::class
+            GymVisitRelationManager::class,
+            TransactionRelationManager::class,
         ];
     }
 

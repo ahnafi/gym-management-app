@@ -24,7 +24,7 @@ class GymVisitResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-arrow-right-start-on-rectangle';
     protected static ?string $navigationGroup = 'Manajemen Penugasan dan Penjadwalan';
     protected static ?string $navigationLabel = 'Visit Gym';
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 8;
 
     public static function form(Form $form): Form
     {

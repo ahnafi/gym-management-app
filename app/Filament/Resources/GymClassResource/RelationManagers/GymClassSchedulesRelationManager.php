@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\GymClassResource\RelationManagers;
 
+use App\Filament\Resources\UserResource\RelationManagers\GymVisitRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\MembershipHistoriesRelationManager;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\DatePicker;
@@ -84,5 +86,12 @@ class GymClassSchedulesRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            GymClassScheduleAttendanceSchedulesRelationManager::class
+        ];
     }
 }

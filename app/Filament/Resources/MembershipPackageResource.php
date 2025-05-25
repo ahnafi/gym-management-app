@@ -21,7 +21,7 @@ class MembershipPackageResource extends Resource
     protected static ?string $navigationGroup = 'Manajemen Paket Gym';
     protected static ?string $navigationLabel = 'Paket Membership';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
