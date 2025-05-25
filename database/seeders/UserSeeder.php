@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
             // 2 Admin
             [
                 'name' => 'Admin One',
-                'email' => 'admin1@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'admin@example.com',
+                'password' => Hash::make('qwerty123'),
                 'role' => 'admin',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Admin Two',
                 'email' => 'admin2@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'admin',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -38,8 +38,8 @@ class UserSeeder extends Seeder
             // 5 Trainer
             [
                 'name' => 'Trainer One',
-                'email' => 'trainer1@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'trainer@example.com',
+                'password' => Hash::make('qwerty123'),
                 'role' => 'trainer',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Trainer Two',
                 'email' => 'trainer2@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'trainer',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Trainer Three',
                 'email' => 'trainer3@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'trainer',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Trainer Four',
                 'email' => 'trainer4@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'trainer',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Trainer Five',
                 'email' => 'trainer5@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'trainer',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -95,8 +95,8 @@ class UserSeeder extends Seeder
             // 5 Member (manual)
             [
                 'name' => 'Member One',
-                'email' => 'member1@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'member@example.com',
+                'password' => Hash::make('qwerty123'),
                 'role' => 'member',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -107,7 +107,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Member Two',
                 'email' => 'member2@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'member',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
@@ -118,7 +118,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Member Three',
                 'email' => 'member3@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qwerty123'),
                 'role' => 'member',
                 'membership_registered' => 'registered',
                 'membership_status' => 'active',
