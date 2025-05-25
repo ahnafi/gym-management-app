@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
+            $table->date('gym_class_date')->nullable();
             $table->integer('amount')->default(0);
 
             $table->string('snap_token')->nullable();

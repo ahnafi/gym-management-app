@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Str;
 
 class Transaction extends Pivot
 {
@@ -14,26 +15,46 @@ class Transaction extends Pivot
 
     protected $fillable = [
         'code',
+        'gym_class_date',
         'amount',
-        'payment_method',
-        'midtrans_transaction_id',
-        'payment_channel',
-        'payment_token',
-        'redirect_url',
-        'payment_deadline',
+        'snap_token',
         'payment_date',
         'payment_status',
-        'raw_notification',
         'purchasable_type',
         'purchasable_id',
         'user_id',
     ];
 
     protected $casts = [
-        'payment_deadline' => 'datetime',
         'payment_date' => 'datetime',
-        'raw_notification' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $prefixMap = [
+                'membership_package' => 'MP',
+                'gym_class' => 'GC',
+                'personal_trainer_package' => 'PTP',
+            ];
+
+            $type = $model->purchasable_type;
+
+            if (str_contains($type, '\\')) {
+                $type = array_search($type, Relation::getMorphedModelAliases()) ?: class_basename($type);
+            }
+
+            $prefix = $prefixMap[$type] ?? 'TX';
+            $date = now()->format('Ymd');
+            $random = strtoupper(Str::random(4));
+
+            $userId = $model->user_id ?? '0';
+
+            $model->code = "{$prefix}-{$date}-U{$userId}-{$random}";
+        });
+    }
 
     public function purchasable(): MorphTo
     {

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gym_class_attendances', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['assigned', 'attended',  'missed', 'cancelled'])->default('assigned');
-            $table->datetime('attended_at');
+            $table->datetime('attended_at')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('gym_class_schedule_id')->constrained();
             $table->timestamps();
