@@ -71,6 +71,30 @@ export type GymClass = {
     updated_at: string;
 };
 
+export type GymClassSchedule = {
+    id: number;
+    date: string;          // format: 'YYYY-MM-DD'
+    start_time: string;    // format: 'HH:mm:ss'
+    end_time: string;      // format: 'HH:mm:ss'
+    slot: number;
+    created_at: string;    // datetime string
+    updated_at: string;    // datetime string
+};
+
+export type GymClassDetail = {
+    id: number;
+    code: string;
+    name: string;
+    slug: string | null;
+    description: string | null;
+    price: number;
+    images: string[] | null;
+    status: 'active' | 'inactive';
+    created_at: string;    // datetime string
+    updated_at: string;    // datetime string
+    gymClassSchedules: GymClassSchedule[];
+};
+
 export type PersonalTrainer = {
     id: number;
     code: string;
@@ -97,8 +121,21 @@ export type PersonalTrainerPackage = {
     personal_trainer_id: number;
     created_at: string;
     updated_at: string;
-    personal_trainer: PersonalTrainer;
 };
+
+export type PersonalTrainerDetail = {
+    id: number;
+    code: string;
+    nickname: string;
+    description: string | null;
+    metadata: Record<string, any> | null;
+    images: string[] | null;
+    user_personal_trainer_id: number;
+    deleted_at: string | null;
+    created_at: string;
+    updated_at: string;
+    personalTrainerPackages: PersonalTrainerPackage[];
+}
 
 
 
