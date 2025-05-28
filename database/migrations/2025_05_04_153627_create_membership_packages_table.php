@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('membership_packages', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
             $table->string('name');
             $table->string('slug')->unique()->nullable();
             $table->text('description')->nullable();
