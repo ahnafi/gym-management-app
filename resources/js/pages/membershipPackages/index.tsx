@@ -1,6 +1,7 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
+import { MembershipPackage} from '@/types';
 import { Head } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -10,7 +11,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function MembershipPackages() {
+export default function MembershipPackages({ packages }: { packages: MembershipPackage[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Paket Membership" />
