@@ -31,7 +31,7 @@ class PersonalTrainer extends Model
     {
         parent::boot();
 
-        static::creating(function ($model) {
+        static::created(function ($model) {
             $userId = $model->user_personal_trainer_id;
             $model->code = 'PT-' . str_pad($model->id, 3, '0', STR_PAD_LEFT) . str_pad($userId, 3, '0',STR_PAD_LEFT);
             $user = User::find($userId);
@@ -39,6 +39,7 @@ class PersonalTrainer extends Model
             $user->save();
 
             $model->slug = STR::slug($model->nickname, '-');
+            $model->save();
         });
 
         static::updating(function ($model) {
