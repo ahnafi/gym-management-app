@@ -31,17 +31,19 @@ class CatalogController extends Controller
         return Inertia::render('gymClasses/index', compact('gymClasses'));
     }
 
-    public function trainerPackages()
-    {
-        $trainerPackages = PersonalTrainerPackage::active()->with('personalTrainer')->get();
+        public function trainerPackages()
+        {
+            $trainerPackages = PersonalTrainerPackage::active()->with('personalTrainer')->get();
 
-        return Inertia::render('personalTrainerPackages/index', compact('trainerPackages'));
-    }
+            return Inertia::render('personalTrainerPackages/index', compact('trainerPackages'));
+        }
 
-    public function gymClassSchedule()
-    {
+        public function gymClassSchedule()
+        {
 
-    }
+
+            return Inertia::render('gymClasses/gymClassSchedule');
+        }
 
     public function personalTrainers() {
         return Inertia::render('personalTrainer/index');
