@@ -9,6 +9,6 @@ class PersonalTrainerController extends Controller
 {
     public function dashboard()
     {
-        return Inertia::render("personalTrainer/personalTrainerDashboard");
+        return Inertia::render("personalTrainerDashboard/index");
     }
 }

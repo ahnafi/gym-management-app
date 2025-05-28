@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 
 class PersonalTrainer extends Model
@@ -14,6 +15,7 @@ class PersonalTrainer extends Model
     protected $fillable = [
         'code',
         'nickname',
+        'slug',
         'description',
         'metadata',
         'images',
@@ -30,11 +32,17 @@ class PersonalTrainer extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->code = 'PT-' . strtoupper(uniqid());
+            $model->code = 'PT-' . str_pad($model->id, 3, '0', STR_PAD_LEFT);
             $userId = $model->user_personal_trainer_id;
             $user = User::find($userId);
             $user->role = 'trainer';
             $user->save();
+
+            $model->slug = STR::slug($model->nickname, '-');
+        });
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->nickname, '-');
         });
 
         static::deleting(function ($model) {
