@@ -9,16 +9,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render('dashboard/index');
-    }
+        $userData = auth()->user();
+        $gymvisitsData = auth()->user()->gymVisits;
+        $gymvisitsData =
+        $gymMembershipsData = auth()->user()->membershipHistories;
 
-    public function show()
-    {
-        return view('dashboard.show');
-    }
-
-    public function edit()
-    {
-        return view('dashboard.edit');
+        return Inertia::render('dashboard/index', [
+            'gymVisitsData' => $gymvisitsData,
+            'gymMembershipsData' => $gymMembershipsData,
+            'userData' => $userData,
+        ]);
     }
 }
