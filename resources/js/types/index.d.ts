@@ -47,6 +47,7 @@ export type MembershipPackage = {
     id: number;
     code: string;
     name: string;
+    slug: string;
     description: string | null;
     duration: number; // Duration in days
     duration_in_months: number; // Duration in months
@@ -61,6 +62,7 @@ export type GymClass = {
     id: number;
     code: string;
     name: string;
+    slug: string;
     description: string | null;
     price: number;
     status: 'active' | 'inactive';
@@ -86,6 +88,7 @@ export type PersonalTrainerPackage = {
     id: number;
     code: string;
     name: string;
+    slug: string;
     description: string | null;
     day_duration: number;
     price: number;

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 
 class MembershipPackage extends Model
 {
@@ -14,6 +15,7 @@ class MembershipPackage extends Model
     protected $fillable = [
         'code',
         'name',
+        'slug',
         'description',
         'duration',
         'status',
@@ -31,6 +33,11 @@ class MembershipPackage extends Model
 
         static::creating(function ($model) {
             $model->code = 'MP-' . strtoupper(uniqid());
+            $model->slug = STR::slug($model->name, '-');
+        });
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->name, '-');
         });
     }
 

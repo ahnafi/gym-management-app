@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 
 class PersonalTrainerPackage extends Model
 {
@@ -14,6 +15,7 @@ class PersonalTrainerPackage extends Model
     protected $fillable = [
         'code',
         'name',
+        'slug',
         'description',
         'day_duration',
         'price',
@@ -32,6 +34,11 @@ class PersonalTrainerPackage extends Model
 
         static::creating(function ($model) {
             $model->code = 'PTP-' . strtoupper(uniqid());
+            $model->slug = STR::slug($model->name, '-');
+        });
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->name, '-');
         });
     }
 
