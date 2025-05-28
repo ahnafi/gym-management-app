@@ -47,7 +47,7 @@ export type MembershipPackage = {
     id: number;
     code: string;
     name: string;
-    slug: string;
+    slug: string | null;
     description: string | null;
     duration: number; // Duration in days
     duration_in_months: number; // Duration in months
