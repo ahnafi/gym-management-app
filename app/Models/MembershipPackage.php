@@ -34,6 +34,12 @@ class MembershipPackage extends Model
         });
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
+
     public function membershipHistories(): HasMany
     {
         return $this->hasMany(MembershipHistory::class);
