@@ -18,13 +18,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Catalog routes (gym classes, trainers, packages, memberships, etc.)
     Route::controller(CatalogController::class)->group(function () {
+        Route::get('membership-packages', 'membershipPackages')->name('membership-packages.index');
+        Route::get('membership-packages/{membershipPackage:slug}', 'membershipPackageDetail')->name('membership-packages.detail');
+
         Route::get('gym-classes', 'gymClasses')->name('gym-classes.index');
         Route::get('gym-classes/schedule/{gymClass:slug}', 'gymClassSchedule')->name('gym-classes.schedule');
 
         Route::get('personal-trainers', 'personalTrainers')->name('personal-trainers.index');
-        Route::get('personal-trainers/packages', 'trainerPackages')->name('personal-trainers.package');
-
-        Route::get('membership-packages', 'membershipPackages')->name('membership-packages.index');
+        Route::get('personal-trainers/{personalTrainer:slug}', 'trainerDetail')->name('personal-trainers.package');
     });
 
     Route::controller(HistoryController::class)->group(function () {
