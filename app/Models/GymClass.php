@@ -23,6 +23,11 @@ class GymClass extends Model
         'images' => 'array',
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
     public static function boot()
     {
         parent::boot();

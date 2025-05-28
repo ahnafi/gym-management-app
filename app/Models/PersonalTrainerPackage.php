@@ -35,6 +35,11 @@ class PersonalTrainerPackage extends Model
         });
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'purchasable');
