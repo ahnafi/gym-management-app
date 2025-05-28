@@ -99,8 +99,9 @@ export type PersonalTrainer = {
     id: number;
     code: string;
     nickname: string;
+    slug: string;
     description: string | null;
-    metadata: Record<string, any> | null;
+    metadata: Record<string> | null;
     images: string[] | null;
     user_personal_trainer_id: number;
     deleted_at: string | null;
@@ -127,8 +128,9 @@ export type PersonalTrainerDetail = {
     id: number;
     code: string;
     nickname: string;
+    slug: string;
     description: string | null;
-    metadata: Record<string, any> | null;
+    metadata: Record<string> | null;
     images: string[] | null;
     user_personal_trainer_id: number;
     deleted_at: string | null;

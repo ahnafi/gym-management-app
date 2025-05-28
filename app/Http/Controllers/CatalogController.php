@@ -88,35 +88,38 @@ class CatalogController extends Controller
     }
 
     public function personalTrainers() {
-        $personalTrainers = PersonalTrainer::all();
+        $trainers = PersonalTrainer::all();
 
-        return Inertia::render('personalTrainer/index', compact('personalTrainers'));
+        return Inertia::render('personalTrainer/index', compact('trainers'));
     }
 
     public function trainerDetail(PersonalTrainer $personalTrainer)
     {
-        $personalTrainer->load(['personalTrainerPackages' => function ($query) {
+        $personalTrainer->load(['personalTrainerPackage' => function ($query) {
             $query->active();
         }]);
 
-        return Inertia::render('personalTrainer/personalTrainerDetail', [
-            'personalTrainer' => [
+        return Inertia::render('personalTrainer/detail', [
+            'ptDetail' => [
                 'id' => $personalTrainer->id,
-                'name' => $personalTrainer->name,
+                'code' => $personalTrainer->code,
+                'nickname' => $personalTrainer->nickname,
                 'slug' => $personalTrainer->slug,
-                'bio' => $personalTrainer->bio,
-                'image' => $personalTrainer->image,
-                'status' => $personalTrainer->status,
+                'metadata' => $personalTrainer->metadata,
+                'description' => $personalTrainer->description,
+                'images' => $personalTrainer->images,
                 'created_at' => $personalTrainer->created_at->toDateTimeString(),
                 'updated_at' => $personalTrainer->updated_at->toDateTimeString(),
-                'personalTrainerPackages' => $personalTrainer->personalTrainerPackages->map(function ($package) {
+                'personalTrainerPackages' => $personalTrainer->personalTrainerPackage->map(function ($package) {
                     return [
                         'id' => $package->id,
                         'name' => $package->name,
+                        'code' => $package->code,
                         'slug' => $package->slug,
-                        'price' => $package->price,
-                        'status' => $package->status,
                         'description' => $package->description,
+                        'day_duration' => $package->day_duration,
+                        'price' => $package->price,
+                        'images' => $package->images
                     ];
                 }),
             ]
