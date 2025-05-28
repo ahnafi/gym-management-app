@@ -24,18 +24,18 @@ class CatalogController extends Controller
         return Inertia::render('membershipPackages/index', compact('membershipPackages'));
     }
 
-    public function trainerPackages()
-    {
-        $trainerPackages = PersonalTrainerPackage::all();
-
-        return Inertia::render('personalTrainerPackages/index', compact('trainerPackages'));
-    }
-
     public function gymClasses()
     {
-        $gymClasses = GymClass::all();
+        $gymClasses = GymClass::active()->get();
 
         return Inertia::render('gymClasses/index', compact('gymClasses'));
+    }
+
+    public function trainerPackages()
+    {
+        $trainerPackages = PersonalTrainerPackage::active()->with('personalTrainer')->get();
+
+        return Inertia::render('personalTrainerPackages/index', compact('trainerPackages'));
     }
 
     public function gymClassSchedule()
