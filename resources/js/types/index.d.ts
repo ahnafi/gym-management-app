@@ -42,3 +42,19 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export type MembershipPackage = {
+    id: number;
+    code: string;
+    name: string;
+    description: string | null;
+    duration: number; // Duration in days
+    duration_in_months: number; // Duration in months
+    price: number;
+    status: 'active' | 'inactive';
+    images: string[] | null;
+    created_at: string;
+    updated_at: string;
+};
+
+
