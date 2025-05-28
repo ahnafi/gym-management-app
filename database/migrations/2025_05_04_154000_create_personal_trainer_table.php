@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('nickname');
+            $table->string('slug')->unique()->nullable();
             $table->text('description')->nullable();
             $table->json('metadata')->nullable();
             $table->string('images')->nullable();
