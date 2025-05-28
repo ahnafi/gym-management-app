@@ -57,4 +57,45 @@ export type MembershipPackage = {
     updated_at: string;
 };
 
+export type GymClass = {
+    id: number;
+    code: string;
+    name: string;
+    description: string | null;
+    price: number;
+    status: 'active' | 'inactive';
+    images: string[] | null;
+    created_at: string;
+    updated_at: string;
+};
+
+export type PersonalTrainer = {
+    id: number;
+    code: string;
+    nickname: string;
+    description: string | null;
+    metadata: Record<string, any> | null;
+    images: string[] | null;
+    user_personal_trainer_id: number;
+    deleted_at: string | null;
+    created_at: string;
+    updated_at: string;
+};
+
+export type PersonalTrainerPackage = {
+    id: number;
+    code: string;
+    name: string;
+    description: string | null;
+    day_duration: number;
+    price: number;
+    images: string[] | null;
+    status: 'active' | 'inactive';
+    personal_trainer_id: number;
+    created_at: string;
+    updated_at: string;
+    personal_trainer: PersonalTrainer;
+};
+
+
 
