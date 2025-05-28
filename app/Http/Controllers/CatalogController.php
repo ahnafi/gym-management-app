@@ -14,7 +14,7 @@ class CatalogController extends Controller
 {
     public function membershipPackages()
     {
-        $membershipPackages = MembershipPackage::active()
+        $packages = MembershipPackage::active()
             ->get()
             ->map(function ($package) {
                 $package->duration_in_months = round($package->duration / 30, 1);
@@ -22,7 +22,7 @@ class CatalogController extends Controller
             });
 
 
-        return Inertia::render('membershipPackages/index', compact('membershipPackages'));
+        return Inertia::render('membershipPackages/index', compact('packages'));
     }
 
     public function membershipPackageDetail(MembershipPackage $membershipPackage)
@@ -30,7 +30,7 @@ class CatalogController extends Controller
         $durationInMonths = round($membershipPackage->duration / 30, 1);
 
         return Inertia::render('membershipPackages/detail', [
-            'membershipPackage' => [
+            'mPackage' => [
                 'id' => $membershipPackage->id,
                 'code' => $membershipPackage->code,
                 'name' => $membershipPackage->name,
