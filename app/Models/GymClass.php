@@ -35,9 +35,10 @@ class GymClass extends Model
     {
         parent::boot();
 
-        static::creating(function ($model) {
+        static::created(function ($model) {
             $model->code = 'GC-' . strtoupper(uniqid());
             $model->slug = STR::slug($model->name, '-');
+            $model->save();
         });
 
         static::updating(function ($model) {

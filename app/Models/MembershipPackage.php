@@ -30,9 +30,10 @@ class MembershipPackage extends Model
     {
         parent::boot();
 
-        static::creating(function ($model) {
+        static::created(function ($model) {
             $model->code = 'MP-' . str_pad($model->id, 3, '0', STR_PAD_LEFT);
-            $model->slug = STR::slug($model->name, '-');
+            $model->slug = Str::slug($model->name, '-');
+            $model->save();
         });
 
         static::updating(function ($model) {

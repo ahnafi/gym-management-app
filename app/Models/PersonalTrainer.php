@@ -32,8 +32,8 @@ class PersonalTrainer extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->code = 'PT-' . str_pad($model->id, 3, '0', STR_PAD_LEFT);
             $userId = $model->user_personal_trainer_id;
+            $model->code = 'PT-' . str_pad($model->id, 3, '0', STR_PAD_LEFT) . str_pad($userId, 3, '0',STR_PAD_LEFT);
             $user = User::find($userId);
             $user->role = 'trainer';
             $user->save();
