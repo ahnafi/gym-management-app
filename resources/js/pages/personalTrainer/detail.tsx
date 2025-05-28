@@ -40,7 +40,7 @@ export default function PersonalTrainerDetails( {ptDetail}: { ptDetail: Personal
 
                     {/* Trainer Info */}
                     <div className="flex flex-col justify-center w-full md:w-2/3 space-y-2">
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{ptDetail.nickname}</h1>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Coach {ptDetail.nickname}</h1>
                         <p className="text-sm text-gray-500 dark:text-gray-400"> {ptDetail.code}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-300">{ptDetail.description ?? 'No description provided.'}</p>
                     </div>

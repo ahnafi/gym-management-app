@@ -37,7 +37,7 @@ export default function PersonalTrainers({ trainers }: { trainers: PersonalTrain
                                 )}
 
                                 <div className="p-6 space-y-2">
-                                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">{trainer.nickname}</h2>
+                                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">Coach {trainer.nickname}</h2>
                                     <p className="text-sm text-gray-500 dark:text-gray-400"> {trainer.code}</p>
                                     <p className="text-sm text-gray-600 dark:text-gray-300">{trainer.description || 'No description provided.'}</p>
                                 </div>
