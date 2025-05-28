@@ -15,6 +15,7 @@ class GymClass extends Model
         'name',
         'description',
         'price',
+        'status',
         'images'
     ];
 

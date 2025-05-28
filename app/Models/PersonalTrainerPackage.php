@@ -18,6 +18,7 @@ class PersonalTrainerPackage extends Model
         'day_duration',
         'price',
         'images',
+        'status',
         'personal_trainer_id'
     ];
 
