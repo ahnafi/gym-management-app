@@ -32,6 +32,7 @@ export default function MembershipPackages({ packages }: { packages: MembershipP
                         )}
                         <div className="p-6 space-y-2">
                             <h2 className="text-xl font-bold text-gray-800 dark:text-white">{pkg.name}</h2>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{pkg.code}</p>
                             <p className="text-sm text-gray-600 dark:text-gray-300">{pkg.description}</p>
                             <div className="mt-2">
                                 <p className="text-lg font-semibold text-primary">Rp {pkg.price.toLocaleString()}</p>
