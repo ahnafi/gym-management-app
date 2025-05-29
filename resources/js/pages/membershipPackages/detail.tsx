@@ -41,7 +41,8 @@
                     {/* Detail info */}
                     <div className="border border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl p-6 bg-white dark:bg-neutral-900">
                         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{mPackage.name}</h1>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{mPackage.description}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Kode: {mPackage.code}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-4">{mPackage.description}</p>
 
                         <div className="mt-4 space-y-1">
                             <p className="text-lg font-semibold text-primary">Rp {mPackage.price.toLocaleString()}</p>
