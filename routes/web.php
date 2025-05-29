@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('membership-packages/{membershipPackage:slug}', 'membershipPackageDetail')->name('membership-packages.detail');
 
         Route::get('gym-classes', 'gymClasses')->name('gym-classes.index');
-        Route::get('gym-classes/schedule/{gymClass:slug}', 'gymClassSchedule')->name('gym-classes.schedule');
+        Route::get('gym-classes/{gymClass:slug}', 'gymClassDetail')->name('gym-classes.detail');
 
         Route::get('personal-trainers', 'personalTrainers')->name('personal-trainers.index');
         Route::get('personal-trainers/{personalTrainer:slug}', 'trainerDetail')->name('personal-trainers.package');
