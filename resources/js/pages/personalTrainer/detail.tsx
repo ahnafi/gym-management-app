@@ -69,7 +69,7 @@ export default function PersonalTrainerDetails( {ptDetail}: { ptDetail: Personal
                                     <p className="text-sm text-gray-600 dark:text-gray-300">{pkg.description ?? 'No description provided.'}</p>
 
                                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                                        <div><strong>Duration:</strong> {pkg.day_duration} day(s)</div>
+                                        <div><strong>Durasi:</strong> {pkg.day_duration} pertemuan</div>
                                     </div>
 
                                     <div className="text-lg font-semibold text-blue-600 dark:text-blue-400">

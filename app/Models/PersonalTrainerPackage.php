@@ -33,7 +33,7 @@ class PersonalTrainerPackage extends Model
         parent::boot();
 
         static::created(function ($model) {
-            $model->code = 'PTP-' . str_pad($model->id, 3, '0', STR_PAD_LEFT);
+            $model->code = 'PTP-' . $model->personal_trainer_id . $model->id;
             $model->slug = STR::slug($model->name, '-');
             $model->save();
         });

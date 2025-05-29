@@ -32,23 +32,26 @@ class PersonalTrainer extends Model
         parent::boot();
 
         static::created(function ($model) {
-            $userId = $model->user_personal_trainer_id;
-            $model->code = 'PT-' . str_pad($model->id, 3, '0', STR_PAD_LEFT) . str_pad($userId, 3, '0',STR_PAD_LEFT);
-            $user = User::find($userId);
-            $user->role = 'trainer';
-            $user->save();
+            $model->code = 'PT-' . $model->user_personal_trainer_id . $model->id;
+            $model->slug = Str::slug($model->nickname ?? 'trainer', '-');
+            $model->saveQuietly();
 
-            $model->slug = STR::slug($model->nickname, '-');
-            $model->save();
+            $user = User::find($model->user_personal_trainer_id);
+            if ($user && $user->role !== 'trainer') {
+                $user->role = 'trainer';
+                $user->save();
+            }
         });
 
         static::updating(function ($model) {
-            $model->slug = Str::slug($model->nickname, '-');
+            if ($model->isDirty('nickname')) {
+                $model->slug = Str::slug($model->nickname ?? 'trainer', '-');
+            }
         });
 
         static::deleting(function ($model) {
             $user = User::find($model->user_personal_trainer_id);
-            if ($user) {
+            if ($user && $user->role === 'trainer') {
                 $user->role = 'member';
                 $user->save();
             }
