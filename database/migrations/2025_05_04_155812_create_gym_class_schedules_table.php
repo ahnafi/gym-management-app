@@ -17,6 +17,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('slot');
+            $table->integer('available_slot')->default(0);
             $table->foreignId('gym_class_id')->constrained();
             $table->timestamps();
         });
