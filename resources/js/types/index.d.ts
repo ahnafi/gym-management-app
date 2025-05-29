@@ -77,6 +77,7 @@ export type GymClassSchedule = {
     start_time: string;    // format: 'HH:mm:ss'
     end_time: string;      // format: 'HH:mm:ss'
     slot: number;
+    available_slot: number;
     created_at: string;    // datetime string
     updated_at: string;    // datetime string
 };
