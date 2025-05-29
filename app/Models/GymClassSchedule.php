@@ -20,7 +20,18 @@ class GymClassSchedule extends Model
 
     protected $casts = [
         'date' => 'date',
+        'start_time' => 'datetime:H:i:s',
+        'end_time' => 'datetime:H:i:s',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->available_slot = $model->slot;
+        });
+    }
 
 
     public function gymClass(): BelongsTo
