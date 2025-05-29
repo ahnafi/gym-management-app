@@ -60,15 +60,15 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             <InputError message={errors.email} />
 
                             {/* Submit Button */}
-                            <Button type="submit" className="w-full bg-[#7AE2CF] mt-4 py-2 rounded-2xl text-white font-semibold" disabled={processing}>
+                            <Button type="submit" className="w-full bg-[#F61501] mt-4 py-2 rounded-2xl text-white font-semibold" disabled={processing}>
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin mr-2 inline" />}
                                 Email Password Reset Link
                             </Button>
 
                             {/* Link to Login */}
-                            <div className="text-center text-sm mt-2 text-[#7AE2CF]">
+                            <div className="text-center text-sm mt-2 text-[#F61501]">
                                 Or, return to{' '}
-                                <TextLink href={route('login')} className="text-[#7AE2CF] hover:underline">
+                                <TextLink href={route('login')} className="text-[#F61501] hover:underline">
                                     log in
                                 </TextLink>
                             </div>

@@ -92,10 +92,10 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                         onChange={() => setData('remember', !data.remember)}
                                         className="form-checkbox"
                                     />
-                                    <span className='text-[#7AE2CF]'>Remember me</span>
+                                    <span className='text-[#F61501]'>Remember me</span>
                                 </label>
                                 {canResetPassword && (
-                                    <TextLink href={route('password.request')} className="text-sm text-[#7AE2CF] hover:underline">
+                                    <TextLink href={route('password.request')} className="text-sm text-[#F61501] hover:underline">
                                         Forgot password?
                                     </TextLink>
                                 )}
@@ -103,16 +103,16 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-[#7AE2CF] mt-4 py-2 rounded-2xl text-white font-semibold"
+                                className="w-full bg-[#F61501] mt-4 py-2 rounded-2xl text-white font-semibold"
                                 disabled={processing}
                             >
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin mr-2 inline" />}
                                 Log in
                             </Button>
 
-                            <div className="text-center text-sm mt-2 text-[#7AE2CF]">
+                            <div className="text-center text-sm mt-2 text-[#F61501]">
                                 Don't have an account?{' '}
-                                <TextLink href={route('register')} className="text-[#7AE2CF] hover:underline">
+                                <TextLink href={route('register')} className="text-[#F61501] hover:underline">
                                     Sign up
                                 </TextLink>
                             </div>
