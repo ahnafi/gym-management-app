@@ -5,6 +5,7 @@ import { FormEventHandler } from 'react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
+import AppearanceToggle from '@/components/appearance-compact';
 
 type RegisterForm = {
     name: string;
@@ -34,6 +35,9 @@ export default function Register() {
         <>
             <Head title="Register" />
             <div className="h-screen md:flex">
+                <div className="absolute top-4 right-4 z-50">
+                    <AppearanceToggle />
+                </div>
                 {/* Left Panel */}
                 <div
                     className="relative overflow-hidden hidden md:flex w-1/2 bg-cover bg-center justify-around items-center"
@@ -47,19 +51,22 @@ export default function Register() {
                 </div>
 
                 {/* Right Panel */}
-                <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
+                {/* Right Panel */}
+                <div className="flex md:w-1/2 justify-center py-10 items-center bg-white dark:bg-black">
                     <form onSubmit={submit} className="w-full max-w-md px-6">
-                        <h1 className="text-gray-800 font-bold text-2xl mb-1">Platinum GYM</h1>
-                        <p className="text-sm font-normal text-gray-600 mb-6">Enter your details below to create your account</p>
+                        <h1 className="text-gray-800 font-bold text-2xl mb-1 dark:text-white">Platinum GYM</h1>
+                        <p className="text-sm font-normal text-gray-600 mb-6 dark:text-gray-300">
+                            Enter your details below to create your account
+                        </p>
 
                         <div className="space-y-4">
                             {/* Name */}
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
+                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
                                 <input
                                     id="name"
                                     type="text"
                                     placeholder="Full name"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
+                                    className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                     value={data.name}
                                     onChange={(e) => setData('name', e.target.value)}
                                     disabled={processing}
@@ -69,12 +76,12 @@ export default function Register() {
                             <InputError message={errors.name} />
 
                             {/* Email */}
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
+                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
                                 <input
                                     id="email"
                                     type="email"
                                     placeholder="Email address"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
+                                    className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
                                     disabled={processing}
@@ -84,12 +91,12 @@ export default function Register() {
                             <InputError message={errors.email} />
 
                             {/* Phone */}
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
+                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
                                 <input
                                     id="phone"
                                     type="tel"
                                     placeholder="Phone number"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
+                                    className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                     value={data.phone}
                                     onChange={(e) => setData('phone', e.target.value)}
                                     disabled={processing}
@@ -99,12 +106,12 @@ export default function Register() {
                             <InputError message={errors.phone} />
 
                             {/* Password */}
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
+                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
                                 <input
                                     id="password"
                                     type="password"
                                     placeholder="Password"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
+                                    className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
                                     disabled={processing}
@@ -114,12 +121,12 @@ export default function Register() {
                             <InputError message={errors.password} />
 
                             {/* Confirm Password */}
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
+                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
                                 <input
                                     id="password_confirmation"
                                     type="password"
                                     placeholder="Confirm password"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
+                                    className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                     value={data.password_confirmation}
                                     onChange={(e) => setData('password_confirmation', e.target.value)}
                                     disabled={processing}
@@ -129,7 +136,11 @@ export default function Register() {
                             <InputError message={errors.password_confirmation} />
 
                             {/* Submit Button */}
-                            <Button type="submit" className="w-full bg-[#F61501] mt-4 py-2 rounded-2xl text-white font-semibold" disabled={processing}>
+                            <Button
+                                type="submit"
+                                className="w-full bg-[#F61501] mt-4 py-2 rounded-2xl text-white font-semibold"
+                                disabled={processing}
+                            >
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin mr-2 inline" />}
                                 Create Account
                             </Button>
@@ -144,6 +155,7 @@ export default function Register() {
                         </div>
                     </form>
                 </div>
+
             </div>
         </>
     );

@@ -5,6 +5,7 @@ import { FormEventHandler } from 'react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
+import AppearanceToggle from '@/components/appearance-compact';
 
 type LoginForm = {
     email: string;
@@ -35,6 +36,9 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <>
             <Head title="Log in" />
             <div className="h-screen md:flex">
+                <div className="absolute top-4 right-4 z-50">
+                    <AppearanceToggle />
+                </div>
                 {/* Left Panel */}
                 <div
                     className="relative overflow-hidden hidden md:flex w-1/2 bg-cover bg-center justify-around items-center"
@@ -48,41 +52,42 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                 </div>
 
                 {/* Right Panel */}
-                <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-                    <form onSubmit={submit} className="w-full max-w-md px-6">
-                        <h1 className="text-gray-800 font-bold text-2xl mb-1">Welcome Back</h1>
-                        <p className="text-sm font-normal text-gray-600 mb-6">Log in to your account</p>
+                <div className="flex md:w-1/2 justify-center py-10 items-center bg-white dark:bg-black">
 
-                        <div className="space-y-4">
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="Email address"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
-                                    value={data.email}
-                                    onChange={(e) => setData('email', e.target.value)}
-                                    disabled={processing}
-                                    required
-                                />
-                            </div>
-                            <InputError message={errors.email} />
+                <form onSubmit={submit} className="w-full max-w-md px-6">
+                    <h1 className="text-gray-800 font-bold text-2xl mb-1 dark:text-white">Welcome Back</h1>
+                    <p className="text-sm font-normal text-gray-600 mb-6 dark:text-gray-300">Log in to your account</p>
 
-                            <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black">
-                                <input
-                                    id="password"
-                                    type="password"
-                                    placeholder="Password"
-                                    className="w-full pl-2 outline-none border-none placeholder-gray-600"
-                                    value={data.password}
-                                    onChange={(e) => setData('password', e.target.value)}
-                                    disabled={processing}
-                                    required
-                                />
-                            </div>
-                            <InputError message={errors.password} />
+                    <div className="space-y-4">
+                        <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Email address"
+                                className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                disabled={processing}
+                                required
+                            />
+                        </div>
+                        <InputError message={errors.email} />
 
-                            <div className="flex justify-between items-center text-sm">
+                        <div className="flex items-center border-2 py-2 px-3 rounded-2xl text-black dark:text-white">
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Password"
+                                className="w-full pl-2 outline-none border-none bg-transparent text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                disabled={processing}
+                                required
+                            />
+                        </div>
+                        <InputError message={errors.password} />
+
+                        <div className="flex justify-between items-center text-sm">
                                 <label className="flex items-center space-x-2">
                                     <input
                                         type="checkbox"

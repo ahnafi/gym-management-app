@@ -1,9 +1,16 @@
 import { Link } from '@inertiajs/react';
+import AppearanceToggle from '@/components/appearance-compact';
 import { PageProps } from '@/types';
 
 export default function Welcome({ auth }: PageProps<{ auth: any }>) {
     return (
-        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <div className="relative max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+
+            {/* Appearance Toggle Positioned Top-Right */}
+            <div className="absolute top-4 right-4 z-50">
+                <AppearanceToggle />
+            </div>
+
             <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
                 <div>
                     <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
@@ -13,7 +20,6 @@ export default function Welcome({ auth }: PageProps<{ auth: any }>) {
                         Power in Every Rep. Platinum in Every Step.
                     </p>
 
-                    {/* Buttons */}
                     <div className="mt-7 grid gap-3 w-full sm:inline-flex">
                         {auth.user ? (
                             <Link
@@ -44,12 +50,8 @@ export default function Welcome({ auth }: PageProps<{ auth: any }>) {
                             </>
                         )}
                     </div>
-
-                    {/* Optional Review Section */}
-                    {/* You can place review stars or testimonials here if you want */}
                 </div>
 
-                {/* You can add an illustration/image here on the right column */}
                 <div className="hidden md:block">
                     <img src="/images/bg.jpg" alt="Hero Illustration" className="w-full" />
                 </div>
