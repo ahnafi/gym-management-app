@@ -47,46 +47,6 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function gymClasses()
-    {
-        $gymClasses = GymClass::active()->get();
-
-        return Inertia::render('gymClasses/index', compact('gymClasses'));
-    }
-
-    public function gymClassSchedule(GymClass $gymClass)
-    {
-        $gymClass->load('gymClassSchedules');
-
-        return Inertia::render('gymClasses/schedule', [
-            'gymClass' => [
-                'id' => $gymClass->id,
-                'code' => $gymClass->code,
-                'name' => $gymClass->name,
-                'slug' => $gymClass->slug,
-                'description' => $gymClass->description,
-                'price' => $gymClass->price,
-                'images' => $gymClass->images ? json_decode($gymClass->images) : null,
-                'status' => $gymClass->status,
-                'created_at' => $gymClass->created_at->toDateTimeString(),
-                'updated_at' => $gymClass->updated_at->toDateTimeString(),
-
-                // map schedules explicitly
-                'gymClassSchedules' => $gymClass->gymClassSchedules->map(function ($schedule) {
-                    return [
-                        'id' => $schedule->id,
-                        'date' => $schedule->date->toDateString(),
-                        'start_time' => $schedule->start_time->format('H:i:s'),
-                        'end_time' => $schedule->end_time->format('H:i:s'),
-                        'slot' => $schedule->slot,
-                        'created_at' => $schedule->created_at->toDateTimeString(),
-                        'updated_at' => $schedule->updated_at->toDateTimeString(),
-                    ];
-                }),
-            ],
-        ]);
-    }
-
     public function personalTrainers() {
         $trainers = PersonalTrainer::all();
 
@@ -123,6 +83,47 @@ class CatalogController extends Controller
                     ];
                 }),
             ]
+        ]);
+    }
+
+    public function gymClasses()
+    {
+        $gymClasses = GymClass::active()->get();
+
+        return Inertia::render('gymClasses/index', compact('gymClasses'));
+    }
+
+    public function gymClassDetail(GymClass $gymClass)
+    {
+        $gymClass->load('gymClassSchedules');
+
+        return Inertia::render('gymClasses/detail', [
+            'gymClass' => [
+                'id' => $gymClass->id,
+                'code' => $gymClass->code,
+                'name' => $gymClass->name,
+                'slug' => $gymClass->slug,
+                'description' => $gymClass->description,
+                'price' => $gymClass->price,
+                'images' => $gymClass->images,
+                'status' => $gymClass->status,
+                'created_at' => $gymClass->created_at->toDateTimeString(),
+                'updated_at' => $gymClass->updated_at->toDateTimeString(),
+
+                // map schedules explicitly
+                'gymClassSchedules' => $gymClass->gymClassSchedules->map(function ($schedule) {
+                    return [
+                        'id' => $schedule->id,
+                        'date' => $schedule->date->toDateString(),
+                        'start_time' => $schedule->start_time->format('H:i:s'),
+                        'end_time' => $schedule->end_time->format('H:i:s'),
+                        'slot' => $schedule->slot,
+                        'available_slot' => $schedule->available_slot,
+                        'created_at' => $schedule->created_at->toDateTimeString(),
+                        'updated_at' => $schedule->updated_at->toDateTimeString(),
+                    ];
+                }),
+            ],
         ]);
     }
 }
