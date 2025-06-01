@@ -2,7 +2,6 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { GymClass } from '@/types';
 import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 import { Head } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 
@@ -28,33 +27,39 @@ export default function GymClasses({ gymClasses }: { gymClasses: GymClass[] }) {
                                 href={route('gym-classes.detail', { gymClass: kelas.slug })}
                                 className="block"
                             >
-                                <Card className="shadow-sm border border-gray-200 dark:border-neutral-700 hover:shadow-lg transition-shadow rounded-xl overflow-hidden">
+                                <div className="flex flex-col h-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                                    {/* Gambar di paling atas tanpa gap */}
                                     {kelas.images && kelas.images.length > 0 ? (
                                         <img
                                             src={`/storage/gym_class/${kelas.images[0]}`}
                                             alt={kelas.name}
-                                            className="w-full h-40 object-cover"
+                                            className="w-full h-48 object-cover"
                                         />
                                     ) : (
-                                        <div className="w-full h-40 bg-gray-100 dark:bg-neutral-800 text-gray-400 dark:text-neutral-400 flex items-center justify-center">
+                                        <div className="w-full h-48 bg-gray-100 dark:bg-neutral-800 text-gray-400 dark:text-neutral-400 flex items-center justify-center">
                                             Tidak ada gambar
                                         </div>
                                     )}
 
-                                    <CardContent className="p-5 space-y-2">
+                                    {/* Konten fleksibel */}
+                                    <div className="flex flex-col flex-1 p-5">
                                         <h2 className="text-lg font-bold text-gray-800 dark:text-white">{kelas.name}</h2>
-                                        <div className="text-sm text-gray-500 dark:text-gray-400 space-y-1">{kelas.code}</div>
-                                        <p className="text-sm text-gray-600 dark:text-gray-300">{kelas.description ?? 'Belum ada deskripsi.'}</p>
-
-                                        <div className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                                        <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">{kelas.code}</div>
+                                        <p className="text-sm text-gray-600 dark:text-gray-300 flex-grow">
+                                            {kelas.description ?? 'Belum ada deskripsi.'}
+                                        </p>
+                                        {/* Harga selalu di bawah */}
+                                        <div className="text-lg font-semibold text-blue-600 dark:text-blue-400 mt-4">
                                             Rp{kelas.price.toLocaleString('id-ID')}
                                         </div>
-                                    </CardContent>
-                                </Card>
+                                    </div>
+                                </div>
                             </Link>
                         ))
                     ) : (
-                        <p className="col-span-3 text-center text-gray-500 dark:text-gray-400">Belum ada kelas gym yang tersedia.</p>
+                        <p className="col-span-3 text-center text-gray-500 dark:text-gray-400">
+                            Belum ada kelas gym yang tersedia.
+                        </p>
                     )}
                 </div>
             </div>
