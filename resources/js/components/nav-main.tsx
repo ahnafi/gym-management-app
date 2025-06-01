@@ -14,6 +14,7 @@ import {
     BicepsFlexed,
     CalendarDays,
     ShoppingCart,
+    PanelsTopLeft,
     History,
     CreditCard,
     Dumbbell
@@ -89,6 +90,14 @@ const personalTrainerItems: NavItem[] = [
     }
 ];
 
+const adminItems: NavItem[] = [
+    {
+        title: 'Admin Dashboard',
+        href: '/admin',
+        icon: PanelsTopLeft,
+    }
+];
+
 export function NavMain() {
     const { auth } = usePage<SharedData>().props;
     const user = auth.user;
@@ -103,6 +112,10 @@ export function NavMain() {
 
     if (user.role === 'trainer') {
         groups.push({ label: 'Personal Trainer', items: personalTrainerItems });
+    }
+
+    if (user.role === 'admin') {
+        groups.push({ label: 'Dashboard Admin', items: adminItems });
     }
 
     return (
