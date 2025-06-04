@@ -58,6 +58,28 @@ export type MembershipPackage = {
     updated_at: string;
 };
 
+export type PurchasableItem = {
+    id: number;
+    code: string;
+    name: string;
+};
+
+export type Transaction = {
+    id: number;
+    code: string;
+    user_id: number;
+    amount: number;
+    payment_status: string;
+    payment_date: string | null;
+    gym_class_date: string | null;
+    snap_token: string;
+    created_at: string;
+    updated_at: string;
+    purchasable_type: 'membership_package' | 'gym_class' | 'personal_trainer_package';
+    purchasable: PurchasableItem;
+};
+
+
 export type GymClass = {
     id: number;
     code: string;
