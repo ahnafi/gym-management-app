@@ -41,7 +41,7 @@ class PersonalTrainerAssignment extends Pivot
         return $this->belongsTo(PersonalTrainerPackage::class, 'personal_trainer_package_id');
     }
 
-    public function personalTrainerScheules(): HasMany
+    public function personalTrainerSchedules(): HasMany
     {
         return  $this->hasMany(PersonalTrainerSchedule::class, 'personal_trainer_assignment_id');
     }
