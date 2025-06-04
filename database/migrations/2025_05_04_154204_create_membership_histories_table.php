@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('membership_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique()->nullable();
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->enum('status', ['active', 'expired'])->default('active');
