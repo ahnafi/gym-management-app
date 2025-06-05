@@ -214,3 +214,38 @@ export interface GymClassHistory {
         };
     };
 }
+
+export interface PersonalTrainingHistory {
+    id: number;
+    day_left: number;
+    start_date: string;
+    end_date: string;
+    status: 'active' | 'cancelled' | 'completed';
+    user_id: number;
+    personal_trainer_id: number;
+    personal_trainer_package_id: number;
+    created_at: string;
+    updated_at: string;
+    personal_trainer_schedules: {
+        id: number;
+        scheduled_at: string;
+        check_in_time: string;
+        check_out_time: string;
+        personal_trainer_assignment_id: number;
+    }[];
+    personal_trainer_package: {
+        id: number;
+        code: string;
+        name: string;
+        day_duration: number;
+        images: string[];
+        personal_trainer_id: number;
+        personal_trainer: {
+            id: number;
+            code: string;
+            nickname: string;
+            images: string[];
+        };
+    };
+}
+
