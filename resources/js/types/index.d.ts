@@ -43,7 +43,7 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export type MembershipPackage = {
+export type MembershipPackageCatalog = {
     id: number;
     code: string;
     name: string;
@@ -79,6 +79,10 @@ export type Transaction = {
     purchasable: PurchasableItem;
 };
 
+export interface SimpleOption {
+    id: number;
+    name: string;
+}
 
 export type GymClass = {
     id: number;
@@ -162,5 +166,30 @@ export type PersonalTrainerDetail = {
     personalTrainerPackages: PersonalTrainerPackage[];
 }
 
+export type MembershipPackageHistory = {
+    id: number;
+    code: string | null;
+    name: string;
+    slug: string | null;
+    description: string | null;
+    duration: number;
+    price: number;
+    status: 'active' | 'expired';
+    images: string | null;
+    created_at: string;
+    updated_at: string;
+};
 
-
+export type MembershipHistory = {
+    id: number;
+    code: string | null;
+    start_date: string;
+    end_date: string;
+    status: 'active' | 'expired';
+    user_id: number;
+    membership_package_id: number;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+    membership_package: MembershipPackageHistory;
+};
