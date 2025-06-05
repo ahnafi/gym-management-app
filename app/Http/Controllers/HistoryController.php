@@ -43,7 +43,7 @@ class HistoryController extends Controller
                 'gymClassSchedule.gymClass:id,code,name,images'
             ])
             ->orderBy('created_at', 'desc')
-            ->get(['id', 'user_id', 'gym_class_schedule_id', 'created_at']);
+            ->get(['id', 'user_id', 'status', 'gym_class_schedule_id', 'created_at']);
 
         $gymClasses = GymClass::select(['id', 'name'])->get();
 

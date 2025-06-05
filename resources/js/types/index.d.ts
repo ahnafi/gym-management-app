@@ -197,6 +197,7 @@ export type MembershipHistory = {
 export interface GymClassHistory {
     id: number;
     user_id: number;
+    status: 'assigned' | 'attended' | 'missed';
     gym_class_schedule_id: number;
     created_at: string; // ISO date string
     gym_class_schedule: {
