@@ -2,8 +2,7 @@ import { Button } from '@/components/ui/button';
 import { MembershipHistory } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { format, parseISO } from 'date-fns';
-import { id } from 'date-fns/locale';
-import { ArrowUpDown, Download } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
 // Submission Column Labels
