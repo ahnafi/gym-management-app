@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GymClassAttendance;
 use App\Models\MembershipHistory;
+use App\Models\PersonalTrainer;
 use App\Models\PersonalTrainerAssignment;
 use App\Models\MembershipPackage;
 use App\Models\GymClass;
@@ -57,15 +58,24 @@ class HistoryController extends Controller
     {
         $personalTrainingHistories = PersonalTrainerAssignment::query()
             ->with([
-                'PersonalTrainerSchedules:id,scheduled_at,check_in_time,check_out_time',
-                'personalTrainerPackage:id,code,name,price,day_duration,images',
-                'personalTrainerPackage.personalTrainer:id,name,images'
+                'personalTrainerSchedules' => function ($query) {
+                    $query->select('id', 'scheduled_at', 'check_in_time', 'check_out_time', 'personal_trainer_assignment_id');
+                },
+                'personalTrainerPackage:id,code,name,day_duration,images,personal_trainer_id',
+                'personalTrainerPackage.personalTrainer:id,code,nickname,images'
             ])
             ->where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return Inertia::render("history/personalTrainingHistory/index", compact('personalTrainingHistories'));
+        $personalTrainers = PersonalTrainer::select(['id', 'nickname'])->get();
+        $personalTrainerPackages = PersonalTrainerPackage::select(['id', 'name'])->get();
+
+        return Inertia::render("history/personalTrainingHistory/index", [
+            'personalTrainingHistories' => $personalTrainingHistories,
+            'personalTrainers' => $personalTrainers,
+            'personalTrainerPackages' => $personalTrainerPackages,
+        ]);
     }
 
     public function membershipHistory()
