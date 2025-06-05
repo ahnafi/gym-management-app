@@ -1,7 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { GymClass } from '@/types';
-import { Card, CardContent } from '@/components/ui/card';
 import { Head } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 

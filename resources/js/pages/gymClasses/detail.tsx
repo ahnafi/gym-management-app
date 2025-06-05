@@ -6,7 +6,6 @@ import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
-  AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogFooter,
