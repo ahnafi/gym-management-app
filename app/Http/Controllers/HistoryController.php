@@ -34,7 +34,6 @@ class HistoryController extends Controller
         return Inertia::render("history/paymentHistory/index", compact('paymentHistories'));
     }
 
-
     public function gymClassHistory()
     {
         $gymClassHistories = GymClassAttendance::query()
@@ -66,11 +65,17 @@ class HistoryController extends Controller
 
     public function membershipHistory()
     {
-         $membershipHistories = MembershipHistory::query()
+        $membershipHistories = MembershipHistory::query()
             ->where('user_id', auth()->id())
+            ->with('membership_package')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return Inertia::render("history/membershipHistory/index", compact('membershipHistories'));
+        $membershipPackages = MembershipPackage::select(['id', 'name'])->get();
+
+        return Inertia::render("history/membershipHistory/indexNew", [
+            'membershipHistories' => $membershipHistories,
+            'membershipPackages' => $membershipPackages,
+        ]);
     }
 }
