@@ -73,7 +73,7 @@ class HistoryController extends Controller
 
         $membershipPackages = MembershipPackage::select(['id', 'name'])->get();
 
-        return Inertia::render("history/membershipHistory/indexNew", [
+        return Inertia::render("history/membershipHistory/index", [
             'membershipHistories' => $membershipHistories,
             'membershipPackages' => $membershipPackages,
         ]);
