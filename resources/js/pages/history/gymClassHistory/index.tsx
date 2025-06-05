@@ -171,7 +171,7 @@ export default function GymClassHistories({
         }, [selectedOption, columnId, setFilters]);
     };
 
-    // MembersshipPackage Lab Column Filter Effect
+    // Gym Class Column Filter Effect
     useEffect(() => {
         if (gymClassSelectedClass?.name) {
             updateColumnFilter(setGymClassFilters, 'class_name', gymClassSelectedClass.name);
@@ -219,6 +219,7 @@ export default function GymClassHistories({
                         <h1 className="title font-semibold">Riwayat Kelas Gym</h1>
                         <div className="membership-table-filters small-font-size mb-2 flex hidden justify-end gap-4 lg:mb-4 lg:flex lg:flex-wrap">
                             {/* Daftar filter untuk layar besar */}
+
                             <div className="test-type">
                                 <SearchableSelect
                                     label="Jenis Kelas"

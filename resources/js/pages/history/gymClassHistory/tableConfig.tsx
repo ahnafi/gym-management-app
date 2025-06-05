@@ -12,6 +12,7 @@ export const gymClassColumnLabels: Record<string, string> = {
     start_time: 'Waktu Mulai',
     end_time: 'Waktu Akhir',
     class_name: 'Nama Kelas',
+    status: 'Status',
     details: 'Detail'
 };
 
@@ -72,6 +73,30 @@ export const gymClassColumns: ColumnDef<GymClassHistory>[] = [
                 {row.getValue('class_name')}
             </div>
         ),
+    },
+    {
+        accessorKey: 'status',
+        id: 'status',
+        header: () => <div className="text-center w-[5rem]">Status</div>,
+        cell: ({ row }) => {
+            const status = row.getValue('status') as string;
+
+            const statusMapping: Record<string, { label: string; color: string }> = {
+                assigned: { label: 'Ditugaskan', color: 'bg-blue-500' },
+                attended: { label: 'Hadir', color: 'bg-green-500' },
+                missed: { label: 'Tidak Hadir', color: 'bg-red-500' },
+            };
+
+            const statusData = statusMapping[status] || { label: status, color: 'bg-gray-500' };
+
+            return (
+                <div className="flex justify-center w-[5rem]">
+        <span className={`text-white text-sm rounded-full px-3 py-1 font-medium ${statusData.color}`}>
+          {statusData.label}
+        </span>
+                </div>
+            );
+        },
     },
     {
         accessorKey: 'id',
