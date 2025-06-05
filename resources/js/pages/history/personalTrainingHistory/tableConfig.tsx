@@ -1,135 +1,140 @@
 import { Button } from '@/components/ui/button';
-import { MembershipHistory } from '@/types';
+import { PersonalTrainingHistory } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { format, parseISO } from 'date-fns';
-import { id } from 'date-fns/locale';
-import { ArrowUpDown, Download } from 'lucide-react';
-import { Link } from '@inertiajs/react';
+import { ArrowUpDown } from 'lucide-react';
 
 // Submission Column Labels
-export const membershipColumnLabels: Record<string, string> = {
-    code: 'Kode Riwayat',
+export const personalTrainingColumnLabels: Record<string, string> = {
+    package_code: 'Kode Paket',
+    package_name: 'Nama Paket',
+    trainer_nickname: 'Trainer',
     start_date: 'Tanggal Mulai',
-    end_date: 'Tanggal Akhir',
-    membership_package_name: 'Nama Paket',
+    end_date: 'Tanggal Berakhir',
     status: 'Status',
     detail: 'Detail',
 };
 
 // Submission Columns Definition
-export const membershipColumns: ColumnDef<MembershipHistory>[] = [
+export const personalTrainingColumns: ColumnDef<PersonalTrainingHistory>[] = [
     {
-        header: '#',
+        header: "#",
         cell: ({ row }) => row.index + 1,
     },
     {
-        accessorKey: 'code',
-        header: () => <div className="flex w-[4rem] justify-center text-center">Kode Membership</div>,
-        cell: ({ row }) => <div className="flex w-[4rem] justify-center text-center capitalize">{row.getValue('code')}</div>,
+        accessorFn: row => row.personal_trainer_package?.code ?? "-",
+        id: "package_code",
+        header: () => <div className="text-center w-[6rem]">Kode Paket</div>,
+        cell: ({ row }) => (
+            <div className="text-center w-[6rem]">
+                {row.getValue("package_code")}
+            </div>
+        ),
     },
     {
-        accessorKey: 'start_date',
-        enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-            const rowDate = new Date(row.getValue(columnId));
-            const start = new Date(filterValue.start);
-            const end = filterValue.end ? new Date(filterValue.end) : start;
-
-            start.setHours(0, 0, 0, 0);
-            end.setHours(23, 59, 59, 999);
-            rowDate.setHours(12, 0, 0, 0);
-
-            return rowDate >= start && rowDate <= end;
-        },
+        accessorFn: row => row.personal_trainer_package?.name ?? "-",
+        id: "package_name",
+        header: () => <div className="text-center w-[8rem]">Nama Paket</div>,
+        cell: ({ row }) => (
+            <div className="text-center w-[8rem]">
+                {row.getValue("package_name")}
+            </div>
+        ),
+    },
+    {
+        accessorFn: row => row.personal_trainer_package?.personal_trainer?.nickname ?? "-",
+        id: "trainer_nickname",
+        header: () => <div className="text-center w-[6rem]">Trainer</div>,
+        cell: ({ row }) => (
+            <div className="text-center w-[6rem] capitalize">
+               Coach {row.getValue("trainer_nickname")}
+            </div>
+        ),
+    },
+    {
+        accessorKey: "start_date",
         header: ({ column }) => (
             <Button
                 variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                className="flex w-[3rem] justify-center text-center"
+                onClick={() =>
+                    column.toggleSorting(column.getIsSorted() === "asc")
+                }
+                className="text-center w-[6rem]"
             >
                 Tanggal Mulai
-                <ArrowUpDown />
+                <ArrowUpDown className="ml-2 h-4 w-4" />
             </Button>
         ),
         cell: ({ row }) => {
-            const testDateRaw = row.getValue('start_date') as string;
-            const testDate = parseISO(testDateRaw);
-            const formatted = format(testDate, 'dd-MM-yyyy');
-
-            return <div className="flex w-[3rem] justify-center text-center capitalize">{formatted}</div>;
-        },
-    },
-    {
-        accessorKey: 'end_date',
-        enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-            const rowDate = new Date(row.getValue(columnId));
-            const start = new Date(filterValue.start);
-            const end = filterValue.end ? new Date(filterValue.end) : start;
-
-            start.setHours(0, 0, 0, 0);
-            end.setHours(23, 59, 59, 999);
-            rowDate.setHours(12, 0, 0, 0);
-
-            return rowDate >= start && rowDate <= end;
-        },
-        header: ({ column }) => (
-            <Button
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                className="flex w-[3rem] justify-center text-center"
-            >
-                Tanggal Akhir
-                <ArrowUpDown />
-            </Button>
-        ),
-        cell: ({ row }) => {
-            const testDateRaw = row.getValue('end_date') as string;
-            const testDate = parseISO(testDateRaw);
-            const formatted = format(testDate, 'dd-MM-yyyy');
-
-            return <div className="flex w-[3rem] justify-center text-center capitalize">{formatted}</div>;
-        },
-    },
-    {
-        accessorKey: 'status',
-        enableColumnFilter: true,
-        header: () => <div className="text-center w-[4rem]">Status</div>,
-        cell: ({ row }) => {
-            const status = row.getValue('status');
-            const statusColor = status === 'active' ? 'bg-green-500' : 'bg-yellow-500';
-
+            const date = parseISO(row.getValue("start_date"));
             return (
-                <div className="flex w-[4rem] justify-center">
-                    <span className={`text-light-base items-center rounded-2xl px-2 py-1 text-center font-medium capitalize md:px-3 ${statusColor}`}>
-                        {row.getValue('status')}
-                    </span>
+                <div className="text-center w-[6rem]">
+                    {format(date, "dd-MM-yyyy")}
                 </div>
             );
         },
     },
     {
-        accessorFn: row => row.membership_package.name,
-        id: 'membership_package_name',
-        header: () => (
-            <div className="flex w-[5rem] justify-center text-center">
-                Paket Membership
-            </div>
+        accessorKey: "end_date",
+        header: ({ column }) => (
+            <Button
+                variant="ghost"
+                onClick={() =>
+                    column.toggleSorting(column.getIsSorted() === "asc")
+                }
+                className="text-center w-[6rem]"
+            >
+                Tanggal Berakhir
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
         ),
-        cell: ({ row }) => (
-            <div className="flex w-[5rem] justify-center text-center capitalize">
-                {row.getValue('membership_package_name')}
-            </div>
-        ),
+        cell: ({ row }) => {
+            const date = parseISO(row.getValue("end_date"));
+            return (
+                <div className="text-center w-[6rem]">
+                    {format(date, "dd-MM-yyyy")}
+                </div>
+            );
+        },
     },
     {
-        id: 'detail',
-        header: () => <div className="flex justify-center text-center">Detail</div>,
-        cell: ({ row }) => (
+        accessorKey: "status",
+        header: () => <div className="text-center w-[6rem]">Status</div>,
+        cell: ({ row }) => {
+            const status = row.getValue("status") as string;
+
+            const statusMapping: Record<string, { label: string; color: string }> = {
+                active: { label: "Aktif", color: "bg-blue-500" },
+                cancelled: { label: "Dibatalkan", color: "bg-red-500" },
+                completed: { label: "Selesai", color: "bg-green-500" },
+            };
+
+            const { label, color } = statusMapping[status] || {
+                label: status,
+                color: "bg-gray-300",
+            };
+
+            return (
+                <div className="text-center w-[6rem]">
+          <span
+              className={`rounded-full px-3 py-1 text-white text-sm font-medium ${color}`}
+          >
+            {label}
+          </span>
+                </div>
+            );
+        },
+    },
+    {
+        id: "detail",
+        header: () => <div className="text-center">Detail</div>,
+        cell: () => (
             <div className="flex justify-center">
-                <Link href={`/history/submission/${row.original.code}`} className="small-font-size cursor-pointer rounded-full bg-blue-base px-2 py-1 text-center font-medium text-light-base bg-black text-white dark:bg-white dark:text-black">
+                <Button
+                    className="small-font-size cursor-pointer rounded-full bg-blue-base px-4 py-1 text-center font-medium text-light-base bg-black text-white dark:bg-white dark:text-black"
+                >
                     Lihat Detail
-                </Link>
+                </Button>
             </div>
         ),
     },

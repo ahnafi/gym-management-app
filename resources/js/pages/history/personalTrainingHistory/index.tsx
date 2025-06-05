@@ -10,8 +10,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import AppLayout from '@/layouts/app-layout';
 import {
     type BreadcrumbItem,
-    MembershipHistory,
-    SimpleOption,
+    PersonalTrainingHistory,
+    SimpleOption
 } from '@/types';
 import { Head } from '@inertiajs/react';
 import type { Table as TanStackTable } from '@tanstack/react-table';
@@ -30,35 +30,37 @@ import { ChevronDown, Boxes, X } from 'lucide-react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { membershipColumnLabels, membershipColumns } from './tableConfig';
+import { personalTrainingColumnLabels, personalTrainingColumns } from './tableConfig';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Riwayat Membership',
+        title: 'Riwayat Personal Training',
         href: '/gym-class-history',
     },
 ];
 
-export default function MembershipHistories({
-                                                membershipHistories,
-                                                membershipPackages,
+export default function PersonalTrainerHistories({
+                                                personalTrainingHistories,
+                                                personalTrainers,
+                                                personalTrainerPackages,
                                             }: {
-    membershipHistories: MembershipHistory[];
-    membershipPackages: SimpleOption[];
+    personalTrainingHistories: PersonalTrainingHistory[];
+    personalTrainers: SimpleOption[];
+    personalTrainerPackages: SimpleOption[];
 }) {
-    // Submission Table State
-    const [membershipSorting, setMembershipSorting] = useState<SortingState>([]);
-    const [membershipFilters, setMembershipFilters] = useState<ColumnFiltersState>([]);
-    const [membershipVisibility, setMembershipVisibility] = useState<VisibilityState>({});
-    const [membershipSelection, setMembershipSelection] = useState({});
-    const [membershipRows, setMembershipRows] = useState<number>(10);
+    // Membership Table State
+    const [PTSorting, setPTSorting] = useState<SortingState>([]);
+    const [PTFilters, setPTFilters] = useState<ColumnFiltersState>([]);
+    const [PTVisibility, setPTVisibility] = useState<VisibilityState>({});
+    const [PTSelection, setPTSelection] = useState({});
+    const [PTRows, setPTRows] = useState<number>(10);
 
-    // Submission Table Filter State
-    const [membershipSelectedPackage, setMembershipSelectedPackage] = useState<SimpleOption | null>(null);
+    // PT Table Filter State
+    const [PTSelectedPackage, setPTSelectedPackage] = useState<SimpleOption | null>(null);
 
-    const [membershipInitialDate, setMembershipInitialDate] = useState<Date | undefined>();
-    const [membershipFinalDate, setMembershipFinalDate] = useState<Date | undefined>();
-    const [membershipFinalDateKey, setMembershipFinalDateKey] = useState<number>(Date.now());
+    const [PTInitialDate, setPTInitialDate] = useState<Date | undefined>();
+    const [PTFinalDate, setPTFinalDate] = useState<Date | undefined>();
+    const [PTFinalDateKey, setPTFinalDateKey] = useState<number>(Date.now());
 
     // Alert State
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
@@ -116,22 +118,22 @@ export default function MembershipHistories({
         }
     };
 
-    const membershipTable = useReactTable<MembershipHistory>({
-        data: membershipHistories,
-        columns: membershipColumns,
-        onSortingChange: setMembershipSorting,
-        onColumnFiltersChange: setMembershipFilters,
+    const PTTable = useReactTable<PersonalTrainingHistory>({
+        data: personalTrainingHistories,
+        columns: personalTrainingColumns,
+        onSortingChange: setPTSorting,
+        onColumnFiltersChange: setPTFilters,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setMembershipVisibility,
-        onRowSelectionChange: setMembershipSelection,
+        onColumnVisibilityChange: setPTVisibility,
+        onRowSelectionChange: setPTSelection,
         state: {
-            sorting: membershipSorting,
-            columnFilters: membershipFilters,
-            columnVisibility: membershipVisibility,
-            rowSelection: membershipSelection,
+            sorting: PTSorting,
+            columnFilters: PTFilters,
+            columnVisibility: PTVisibility,
+            rowSelection: PTSelection,
         },
     });
 
@@ -146,17 +148,17 @@ export default function MembershipHistories({
         });
     };
 
-    // Submission Date Column Filter Effect
+    // PT Date Column Filter Effect
     useEffect(() => {
-        if (membershipInitialDate) {
-            updateColumnFilter(setMembershipFilters, 'start_date', {
-                start: membershipInitialDate,
-                end: membershipFinalDate ?? membershipInitialDate,
+        if (PTInitialDate) {
+            updateColumnFilter(setPTFilters, 'start_date', {
+                start: PTInitialDate,
+                end: PTFinalDate ?? PTInitialDate,
             });
         } else {
-            updateColumnFilter(setMembershipFilters, 'start_date', undefined);
+            updateColumnFilter(setPTFilters, 'start_date', undefined);
         }
-    }, [membershipInitialDate, membershipFinalDate]);
+    }, [PTInitialDate, PTFinalDate]);
 
     const useColumnFilterEffect = (
         selectedOption: SimpleOption | null,
@@ -172,14 +174,14 @@ export default function MembershipHistories({
         }, [selectedOption, columnId, setFilters]);
     };
 
-    // MembersshipPackage Lab Column Filter Effect
+    // MembersshipPackage Column Filter Effect
     useEffect(() => {
-        if (membershipSelectedPackage?.name) {
-            updateColumnFilter(setMembershipFilters, 'membership_package_name', membershipSelectedPackage.name);
+        if (PTSelectedPackage?.name) {
+            updateColumnFilter(setPTFilters, 'package_name', PTSelectedPackage.name);
         } else {
-            updateColumnFilter(setMembershipFilters, 'membership_package_name', undefined);
+            updateColumnFilter(setPTFilters, 'package_name', undefined);
         }
-    }, [membershipSelectedPackage]);
+    }, [PTSelectedPackage]);
 
     // Row Pagination Effect
     const usePageSizeEffect = <T,>(table: TanStackTable<T>, rows: number) => {
@@ -188,8 +190,8 @@ export default function MembershipHistories({
         }, [rows, table]);
     };
 
-    // Submission Table Row Pagination Effect
-    usePageSizeEffect(membershipTable, membershipRows);
+    // Membership Table Row Pagination Effect
+    usePageSizeEffect(PTTable, PTRows);
 
     // Alert Message
     useEffect(() => {
@@ -216,17 +218,17 @@ export default function MembershipHistories({
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-xl p-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="submission col-span-full space-y-2">
-                        <h1 className="title font-semibold">Riwayat Membership</h1>
+                    <div className="membership col-span-full space-y-2">
+                        <h1 className="title font-semibold">Riwayat Personal Training</h1>
                         <div className="membership-table-filters small-font-size mb-2 flex hidden justify-end gap-4 lg:mb-4 lg:flex lg:flex-wrap">
                             {/* Daftar filter untuk layar besar */}
                             <div className="test-type">
                                 <SearchableSelect
-                                    label="Jenis Membership"
-                                    options={membershipPackages}
-                                    selectedOption={membershipSelectedPackage}
-                                    setSelectedOption={setMembershipSelectedPackage}
-                                    placeholder="Filter Jenis Membership..."
+                                    label="Paket Personal Trainer"
+                                    options={personalTrainerPackages}
+                                    selectedOption={PTSelectedPackage}
+                                    setSelectedOption={setPTSelectedPackage}
+                                    placeholder="Cari Nama Paket..."
                                     searchIcon={<Boxes size={16} />}
                                 />
                             </div>
@@ -235,27 +237,27 @@ export default function MembershipHistories({
                                 <div className="flex gap-3">
                                     <div className="initial-date">
                                         <DatePicker
-                                            value={membershipInitialDate}
+                                            value={PTInitialDate}
                                             placeholder="Pilih Tanggal Awal"
                                             onDateSelect={(date) =>
-                                                handleInitialDateSelect(date, setMembershipInitialDate, setMembershipFinalDate, membershipFinalDate)
+                                                handleInitialDateSelect(date, setPTInitialDate, setPTFinalDate, PTFinalDate)
                                             }
                                         />
                                     </div>
                                     <div className="flex items-center justify-center">-</div>
                                     <div className="final-date">
                                         <DatePicker
-                                            key={membershipFinalDateKey}
-                                            value={membershipInitialDate}
+                                            key={PTFinalDateKey}
+                                            value={PTInitialDate}
                                             placeholder="Pilih Tanggal Akhir"
                                             onDateSelect={(date) =>
                                                 handleFinalDateSelect(
                                                     date,
-                                                    membershipInitialDate,
-                                                    setMembershipInitialDate,
-                                                    setMembershipFinalDate,
+                                                    PTInitialDate,
+                                                    setPTInitialDate,
+                                                    setPTFinalDate,
                                                     setAlertMessage,
-                                                    setMembershipFinalDateKey,
+                                                    setPTFinalDateKey,
                                                 )
                                             }
                                         />
@@ -263,13 +265,13 @@ export default function MembershipHistories({
                                 </div>
 
 
-                                {(membershipInitialDate || membershipFinalDate) && (
+                                {(PTInitialDate || PTFinalDate) && (
                                     <button
                                         type="button"
                                         onClick={() => {
-                                            setMembershipInitialDate(undefined);
-                                            setMembershipFinalDate(undefined);
-                                            setMembershipFilters((prev) => prev.filter((f) => f.id !== 'test_submission_date'));
+                                            setPTInitialDate(undefined);
+                                            setPTFinalDate(undefined);
+                                            setPTFilters((prev) => prev.filter((f) => f.id !== 'start_date'));
                                         }}
                                         className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1"
                                     >
@@ -279,8 +281,6 @@ export default function MembershipHistories({
                                 )}
                             </div>
                         </div>
-
-
 
                         {/* Tombol Filter untuk layar kecil */}
                         <div className="mb-2 flex justify-end lg:mb-4 lg:hidden">
@@ -300,43 +300,43 @@ export default function MembershipHistories({
                                             <div className="flex justify-between gap-2">
                                                 <div className="initial-date flex flex-col">
                                                     <DatePicker
-                                                        value={membershipInitialDate}
+                                                        value={PTInitialDate}
                                                         placeholder="Pilih Tanggal Awal"
                                                         onDateSelect={(date) =>
                                                             handleInitialDateSelect(
                                                                 date,
-                                                                setMembershipInitialDate,
-                                                                setMembershipFinalDate,
-                                                                membershipFinalDate,
+                                                                setPTInitialDate,
+                                                                setPTFinalDate,
+                                                                PTFinalDate,
                                                             )
                                                         }
                                                     />
                                                 </div>
                                                 <div className="final-date flex flex-col">
                                                     <DatePicker
-                                                        key={membershipFinalDateKey}
-                                                        value={membershipInitialDate}
+                                                        key={PTFinalDateKey}
+                                                        value={PTInitialDate}
                                                         placeholder="Pilih Tanggal Akhir"
                                                         onDateSelect={(date) =>
                                                             handleFinalDateSelect(
                                                                 date,
-                                                                membershipInitialDate,
-                                                                setMembershipInitialDate,
-                                                                setMembershipFinalDate,
+                                                                PTInitialDate,
+                                                                setPTInitialDate,
+                                                                setPTFinalDate,
                                                                 setAlertMessage,
-                                                                setMembershipFinalDateKey,
+                                                                setPTFinalDateKey,
                                                             )
                                                         }
                                                     />
                                                 </div>
                                             </div>
-                                            {(membershipInitialDate || membershipFinalDate) && (
+                                            {(PTInitialDate || PTFinalDate) && (
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setMembershipInitialDate(undefined);
-                                                        setMembershipFinalDate(undefined);
-                                                        setMembershipFilters((prev) => prev.filter((f) => f.id !== 'start_date'));
+                                                        setPTInitialDate(undefined);
+                                                        setPTFinalDate(undefined);
+                                                        setPTFilters((prev) => prev.filter((f) => f.id !== 'start_date'));
                                                     }}
                                                     className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1"
                                                 >
@@ -349,14 +349,14 @@ export default function MembershipHistories({
                                 </DialogContent>
                             </Dialog>
                         </div>
-                        <div className="submission-table-main">
-                            <div className="submission-table-option mb-2 flex justify-between lg:mb-4">
+                        <div className="membership-table-main">
+                            <div className="membership-table-option mb-2 flex justify-between lg:mb-4">
                                 <div className="flex w-full justify-end gap-2 flex-wrap">
                                     <div className="code-search flex flex-col">
                                         <Input
-                                            placeholder="Cari Kode Membership..."
-                                            value={(membershipTable.getColumn('code')?.getFilterValue() as string) ?? ''}
-                                            onChange={(e) => membershipTable.getColumn('code')?.setFilterValue(e.target.value)}
+                                            placeholder="Cari Personal Trainer..."
+                                            value={(PTTable.getColumn('trainer_nickname')?.getFilterValue() as string) ?? ''}
+                                            onChange={(e) => PTTable.getColumn('trainer_nickname')?.setFilterValue(e.target.value)}
                                             className="border-muted bg-background text-foreground focus:ring-primary small-font-size small-font-size w-full rounded-md border py-2 shadow-sm focus:ring-1 focus:outline-none"
                                         />
                                     </div>
@@ -368,7 +368,7 @@ export default function MembershipHistories({
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
-                                                {membershipTable
+                                                {PTTable
                                                     .getAllColumns()
                                                     .filter((column) => column.getCanHide())
                                                     .map((column) => {
@@ -379,7 +379,7 @@ export default function MembershipHistories({
                                                                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
                                                                 className="small-font-size"
                                                             >
-                                                                {membershipColumnLabels[column.id] ?? column.id}
+                                                                {personalTrainingColumnLabels[column.id] ?? column.id}
                                                             </DropdownMenuCheckboxItem>
                                                         );
                                                     })}
@@ -390,15 +390,15 @@ export default function MembershipHistories({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="outline" className="small-font-size ml-auto font-normal">
-                                                    Tampilkan {membershipRows} Baris <ChevronDown className="ml-1 h-4 w-4" />
+                                                    Tampilkan {PTRows} Baris <ChevronDown className="ml-1 h-4 w-4" />
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
                                                 {[10, 25, 50, 100].map((size) => (
                                                     <DropdownMenuCheckboxItem
                                                         key={size}
-                                                        checked={membershipRows === size}
-                                                        onCheckedChange={() => setMembershipRows(size)}
+                                                        checked={PTRows === size}
+                                                        onCheckedChange={() => setPTRows(size)}
                                                         className="small-font-size"
                                                     >
                                                         {size} baris
@@ -409,11 +409,11 @@ export default function MembershipHistories({
                                     </div>
                                 </div>
                             </div>
-                            <div className="submission-table-body">
+                            <div className="membership-table-body">
                                 <div className="rounded-md border">
                                     <Table className="small-font-size">
                                         <TableHeader>
-                                            {membershipTable.getHeaderGroups().map((headerGroup) => (
+                                            {PTTable.getHeaderGroups().map((headerGroup) => (
                                                 <TableRow key={headerGroup.id}>
                                                     {headerGroup.headers.map((header) => {
                                                         return (
@@ -428,8 +428,8 @@ export default function MembershipHistories({
                                             ))}
                                         </TableHeader>
                                         <TableBody>
-                                            {membershipTable.getRowModel().rows?.length ? (
-                                                membershipTable.getRowModel().rows.map((row) => (
+                                            {PTTable.getRowModel().rows?.length ? (
+                                                PTTable.getRowModel().rows.map((row) => (
                                                     <TableRow key={row.id}>
                                                         {row.getVisibleCells().map((cell) => (
                                                             <TableCell key={cell.id}>
@@ -440,7 +440,7 @@ export default function MembershipHistories({
                                                 ))
                                             ) : (
                                                 <TableRow>
-                                                    <TableCell colSpan={membershipColumns.length} className="h-24 text-center">
+                                                    <TableCell colSpan={personalTrainingColumns.length} className="h-24 text-center">
                                                         No results.
                                                     </TableCell>
                                                 </TableRow>
@@ -453,8 +453,8 @@ export default function MembershipHistories({
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => membershipTable.previousPage()}
-                                            disabled={!membershipTable.getCanPreviousPage()}
+                                            onClick={() => PTTable.previousPage()}
+                                            disabled={!PTTable.getCanPreviousPage()}
                                             className="small-font-size"
                                         >
                                             Previous
@@ -462,8 +462,8 @@ export default function MembershipHistories({
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => membershipTable.nextPage()}
-                                            disabled={!membershipTable.getCanNextPage()}
+                                            onClick={() => PTTable.nextPage()}
+                                            disabled={!PTTable.getCanNextPage()}
                                             className="small-font-size"
                                         >
                                             Next
