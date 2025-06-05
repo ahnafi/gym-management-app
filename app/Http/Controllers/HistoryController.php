@@ -39,13 +39,18 @@ class HistoryController extends Controller
         $gymClassHistories = GymClassAttendance::query()
             ->where('user_id', auth()->id())
             ->with([
-                'gymClassSchedule:id,date,start_time,end_time',
+                'gymClassSchedule:id,date,start_time,end_time,gym_class_id',
                 'gymClassSchedule.gymClass:id,code,name,images'
             ])
             ->orderBy('created_at', 'desc')
             ->get(['id', 'user_id', 'gym_class_schedule_id', 'created_at']);
 
-        return Inertia::render("history/gymClassHistory/index");
+        $gymClasses = GymClass::select(['id', 'name'])->get();
+
+        return Inertia::render("history/gymClassHistory/index", [
+            'gymClassHistories' => $gymClassHistories,
+            'gymClasses' => $gymClasses,
+        ]);
     }
 
     public function personalTrainingHistory()
