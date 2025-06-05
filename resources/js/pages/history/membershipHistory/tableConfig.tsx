@@ -11,7 +11,7 @@ export const membershipColumnLabels: Record<string, string> = {
     code: 'Kode Riwayat',
     start_date: 'Tanggal Mulai',
     end_date: 'Tanggal Akhir',
-    name: 'Nama Paket',
+    membership_package_name: 'Nama Paket',
     status: 'Status',
     detail: 'Detail',
 };
@@ -45,7 +45,7 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
             <Button
                 variant="ghost"
                 onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                className="flex w-[5rem] justify-center text-center"
+                className="flex w-[4rem] justify-center text-center"
             >
                 Tanggal Mulai
                 <ArrowUpDown />
@@ -56,7 +56,7 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
             const testDate = parseISO(testDateRaw);
             const formatted = format(testDate, 'dd-MM-yyyy');
 
-            return <div className="flex w-[5rem] justify-center text-center capitalize">{formatted}</div>;
+            return <div className="flex w-[4rem] justify-center text-center capitalize">{formatted}</div>;
         },
     },
     {
@@ -77,7 +77,7 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
             <Button
                 variant="ghost"
                 onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                className="flex w-[5rem] justify-center text-center"
+                className="flex w-[4rem] justify-center text-center"
             >
                 Tanggal Akhir
                 <ArrowUpDown />
@@ -88,19 +88,19 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
             const testDate = parseISO(testDateRaw);
             const formatted = format(testDate, 'dd-MM-yyyy');
 
-            return <div className="flex w-[5rem] justify-center text-center capitalize">{formatted}</div>;
+            return <div className="flex w-[4rem] justify-center text-center capitalize">{formatted}</div>;
         },
     },
     {
         accessorKey: 'status',
         enableColumnFilter: true,
-        header: () => <div className="text-center">Status</div>,
+        header: () => <div className="text-center w-[4rem]">Status</div>,
         cell: ({ row }) => {
             const status = row.getValue('status');
             const statusColor = status === 'active' ? 'bg-green-500' : 'bg-yellow-500';
 
             return (
-                <div className="flex w-full justify-center">
+                <div className="flex w-[4rem] justify-center">
                     <span className={`text-light-base items-center rounded-2xl px-2 py-1 text-center font-medium capitalize md:px-3 ${statusColor}`}>
                         {row.getValue('status')}
                     </span>
@@ -110,7 +110,7 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
     },
     {
         accessorFn: row => row.membership_package.name,
-        id: 'membership_package_name', // required when using accessorFn
+        id: 'membership_package_name',
         header: () => (
             <div className="flex w-[5rem] justify-center text-center">
                 Paket Membership
@@ -121,16 +121,16 @@ export const membershipColumns: ColumnDef<MembershipHistory>[] = [
                 {row.getValue('membership_package_name')}
             </div>
         ),
-    }
-    // {
-    //     id: 'detail',
-    //     header: () => <div className="flex justify-center text-center">Detail</div>,
-    //     cell: ({ row }) => (
-    //         <div className="flex justify-center">
-    //             <Link href={`/history/submission/${row.original.code}`} className="small-font-size cursor-pointer rounded-full bg-blue-base px-2 py-1 text-center font-medium text-light-base hover:bg-blue-600">
-    //                 Lihat Detail
-    //             </Link>
-    //         </div>
-    //     ),
-    // },
+    },
+    {
+        id: 'detail',
+        header: () => <div className="flex justify-center text-center">Detail</div>,
+        cell: ({ row }) => (
+            <div className="flex justify-center">
+                <Link href={`/history/submission/${row.original.code}`} className="small-font-size cursor-pointer rounded-full bg-blue-base px-4 py-1 text-center font-medium text-light-base bg-black text-white dark:bg-white dark:text-black">
+                    Lihat Detail
+                </Link>
+            </div>
+        ),
+    },
 ];

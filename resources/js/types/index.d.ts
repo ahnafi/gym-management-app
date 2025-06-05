@@ -193,3 +193,24 @@ export type MembershipHistory = {
     deleted_at: string | null;
     membership_package: MembershipPackageHistory;
 };
+
+export interface GymClassHistory {
+    id: number;
+    user_id: number;
+    status: 'assigned' | 'attended' | 'missed';
+    gym_class_schedule_id: number;
+    created_at: string; // ISO date string
+    gym_class_schedule: {
+        id: number;
+        date: string; // ISO string: "2025-06-04T17:00:00.000000Z"
+        start_time: string; // "08:00:00"
+        end_time: string;   // "09:00:00"
+        gym_class_id: number;
+        gym_class: {
+            id: number;
+            code: string;
+            name: string;
+            images: string[]; // Assuming this is a JSON array of image filenames/URLs
+        };
+    };
+}

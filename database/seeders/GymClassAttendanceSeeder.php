@@ -24,7 +24,7 @@ class GymClassAttendanceSeeder extends Seeder
                 'gym_class_schedule_id' => 2,
             ],
             [
-                'status' => 'cancelled',
+                'status' => 'attended',
                 'attended_at' => Carbon::now()->subDays(8),
                 'user_id' => 3,
                 'gym_class_schedule_id' => 3,
@@ -60,7 +60,7 @@ class GymClassAttendanceSeeder extends Seeder
                 'gym_class_schedule_id' => 8,
             ],
             [
-                'status' => 'cancelled',
+                'status' => 'attended',
                 'attended_at' => Carbon::now()->subDays(2),
                 'user_id' => 9,
                 'gym_class_schedule_id' => 9,
