@@ -16,7 +16,7 @@ export default function MembershipPackages({ packages }: { packages: MembershipP
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Paket Membership" />
-            <div className="px-3 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="px-4 py-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {packages.map((pkg) => (
                     <Link
                         href={`/membership-packages/${pkg.slug}`}
