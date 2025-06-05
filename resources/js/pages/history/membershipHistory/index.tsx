@@ -6,8 +6,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import SearchableSelect from '@/components/ui/SearchableSelect';
-import { Calendar } from "@/components/ui/calendar"
-import { DayPicker } from 'react-day-picker';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import {
@@ -48,14 +46,14 @@ export default function MembershipHistories({
     membershipHistories: MembershipHistory[];
     membershipPackages: SimpleOption[];
 }) {
-    // Submission Table State
+    // Membership Table State
     const [membershipSorting, setMembershipSorting] = useState<SortingState>([]);
     const [membershipFilters, setMembershipFilters] = useState<ColumnFiltersState>([]);
     const [membershipVisibility, setMembershipVisibility] = useState<VisibilityState>({});
     const [membershipSelection, setMembershipSelection] = useState({});
     const [membershipRows, setMembershipRows] = useState<number>(10);
 
-    // Submission Table Filter State
+    // Membership Table Filter State
     const [membershipSelectedPackage, setMembershipSelectedPackage] = useState<SimpleOption | null>(null);
 
     const [membershipInitialDate, setMembershipInitialDate] = useState<Date | undefined>();
@@ -148,7 +146,7 @@ export default function MembershipHistories({
         });
     };
 
-    // Submission Date Column Filter Effect
+    // Membership Date Column Filter Effect
     useEffect(() => {
         if (membershipInitialDate) {
             updateColumnFilter(setMembershipFilters, 'start_date', {
@@ -160,27 +158,26 @@ export default function MembershipHistories({
         }
     }, [membershipInitialDate, membershipFinalDate]);
 
-    // Reusable Column Filter Effect
-    // const useColumnFilterEffect = (
-    //     selectedOption: SimpleOption | null,
-    //     setFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>,
-    //     columnId: string,
-    // ) => {
-    //     useEffect(() => {
-    //         if (selectedOption?.name) {
-    //             updateColumnFilter(setFilters, columnId, selectedOption.name);
-    //         } else {
-    //             updateColumnFilter(setFilters, columnId, undefined);
-    //         }
-    //     }, [selectedOption, columnId, setFilters]);
-    // };
+    const useColumnFilterEffect = (
+        selectedOption: SimpleOption | null,
+        setFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>,
+        columnId: string,
+    ) => {
+        useEffect(() => {
+            if (selectedOption?.name) {
+                updateColumnFilter(setFilters, columnId, selectedOption.name);
+            } else {
+                updateColumnFilter(setFilters, columnId, undefined);
+            }
+        }, [selectedOption, columnId, setFilters]);
+    };
 
-    // Submission Lab Column Filter Effect
+    // MembersshipPackage Column Filter Effect
     useEffect(() => {
         if (membershipSelectedPackage?.name) {
-            updateColumnFilter(setMembershipFilters, 'MembershipPackageHistory.name', membershipSelectedPackage.name);
+            updateColumnFilter(setMembershipFilters, 'membership_package_name', membershipSelectedPackage.name);
         } else {
-            updateColumnFilter(setMembershipFilters, 'MembershipPackageHistory.name', undefined);
+            updateColumnFilter(setMembershipFilters, 'membership_package_name', undefined);
         }
     }, [membershipSelectedPackage]);
 
@@ -191,7 +188,7 @@ export default function MembershipHistories({
         }, [rows, table]);
     };
 
-    // Submission Table Row Pagination Effect
+    // Membership Table Row Pagination Effect
     usePageSizeEffect(membershipTable, membershipRows);
 
     // Alert Message
@@ -219,13 +216,13 @@ export default function MembershipHistories({
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-xl p-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="submission col-span-full space-y-2">
+                    <div className="membership col-span-full space-y-2">
                         <h1 className="title font-semibold">Riwayat Membership</h1>
                         <div className="membership-table-filters small-font-size mb-2 flex hidden justify-end gap-4 lg:mb-4 lg:flex lg:flex-wrap">
                             {/* Daftar filter untuk layar besar */}
                             <div className="test-type">
                                 <SearchableSelect
-                                    label="Jenis Pengujian"
+                                    label="Jenis Membership"
                                     options={membershipPackages}
                                     selectedOption={membershipSelectedPackage}
                                     setSelectedOption={setMembershipSelectedPackage}
@@ -272,7 +269,7 @@ export default function MembershipHistories({
                                         onClick={() => {
                                             setMembershipInitialDate(undefined);
                                             setMembershipFinalDate(undefined);
-                                            setMembershipFilters((prev) => prev.filter((f) => f.id !== 'test_submission_date'));
+                                            setMembershipFilters((prev) => prev.filter((f) => f.id !== 'start_date'));
                                         }}
                                         className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1"
                                     >
@@ -282,8 +279,6 @@ export default function MembershipHistories({
                                 )}
                             </div>
                         </div>
-
-
 
                         {/* Tombol Filter untuk layar kecil */}
                         <div className="mb-2 flex justify-end lg:mb-4 lg:hidden">
@@ -352,8 +347,8 @@ export default function MembershipHistories({
                                 </DialogContent>
                             </Dialog>
                         </div>
-                        <div className="submission-table-main">
-                            <div className="submission-table-option mb-2 flex justify-between lg:mb-4">
+                        <div className="membership-table-main">
+                            <div className="membership-table-option mb-2 flex justify-between lg:mb-4">
                                 <div className="flex w-full justify-end gap-2 flex-wrap">
                                     <div className="code-search flex flex-col">
                                         <Input
@@ -412,7 +407,7 @@ export default function MembershipHistories({
                                     </div>
                                 </div>
                             </div>
-                            <div className="submission-table-body">
+                            <div className="membership-table-body">
                                 <div className="rounded-md border">
                                     <Table className="small-font-size">
                                         <TableHeader>

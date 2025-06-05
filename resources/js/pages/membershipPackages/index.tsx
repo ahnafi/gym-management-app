@@ -36,8 +36,7 @@ export default function MembershipPackages({ packages }: { packages: MembershipP
                             <p className="text-sm text-gray-600 dark:text-gray-300">{pkg.description}</p>
                             <div className="mt-2">
                                 <p className="text-lg font-semibold text-primary">Rp {pkg.price.toLocaleString()}</p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">Durasi: {pkg.duration} hari</p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">({pkg.duration_in_months} bulan)</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Durasi: {pkg.duration} hari ({pkg.duration_in_months} bulan)</p>
                             </div>
                         </div>
                     </Link>
