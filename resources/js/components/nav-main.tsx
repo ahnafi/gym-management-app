@@ -61,11 +61,6 @@ const pembayaranItems: NavItem[] = [
 
 const riwayatItems: NavItem[] = [
     {
-        title: 'Riwayat Pembayaran',
-        href: '/payment-history',
-        icon: History,
-    },
-    {
         title: 'Riwayat Membership',
         href: '/membership-history',
         icon: History,
