@@ -1,7 +1,7 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { MembershipPackage} from '@/types';
+import { MembershipPackageCatalog} from '@/types';
 import { Head } from '@inertiajs/react';
 import { Link } from '@inertiajs/react'
 
@@ -12,11 +12,11 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function MembershipPackages({ packages }: { packages: MembershipPackage[] }) {
+export default function MembershipPackages({ packages }: { packages: MembershipPackageCatalog[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Paket Membership" />
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="px-3 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {packages.map((pkg) => (
                     <Link
                         href={`/membership-packages/${pkg.slug}`}
