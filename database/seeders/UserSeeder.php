@@ -650,7 +650,7 @@ class UserSeeder extends Seeder
         }
 
         // Tambahan 5 member dari factory
-        \App\Models\User::factory(5)->create([
+        User::factory(5)->create([
             'role' => 'member',
             'membership_registered' => 'registered',
             'membership_status' => 'active',

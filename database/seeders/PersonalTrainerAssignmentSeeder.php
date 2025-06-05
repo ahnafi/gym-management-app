@@ -12,7 +12,7 @@ class PersonalTrainerAssignmentSeeder extends Seeder
     {
         $assignments = [
             [
-                'user_id' => 4,
+                'user_id' => 1,
                 'personal_trainer_id' => 1,
                 'personal_trainer_package_id' => 1,
                 'day_left' => 7,
