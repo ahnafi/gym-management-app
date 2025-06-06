@@ -340,48 +340,6 @@ class GymClassScheduleSeeder extends Seeder
                 'slot' => 15,
                 'gym_class_id' => 24,
             ],
-            [
-                'date' => Carbon::today()->addDays(25),
-                'start_time' => '08:30:00',
-                'end_time' => '10:00:00',
-                'slot' => 20,
-                'gym_class_id' => 25,
-            ],
-            [
-                'date' => Carbon::today()->addDays(26),
-                'start_time' => '15:00:00',
-                'end_time' => '16:00:00',
-                'slot' => 9,
-                'gym_class_id' => 26,
-            ],
-            [
-                'date' => Carbon::today()->addDays(27),
-                'start_time' => '13:30:00',
-                'end_time' => '14:30:00',
-                'slot' => 12,
-                'gym_class_id' => 27,
-            ],
-            [
-                'date' => Carbon::today()->addDays(28),
-                'start_time' => '17:30:00',
-                'end_time' => '18:30:00',
-                'slot' => 18,
-                'gym_class_id' => 28,
-            ],
-            [
-                'date' => Carbon::today()->addDays(29),
-                'start_time' => '10:30:00',
-                'end_time' => '11:30:00',
-                'slot' => 14,
-                'gym_class_id' => 29,
-            ],
-            [
-                'date' => Carbon::today()->addDays(30),
-                'start_time' => '07:30:00',
-                'end_time' => '09:00:00',
-                'slot' => 20,
-                'gym_class_id' => 30,
-            ]
         ];
 
         foreach ($schedules as $schedule) {

@@ -15,7 +15,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Zumba Dance',
                 'description' => 'Kelas kardio dengan gerakan menari energik.',
                 'price' => 50000,
-                'images' => ['default.jpg'],
+                'images' => ['gc1.jpg'],
                 'status' => 'active',
             ],
             [
@@ -23,7 +23,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Yoga Flow',
                 'description' => 'Kelas yoga untuk meningkatkan fleksibilitas dan relaksasi.',
                 'price' => 60000,
-                'images' => ['default.jpg'],
+                'images' => ['gc2.jpg'],
                 'status' => 'active',
             ],
             [
@@ -31,7 +31,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Body Pump',
                 'description' => 'Kelas latihan beban intensitas tinggi.',
                 'price' => 70000,
-                'images' => ['default.jpg'],
+                'images' => ['gc3.jpg'],
                 'status' => 'active',
             ],
             [
@@ -39,7 +39,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'HIIT Workout',
                 'description' => 'Latihan interval intensitas tinggi untuk membakar kalori lebih cepat.',
                 'price' => 75000,
-                'images' => ['default.jpg'],
+                'images' => ['gc4.jpg'],
                 'status' => 'active',
             ],
             [
@@ -47,7 +47,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Pilates Core',
                 'description' => 'Latihan untuk kekuatan otot inti dan postur tubuh.',
                 'price' => 65000,
-                'images' => ['default.jpg'],
+                'images' => ['gc5.jpg'],
                 'status' => 'active',
             ],
             [
@@ -55,7 +55,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Boxing Fit',
                 'description' => 'Kelas latihan tinju untuk kebugaran dan kekuatan.',
                 'price' => 80000,
-                'images' => ['default.jpg'],
+                'images' => ['gc6.jpg'],
                 'status' => 'active',
             ],
             [
@@ -63,7 +63,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Cycling Spin',
                 'description' => 'Kelas bersepeda dalam ruangan dengan irama musik.',
                 'price' => 55000,
-                'images' => ['default.jpg'],
+                'images' => ['gc7.jpg'],
                 'status' => 'active',
             ],
             [
@@ -71,7 +71,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Aqua Aerobics',
                 'description' => 'Latihan aerobik di dalam air untuk semua usia.',
                 'price' => 60000,
-                'images' => ['default.jpg'],
+                'images' => ['gc8.jpg'],
                 'status' => 'active',
             ],
             [
@@ -79,7 +79,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'CrossFit Circuit',
                 'description' => 'Kelas kekuatan dan daya tahan dengan latihan sirkuit.',
                 'price' => 85000,
-                'images' => ['default.jpg'],
+                'images' => ['gc9.jpg'],
                 'status' => 'active',
             ],
             [
@@ -87,7 +87,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Stretch & Relax',
                 'description' => 'Kelas peregangan dan meditasi untuk relaksasi otot.',
                 'price' => 45000,
-                'images' => ['default.jpg'],
+                'images' => ['gc10.jpg'],
                 'status' => 'active',
             ],
             [
@@ -95,7 +95,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Functional Training',
                 'description' => 'Latihan fungsional untuk gerakan sehari-hari.',
                 'price' => 70000,
-                'images' => ['default.jpg'],
+                'images' => ['gc11.jpg'],
                 'status' => 'active',
             ],
             [
@@ -103,7 +103,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'TRX Suspension',
                 'description' => 'Latihan kekuatan menggunakan tali TRX.',
                 'price' => 72000,
-                'images' => ['default.jpg'],
+                'images' => ['gc12.jpg'],
                 'status' => 'active',
             ],
             [
@@ -111,7 +111,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Core Stability',
                 'description' => 'Fokus pada kestabilan otot inti.',
                 'price' => 68000,
-                'images' => ['default.jpg'],
+                'images' => ['gc13.jpg'],
                 'status' => 'active',
             ],
             [
@@ -119,7 +119,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Barre Fitness',
                 'description' => 'Gabungan ballet, yoga, dan pilates.',
                 'price' => 75000,
-                'images' => ['default.jpg'],
+                'images' => ['gc14.jpg'],
                 'status' => 'active',
             ],
             [
@@ -127,7 +127,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Tabata Express',
                 'description' => 'Latihan HIIT singkat dan padat.',
                 'price' => 73000,
-                'images' => ['default.jpg'],
+                'images' => ['gc15.jpg'],
                 'status' => 'active',
             ],
             [
@@ -135,7 +135,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Dance Cardio',
                 'description' => 'Kelas menari cepat untuk bakar kalori.',
                 'price' => 50000,
-                'images' => ['default.jpg'],
+                'images' => ['gc16.jpg'],
                 'status' => 'active',
             ],
             [
@@ -143,7 +143,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Kickboxing',
                 'description' => 'Latihan bela diri untuk cardio dan kekuatan.',
                 'price' => 79000,
-                'images' => ['default.jpg'],
+                'images' => ['gc17.jpg'],
                 'status' => 'active',
             ],
             [
@@ -151,7 +151,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Bootcamp Blast',
                 'description' => 'Latihan intens di luar ruangan.',
                 'price' => 85000,
-                'images' => ['default.jpg'],
+                'images' => ['gc18.jpg'],
                 'status' => 'active',
             ],
             [
@@ -159,7 +159,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Morning Mobility',
                 'description' => 'Peregangan dan pemanasan pagi hari.',
                 'price' => 46000,
-                'images' => ['default.jpg'],
+                'images' => ['gc19.jpg'],
                 'status' => 'active',
             ],
             [
@@ -167,7 +167,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Evening Flow',
                 'description' => 'Yoga dan meditasi malam hari.',
                 'price' => 60000,
-                'images' => ['default.jpg'],
+                'images' => ['gc20.jpg'],
                 'status' => 'active',
             ],
             [
@@ -175,7 +175,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Strength & Sculpt',
                 'description' => 'Latihan kekuatan dan pembentukan otot.',
                 'price' => 80000,
-                'images' => ['default.jpg'],
+                'images' => ['gc21.jpg'],
                 'status' => 'active',
             ],
             [
@@ -183,7 +183,7 @@ class GymClassSeeder extends Seeder
                 'name' => 'Balance Training',
                 'description' => 'Latihan koordinasi dan keseimbangan.',
                 'price' => 69000,
-                'images' => ['default.jpg'],
+                'images' => ['gc22.jpg'],
                 'status' => 'active',
             ],
             [
@@ -191,63 +191,15 @@ class GymClassSeeder extends Seeder
                 'name' => 'Power Yoga',
                 'description' => 'Yoga dinamis untuk stamina dan fleksibilitas.',
                 'price' => 77000,
-                'images' => ['default.jpg'],
+                'images' => ['gc23.jpg'],
                 'status' => 'active',
             ],
             [
                 'code' => 'GYM024',
-                'name' => 'Cardio Dance',
-                'description' => 'Tari energik untuk meningkatkan denyut jantung.',
-                'price' => 55000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM025',
-                'name' => 'AeroBox',
-                'description' => 'Gabungan aerobik dan boxing.',
-                'price' => 71000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM026',
-                'name' => 'Body Combat',
-                'description' => 'Kelas bela diri dengan irama musik.',
-                'price' => 76000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM027',
-                'name' => 'Step Aerobics',
-                'description' => 'Latihan cardio menggunakan step board.',
-                'price' => 67000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM028',
-                'name' => 'Strength Circuit',
-                'description' => 'Latihan sirkuit menggunakan beban.',
-                'price' => 82000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM029',
-                'name' => 'Recovery Stretch',
-                'description' => 'Fokus pemulihan otot dan mobilitas.',
-                'price' => 50000,
-                'images' => ['default.jpg'],
-                'status' => 'active',
-            ],
-            [
-                'code' => 'GYM030',
                 'name' => 'Zen Meditation',
-                'description' => 'Sesi meditasi untuk ketenangan pikiran.',
-                'price' => 40000,
-                'images' => ['default.jpg'],
+                'description' => 'TSesi meditasi untuk ketenangan pikiran.',
+                'price' => 55000,
+                'images' => ['gc24.jpg'],
                 'status' => 'active',
             ],
         ];
