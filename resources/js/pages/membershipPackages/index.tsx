@@ -25,7 +25,7 @@ export default function MembershipPackages({ packages }: { packages: MembershipP
                     >
                         {pkg.images && pkg.images.length > 0 && (
                             <img
-                                src={`/storage/membership_package/${pkg.images[0]}`}
+                                src={`/storage/${pkg.images[0]}`}
                                 alt={pkg.name}
                                 className="w-full h-48 object-cover"
                             />

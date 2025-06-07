@@ -26,7 +26,7 @@ export default function PersonalTrainers({ trainers }: { trainers: PersonalTrain
                             >
                                 {trainer.images && trainer.images.length > 0 ? (
                                     <img
-                                        src={`/storage/personal_trainer/${trainer.images[0]}`}
+                                        src={`/storage/${trainer.images[0]}`}
                                         alt={trainer.nickname}
                                         className="w-full h-48 object-cover"
                                     />
