@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { MembershipPackage } from '@/types';
+import { MembershipPackageCatalog } from '@/types';
 import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,7 +27,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
 ];
 
-export default function MembershipPackages({ mPackage }: { mPackage: MembershipPackage }) {
+export default function MembershipPackages({ mPackage }: { mPackage: MembershipPackageCatalog }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleConfirm = () => {
