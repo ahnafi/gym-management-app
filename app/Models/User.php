@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -45,6 +46,45 @@ class User extends Authenticatable implements FilamentUser
         'password',
         'remember_token',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->profile_image)) {
+                $model->profile_image = 'user_profile\/default-user_profile.jpg';
+            }
+        });
+
+        static::updating(function ($model) {
+            if ($model->isDirty('profile_image')) {
+                $oldImage = $model->getOriginal('profile_image');
+                $newImage = $model->profile_image;
+
+                if (
+                    $oldImage &&
+                    $oldImage !== $newImage &&
+                    $oldImage !== 'user_profile\/default-user_profile.jpg' &&
+                    Storage::disk('public')->exists($oldImage)
+                ) {
+                    Storage::disk('public')->delete($oldImage);
+                }
+            }
+        });
+
+        static::deleting(function ($model) {
+            if (
+                $model->profile_image &&
+                $model->profile_image !== 'user_profile\/default-user_profile.jpg' &&
+                Storage::disk('public')->exists($model->profile_image)
+            ) {
+                Storage::disk('public')->delete($model->profile_image);
+            }
+        });
+    }
+
+
 
     public function canAccessPanel(Panel $panel): bool
     {

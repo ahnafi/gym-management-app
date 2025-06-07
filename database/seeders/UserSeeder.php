@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addYear(),
                 'profile_bio' => 'Primary system administrator.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Admin Two',
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addYear(),
                 'profile_bio' => 'Backup system administrator.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
 
             // 25 Trainer
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Spesialis dalam pembentukan otot dan nutrisi.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Two',
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Berpengalaman melatih atlet remaja.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Three',
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Ahli dalam latihan fungsional dan mobilitas.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Four',
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih HIIT dan cardio tingkat lanjut.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Five',
@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih kebugaran umum.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Six',
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Berfokus pada kebugaran wanita.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Seven',
@@ -121,7 +121,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Ahli rehabilitasi cedera olahraga.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Eight',
@@ -133,7 +133,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Spesialis stretching dan fleksibilitas.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Nine',
@@ -145,7 +145,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Berpengalaman dalam pelatihan lansia.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Ten',
@@ -157,7 +157,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih fitness outdoor dan hiking.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Eleven',
@@ -169,7 +169,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Instruktur zumba dan aerobik.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twelve',
@@ -181,7 +181,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pakar olahraga untuk penurunan berat badan.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Thirteen',
@@ -193,7 +193,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih tinju dan bela diri dasar.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Fourteen',
@@ -205,7 +205,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Mendalami yoga dan mindfulness fitness.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Fifteen',
@@ -217,7 +217,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Fokus pada pelatihan speed dan agility.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Sixteen',
@@ -229,7 +229,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih TRX dan bodyweight training.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Seventeen',
@@ -241,7 +241,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Ahli postur tubuh dan koreksi gerakan.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Eighteen',
@@ -253,7 +253,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Pelatih anak-anak dan remaja aktif.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Nineteen',
@@ -265,7 +265,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Menggabungkan latihan fisik dengan nutrisi.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty',
@@ -277,7 +277,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Spesialis crossfit dan endurance.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty-One',
@@ -289,7 +289,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Berpengalaman 10 tahun di dunia fitness.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty-Two',
@@ -301,7 +301,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Fokus pada latihan fungsional untuk keseharian.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty-Three',
@@ -313,7 +313,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Spesialis olahraga air dan pelatihan renang.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty-Four',
@@ -325,7 +325,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Menggabungkan metode barbell dan calisthenics.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Trainer Twenty-Five',
@@ -337,7 +337,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addMonths(6),
                 'profile_bio' => 'Ahli motivasi olahraga dan pembentukan kebiasaan.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
 
 
@@ -353,7 +353,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(135),
                 'profile_bio' => 'Aktif mengikuti kelas zumba.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 2',
@@ -365,7 +365,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(43),
                 'profile_bio' => 'Menggemari latihan kardio.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 3',
@@ -377,7 +377,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(102),
                 'profile_bio' => 'Sering hadir di akhir pekan.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 4',
@@ -389,7 +389,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(60),
                 'profile_bio' => 'Berpartisipasi dalam lomba kebugaran.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 5',
@@ -401,7 +401,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(170),
                 'profile_bio' => 'Fokus pada diet sehat.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 6',
@@ -413,7 +413,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(80),
                 'profile_bio' => 'Senang berlatih angkat beban.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 7',
@@ -425,7 +425,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(50),
                 'profile_bio' => 'Mengikuti kelas HIIT setiap minggu.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 8',
@@ -437,7 +437,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(30),
                 'profile_bio' => 'Baru memulai latihan gym.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 9',
@@ -449,7 +449,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(120),
                 'profile_bio' => 'Meminati kelas pilates.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 10',
@@ -461,7 +461,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(90),
                 'profile_bio' => 'Selalu aktif dalam kegiatan komunitas gym.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 11',
@@ -473,7 +473,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(45),
                 'profile_bio' => 'Memiliki tujuan menurunkan berat badan.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 12',
@@ -485,7 +485,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(180),
                 'profile_bio' => 'Penggemar senam aerobik.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 13',
@@ -497,7 +497,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(20),
                 'profile_bio' => 'Sering berlatih dengan pelatih pribadi.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 14',
@@ -509,7 +509,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(25),
                 'profile_bio' => 'Lebih suka latihan mandiri.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 15',
@@ -521,7 +521,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(60),
                 'profile_bio' => 'Suka berolahraga malam hari.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 16',
@@ -533,7 +533,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(130),
                 'profile_bio' => 'Menikmati suasana gym yang santai.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 17',
@@ -545,7 +545,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(150),
                 'profile_bio' => 'Biasa mengikuti sesi pagi.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 18',
@@ -557,7 +557,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(75),
                 'profile_bio' => 'Baru pulih dari cedera.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 19',
@@ -569,7 +569,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(200),
                 'profile_bio' => 'Terdaftar dalam program pelatihan pribadi.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 20',
@@ -581,7 +581,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(40),
                 'profile_bio' => 'Fokus pada kekuatan otot inti.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 21',
@@ -593,7 +593,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(15),
                 'profile_bio' => 'Berlatih 3 kali seminggu.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 22',
@@ -605,7 +605,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(100),
                 'profile_bio' => 'Mengikuti semua kelas yoga.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 23',
@@ -617,7 +617,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(10),
                 'profile_bio' => 'Lebih nyaman berolahraga sendiri.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 24',
@@ -629,7 +629,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(210),
                 'profile_bio' => 'Suka tantangan olahraga intensif.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ],
             [
                 'name' => 'Member 25',
@@ -641,7 +641,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'active',
                 'membership_end_date' => now()->addDays(90),
                 'profile_bio' => 'Anggota loyal sejak 2 tahun terakhir.',
-                'profile_image' => 'default.jpg',
+                'profile_image' => 'user_profile\/default-user_profile.jpg',
             ]
         ];
 

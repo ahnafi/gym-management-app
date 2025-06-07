@@ -9,6 +9,7 @@ use App\Filament\Resources\UserResource\RelationManagers\TransactionRelationMana
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use App\Services\FileNaming;
 use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -18,6 +19,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Hash;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class UserResource extends Resource
 {
@@ -71,9 +74,23 @@ class UserResource extends Resource
                 Textarea::make('profile_bio'),
 
                 FileUpload::make('profile_image')
+                    ->label('Foto Profil')
                     ->image()
-                    ->directory('profile-images')
-                    ->default('null'),
+                    ->imageEditor()
+                    ->previewable(true)
+                    ->avatar()
+                    ->directory('user_profile')
+                    ->imagePreviewHeight('150')
+                    ->visibility('public')
+                    ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $component) {
+                        $extension = $file->getClientOriginalExtension();
+
+                        $record = $component->getLivewire()->getRecord();
+                        $id = $record?->id ?? -1;
+
+                        return FileNaming::generateUserProfileName($id, $extension);
+                    })
+                ->default('default-user_profile.png')
             ]);
     }
 
@@ -81,6 +98,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('profile_image')
+                    ->label('Foto')
+                    ->disk('public')
+                    ->circular()
+                    ->height(40)
+                    ->width(40),
+
                 TextColumn::make('name')
                     ->label('Nama Lengkap')
                     ->searchable()

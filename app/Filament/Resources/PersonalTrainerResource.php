@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonalTrainerResource\Pages;
+use App\Services\FileNaming;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,6 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\KeyValue;
 use App\Models\PersonalTrainer;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PersonalTrainerResource extends Resource
 {
@@ -55,7 +57,26 @@ class PersonalTrainerResource extends Resource
                     ->label('Metadata')
                     ->keyLabel('Kunci')
                     ->valueLabel('Isi')
-                    ->addActionLabel('Tambah Data')
+                    ->addActionLabel('Tambah Data'),
+
+                FileUpload::make('images')
+                    ->label('Gambar')
+                    ->multiple()
+                    ->reorderable()
+                    ->image()
+                    ->imageEditor()
+                    ->previewable(true)
+                    ->imagePreviewHeight('150')
+                    ->visibility('public')
+                    ->directory('personal_trainer')
+                    ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $component) {
+                        $extension = $file->getClientOriginalExtension();
+
+                        $record = $component->getLivewire()->getRecord();
+                        $id = $record?->id ?? -1;
+
+                        return FileNaming::generatePersonalTrainerName($id, $extension);
+                    })
         ]);
     }
 

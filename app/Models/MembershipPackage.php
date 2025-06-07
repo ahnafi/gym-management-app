@@ -59,10 +59,8 @@ class MembershipPackage extends Model
                 $removedImages = array_diff($originalImages, $newImages);
 
                 foreach ($removedImages as $removedImage) {
-                    Log::info("Checking for deletion: $removedImage");
                     if (Storage::disk('public')->exists($removedImage)) {
                         Storage::disk('public')->delete($removedImage);
-                    } else {
                     }
                 }
             }
