@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'role' => 'admin',
                 'membership_registered' => 'registered',
-                'membership_status' => 'active',
+                'membership_status' => 'inactive',
                 'membership_end_date' => now()->addYear(),
                 'profile_bio' => 'Primary system administrator.',
                 'profile_image' => 'default.jpg',
