@@ -9,6 +9,10 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
+use App\Services\FileNaming;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -59,9 +63,23 @@ class MembershipPackageResource extends Resource
 
                 FileUpload::make('images')
                     ->label('Gambar')
+                    ->multiple()
+                    ->reorderable()
                     ->image()
-                    ->directory('membership-packages')
-                    ->imagePreviewHeight('150'),
+                    ->imageEditor()
+                    ->previewable(true)
+                    ->imagePreviewHeight('150')
+                    ->visibility('public')
+                    ->directory('membership_package')
+                    ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $component) {
+                        $extension = $file->getClientOriginalExtension();
+
+                        $record = $component->getLivewire()->getRecord();
+                        $id = $record?->id ?? -1;
+
+                        return FileNaming::generateMembershipPackageName($id, $extension);
+                    })
+
             ]);
     }
 
