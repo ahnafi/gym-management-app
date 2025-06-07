@@ -14,13 +14,25 @@ class CatalogController extends Controller
 {
     public function membershipPackages()
     {
-        $packages = MembershipPackage::active()
-            ->get()
-            ->map(function ($package) {
-                $package->duration_in_months = round($package->duration / 30, 1);
-                return $package;
-            });
+        $user = auth()->user();
 
+        if($user->membership_registered=='unregistered')
+        {
+            $packages = MembershipPackage::active()
+                ->where('code', 'MP-001')
+                ->get()
+                ->map(function ($package) {
+                    $package->duration_in_months = round($package->duration / 30, 1);
+                    return $package;
+                });
+        } else {
+            $packages = MembershipPackage::active()
+                ->get()
+                ->map(function ($package) {
+                    $package->duration_in_months = round($package->duration / 30, 1);
+                    return $package;
+                });
+        }
 
         return Inertia::render('membershipPackages/index', compact('packages'));
     }
