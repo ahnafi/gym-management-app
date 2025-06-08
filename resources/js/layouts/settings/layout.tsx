@@ -25,7 +25,7 @@ const sidebarNavItems: NavItem[] = [
 ];
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
-    // When server-side rendering, we only render the layout on the client...
+    // Hindari SSR error dengan cek window
     if (typeof window === 'undefined') {
         return null;
     }
@@ -37,6 +37,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
             <Heading title="Settings" description="Manage your profile and account settings" />
 
             <div className="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-12">
+                {/* Sidebar kiri */}
                 <aside className="w-full max-w-xl lg:w-48">
                     <nav className="flex flex-col space-y-1 space-x-0">
                         {sidebarNavItems.map((item, index) => (
@@ -57,10 +58,12 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                     </nav>
                 </aside>
 
+                {/* Garis pembatas untuk mobile */}
                 <Separator className="my-6 md:hidden" />
 
-                <div className="flex-1 md:max-w-2xl">
-                    <section className="max-w-xl space-y-12">{children}</section>
+                {/* Konten kanan */}
+                <div className="flex-1">
+                    {children}
                 </div>
             </div>
         </div>
