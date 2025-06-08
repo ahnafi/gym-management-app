@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { MembershipPackage } from '@/types';
+import { MembershipPackageCatalog } from '@/types';
 import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,7 +27,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
 ];
 
-export default function MembershipPackages({ mPackage }: { mPackage: MembershipPackage }) {
+export default function MembershipPackages({ mPackage }: { mPackage: MembershipPackageCatalog }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleConfirm = () => {
@@ -41,7 +41,7 @@ export default function MembershipPackages({ mPackage }: { mPackage: MembershipP
 
       <section className="bg-white dark:bg-gray-900 rounded-xl p-4">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto gap-8 lg:py-16 lg:grid-cols-12">
-          
+
           {/* Kiri: Informasi detail */}
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
@@ -89,7 +89,7 @@ export default function MembershipPackages({ mPackage }: { mPackage: MembershipP
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             {mPackage.images && mPackage.images.length > 0 ? (
               <img
-                src={`/storage/membership_package/${mPackage.images[0]}`}
+                src={`/storage/${mPackage.images[0]}`}
                 alt={`${mPackage.name}`}
                 className="w-full h-auto rounded-xl object-cover border border-sidebar-border/70 dark:border-sidebar-border"
               />

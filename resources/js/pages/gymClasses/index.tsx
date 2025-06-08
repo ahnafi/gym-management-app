@@ -30,7 +30,7 @@ export default function GymClasses({ gymClasses }: { gymClasses: GymClass[] }) {
                                     {/* Gambar di paling atas tanpa gap */}
                                     {kelas.images && kelas.images.length > 0 ? (
                                         <img
-                                            src={`/storage/gym_class/${kelas.images[0]}`}
+                                            src={`/storage/${kelas.images[0]}`}
                                             alt={kelas.name}
                                             className="w-full h-48 object-cover"
                                         />

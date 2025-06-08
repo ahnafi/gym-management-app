@@ -11,12 +11,20 @@ class MembershipPackageSeeder extends Seeder
     {
         $packages = [
             [
+                'name' => 'Registration',
+                'description' => 'Pendaftaran awal untuk menjadi anggota gym.',
+                'duration' => 0, // hari
+                'price' => 50000,
+                'status' => 'active',
+                'images' => ['membership_package\/default.jpg'],
+            ],
+            [
                 'name' => 'Silver Package',
                 'description' => 'Paket keanggotaan dasar dengan akses gym standar.',
                 'duration' => 30, // hari
                 'price' => 200000,
                 'status' => 'active',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
             [
                 'name' => 'Gold Package',
@@ -24,7 +32,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 350000,
                 'status' => 'active',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
             [
                 'name' => 'Platinum Package',
@@ -32,7 +40,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 500000,
                 'status' => 'active',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
             [
                 'name' => 'Student Package',
@@ -40,7 +48,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 30,
                 'price' => 150000,
                 'status' => 'active',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
             [
                 'name' => 'Quarterly Package',
@@ -48,7 +56,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 90,
                 'price' => 900000,
                 'status' => 'inactive',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
             [
                 'name' => 'Annual Package',
@@ -56,7 +64,7 @@ class MembershipPackageSeeder extends Seeder
                 'duration' => 365,
                 'price' => 3000000,
                 'status' => 'active',
-                'images' => ['default.jpg'],
+                'images' => ['membership_package\/default.jpg'],
             ],
         ];
 

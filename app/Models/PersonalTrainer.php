@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -31,21 +32,37 @@ class PersonalTrainer extends Model
     {
         parent::boot();
 
+        static::creating(function ($model) {
+            $model->slug = Str::slug($model->nickname ?? 'trainer', '-');
+        });
+
         static::created(function ($model) {
             $model->code = 'PT-' . $model->user_personal_trainer_id . $model->id;
-            $model->slug = Str::slug($model->nickname ?? 'trainer', '-');
             $model->saveQuietly();
 
             $user = User::find($model->user_personal_trainer_id);
             if ($user && $user->role !== 'trainer') {
                 $user->role = 'trainer';
-                $user->save();
+                $user->saveQuietly();
             }
         });
 
         static::updating(function ($model) {
             if ($model->isDirty('nickname')) {
                 $model->slug = Str::slug($model->nickname ?? 'trainer', '-');
+            }
+
+            if ($model->isDirty('images')) {
+                $originalImages = $model->getOriginal('images') ?? [];
+                $newImages = $model->images ?? [];
+
+                $removedImages = array_diff($originalImages, $newImages);
+
+                foreach ($removedImages as $removedImage) {
+                    if (Storage::disk('public')->exists($removedImage)) {
+                        Storage::disk('public')->delete($removedImage);
+                    }
+                }
             }
         });
 
@@ -54,6 +71,14 @@ class PersonalTrainer extends Model
             if ($user && $user->role === 'trainer') {
                 $user->role = 'member';
                 $user->save();
+            }
+
+            if (!empty($model->images)) {
+                foreach ($model->images as $filename) {
+                    if (Storage::disk('public')->exists($filename)) {
+                        Storage::disk('public')->delete($filename);
+                    }
+                }
             }
         });
     }

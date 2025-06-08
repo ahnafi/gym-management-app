@@ -43,7 +43,7 @@ export default function PersonalTrainerDetails({ ptDetail }: { ptDetail: Persona
           <div className="w-full md:w-1/3 max-h-72 overflow-hidden rounded-xl border border-gray-200 dark:border-neutral-700">
             {ptDetail.images && ptDetail.images.length > 0 ? (
               <img
-                src={`/storage/personal_trainer/${ptDetail.images[0]}`}
+                src={`/storage/${ptDetail.images[0]}`}
                 alt={ptDetail.nickname}
                 className="object-cover w-full h-full"
               />
@@ -72,7 +72,7 @@ export default function PersonalTrainerDetails({ ptDetail }: { ptDetail: Persona
               >
                 {pkg.images && pkg.images.length > 0 ? (
                   <img
-                    src={`/storage/personal_trainer_package/${pkg.images[0]}`}
+                    src={`/storage/${pkg.images[0]}`}
                     alt={pkg.name}
                     className="w-full h-48 object-cover"
                   />

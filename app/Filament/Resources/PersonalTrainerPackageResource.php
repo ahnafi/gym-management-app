@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonalTrainerPackageResource\Pages;
+use App\Services\FileNaming;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use App\Models\PersonalTrainerPackage;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PersonalTrainerPackageResource extends Resource
 {
@@ -52,9 +54,23 @@ class PersonalTrainerPackageResource extends Resource
                     ->required(),
 
                 FileUpload::make('images')
+                    ->label('Gambar')
+                    ->multiple()
+                    ->reorderable()
                     ->image()
-                    ->directory('trainer-packages')
-                    ->imagePreviewHeight('150'),
+                    ->imageEditor()
+                    ->previewable(true)
+                    ->imagePreviewHeight('150')
+                    ->visibility('public')
+                    ->directory('personal_trainer_package')
+                    ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, $component) {
+                        $extension = $file->getClientOriginalExtension();
+
+                        $record = $component->getLivewire()->getRecord();
+                        $id = $record?->id ?? -1;
+
+                        return FileNaming::generatePersonalTrainerPackageName($id, $extension);
+                    })
             ]);
     }
 

@@ -15,7 +15,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Citra',
                 'description' => 'Fokus pada wanita dan kebugaran pasca melahirkan.',
                 'metadata' => json_encode(['experience_years' => 6, 'specialties' => ['prenatal', 'postnatal']]),
-                'images' => ['pt1.jpg'],
+                'images' => ['personal_trainer\/pt1.jpg'],
                 'user_personal_trainer_id' => 3,
             ],
             [
@@ -23,7 +23,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Dewi',
                 'description' => 'Ahli yoga dan fleksibilitas.',
                 'metadata' => json_encode(['experience_years' => 7, 'specialties' => ['yoga', 'mobility']]),
-                'images' => ['pt2.jpg'],
+                'images' => ['personal_trainer\/pt2.jpg'],
                 'user_personal_trainer_id' => 4,
             ],
             [
@@ -31,7 +31,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Eka',
                 'description' => 'Pelatih kebugaran untuk lansia.',
                 'metadata' => json_encode(['experience_years' => 10, 'specialties' => ['senior fitness']]),
-                'images' => ['pt3.jpg'],
+                'images' => ['personal_trainer\/pt3.jpg'],
                 'user_personal_trainer_id' => 5,
             ],
             [
@@ -39,7 +39,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Fajar',
                 'description' => 'Pelatih fungsional dan HIIT.',
                 'metadata' => json_encode(['experience_years' => 3, 'specialties' => ['HIIT', 'functional training']]),
-                'images' => ['pt4.jpg'],
+                'images' => ['personal_trainer\/pt4.jpg'],
                 'user_personal_trainer_id' => 6,
             ],
             [
@@ -47,7 +47,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Gita',
                 'description' => 'Spesialis pelatihan atlet muda.',
                 'metadata' => json_encode(['experience_years' => 4, 'specialties' => ['youth athletics']]),
-                'images' => ['pt5.jpg'],
+                'images' => ['personal_trainer\/pt5.jpg'],
                 'user_personal_trainer_id' => 7,
             ],
 
@@ -56,7 +56,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Indah',
                 'description' => 'Fokus pelatihan wanita muda.',
                 'metadata' => json_encode(['experience_years' => 2, 'specialties' => ['beginner female fitness']]),
-                'images' => ['pt6.jpg'],
+                'images' => ['personal_trainer\/pt6.jpg'],
                 'user_personal_trainer_id' => 9,
             ],
             [
@@ -64,7 +64,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Joko',
                 'description' => 'Pelatih senior dengan sertifikasi internasional.',
                 'metadata' => json_encode(['experience_years' => 12, 'certified' => true]),
-                'images' => ['pt7.jpg'],
+                'images' => ['personal_trainer\/pt7.jpg'],
                 'user_personal_trainer_id' => 10,
             ],
             [
@@ -72,7 +72,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Adi',
                 'description' => 'Spesialis dalam pelatihan kekuatan dan daya tahan.',
                 'metadata' => '{"experience_years": 13, "specialties": ["HIIT", "endurance"]}',
-                'images' => ['pt8.jpg'],
+                'images' => ['personal_trainer\/pt8.jpg'],
                 'user_personal_trainer_id' => 11,
             ],
             [
@@ -80,7 +80,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Bella',
                 'description' => 'Berpengalaman dalam program penurunan berat badan.',
                 'metadata' => '{"experience_years": 1, "specialties": ["nutrition"]}',
-                'images' => ['pt9.jpg'],
+                'images' => ['personal_trainer\/pt9.jpg'],
                 'user_personal_trainer_id' => 12,
             ],
             [
@@ -88,7 +88,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Chandra',
                 'description' => 'Ahli dalam latihan fleksibilitas dan mobilitas.',
                 'metadata' => '{"experience_years": 10, "specialties": ["endurance", "cardio", "weight loss"]}',
-                'images' => ['pt10.jpg'],
+                'images' => ['personal_trainer\/pt10.jpg'],
                 'user_personal_trainer_id' => 13,
             ],
             [
@@ -96,7 +96,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Dian',
                 'description' => 'Menyediakan pelatihan untuk pemulihan cedera.',
                 'metadata' => '{"experience_years": 1, "specialties": ["endurance"]}',
-                'images' => ['pt11.jpg'],
+                'images' => ['personal_trainer\/pt11.jpg'],
                 'user_personal_trainer_id' => 14,
             ],
             [
@@ -104,7 +104,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Dimas',
                 'description' => 'Terfokus pada pengembangan tulang punggung.',
                 'metadata' => '{"experience_years": 15, "specialties": ["endurance"]}',
-                'images' => ['pt12.jpg'],
+                'images' => ['personal_trainer\/pt12.jpg'],
                 'user_personal_trainer_id' => 15,
             ],
             [
@@ -112,7 +112,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Fitri',
                 'description' => 'Pelatih pribadi dengan pendekatan holistik.',
                 'metadata' => '{"experience_years": 15, "specialties": ["flexibility", "rehab", "weight loss"]}',
-                'images' => ['pt13.jpg'],
+                'images' => ['personal_trainer\/pt13.jpg'],
                 'user_personal_trainer_id' => 16,
             ],
             [
@@ -120,7 +120,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Galih',
                 'description' => 'Ahli nutrisi dan kebugaran menyeluruh.',
                 'metadata' => '{"experience_years": 14, "specialties": ["yoga"]}',
-                'images' => ['pt14.jpg'],
+                'images' => ['personal_trainer\/pt14.jpg'],
                 'user_personal_trainer_id' => 17,
             ],
             [
@@ -128,7 +128,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Hana',
                 'description' => 'Berpengalaman dengan atlet profesional.',
                 'metadata' => '{"experience_years": 13, "specialties": ["yoga", "strength"]}',
-                'images' => ['pt15.jpg'],
+                'images' => ['personal_trainer\/pt15.jpg'],
                 'user_personal_trainer_id' => 18,
             ],
             [
@@ -136,7 +136,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Ilham',
                 'description' => 'Memiliki pendekatan unik untuk latihan HIIT.',
                 'metadata' => '{"experience_years": 14, "specialties": ["mobility", "endurance", "nutrition"]}',
-                'images' => ['pt16.jpg'],
+                'images' => ['personal_trainer\/pt16.jpg'],
                 'user_personal_trainer_id' => 19,
             ],
             [
@@ -144,7 +144,7 @@ class PersonalTrainerSeeder extends Seeder
                 'nickname' => 'Jeni',
                 'description' => 'Membantu klien mencapai tujuan kebugaran jangka panjang.',
                 'metadata' => '{"experience_years": 13, "specialties": ["HIIT"]}',
-                'images' => ['pt17.jpg'],
+                'images' => ['personal_trainer\/pt17.jpg'],
                 'user_personal_trainer_id' => 20,
             ],
         ];
