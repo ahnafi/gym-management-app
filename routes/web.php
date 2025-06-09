@@ -37,10 +37,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Payment route
     Route::get('payments', [PaymentController::class, 'index'])->name('payments.index');
+
+    // POST
+    // initiate payment with Midtrans
+    Route::post('payments/checkout', [PaymentController::class, 'checkout'])->name('payments.checkout');
+
+    // update payment status
+    Route::post('payments/update-status', [PaymentController::class, 'updatePaymentStatus'])->name('payments.update-status');
+
 });
 
 
-// 👇 Routes for trainers only
+// Routes for trainers only
 Route::middleware(['trainer-area'])->group(function () {
     Route::get('personal-trainer-dashboard', [PersonalTrainerController::class, 'dashboard'])
         ->name('personal-trainer-dashboard');
