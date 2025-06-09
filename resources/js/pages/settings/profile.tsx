@@ -1,7 +1,6 @@
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
 
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
@@ -9,7 +8,8 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/app-layout';
+import AppLayout from '@/layouts/app-layout'
+import { Pencil } from 'lucide-react';
 import SettingsLayout from '@/layouts/settings/layout';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -19,23 +19,32 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-type ProfileForm = {
-    name: string;
-    email: string;
-};
+
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth } = usePage<SharedData>().props;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{
+        name: string;
+        email: string;
+        profile_bio: string;
+        profile_image: File | null;
+    }>({
         name: auth.user.name,
         email: auth.user.email,
+        profile_bio: auth.user.profile_bio ?? '',
+        profile_image: null,
     });
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-        patch(route('profile.update'), { preserveScroll: true });
-    };
+
+    function submit(event: React.FormEvent) {
+        event.preventDefault();
+
+        post(route('profile.update'), {
+            preserveScroll: true,
+            forceFormData: true, // IMPORTANT for file upload
+        });
+    }
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -117,27 +126,52 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                     </div>
 
                     {/* Kanan - Foto dan Bio */}
-                    <div className="bg-white shadow-lg rounded-xl p-6">
+                    <div className="bg-white bg dark:bg-sidebar shadow-lg rounded-xl p-6">
                         <div className="flex flex-col items-center text-center">
-                            <img
-                                src="https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/blob/main/build/assets/img/team-2.jpg?raw=true"
-                                className="w-32 h-32 rounded-full shadow-xl object-cover -mt-16 mb-4"
-                                alt="Profile"
-                            />
-                            <h3 className="text-xl font-semibold text-gray-700">{auth.user.name}</h3>
-                            <p className="text-sm text-gray-500 mt-1">{auth.user.email}</p>
+                            <div className="relative group w-32 h-32 -mt-16 mb-4">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="profile-image-upload"
+                                    className="hidden"
+                                    onChange={(e) => {
+                                        const file = e.target.files?.[0];
+                                        if (file) {
+                                            setData('profile_image', file); // set the actual File object
+                                        }
+                                    }}
+                                />
+                                <label htmlFor="profile-image-upload" className="cursor-pointer block w-full h-full">
+                                    <img
+                                        src={`/storage/${auth.user.profile_image}`}
+                                        className="w-full h-full rounded-full shadow-xl object-cover"
+                                        alt="Profile"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                        <Pencil className="text-white w-6 h-6" />
+                                    </div>
+                                </label>
+                            </div>
+
+                            <h3 className="text-xl font-semibold text-black dark:text-white">{auth.user.name}</h3>
+                            <p className="text-sm text-black dark:text-white mt-1">{auth.user.email}</p>
 
                             <div className="mt-4 w-full">
-                                <Label htmlFor="bio" className="block text-left mb-1">
+                                <Label htmlFor="bio" className="block text-left mb-1 font-medium text-sm text-black dark:text-white">
                                     Bio
                                 </Label>
                                 <textarea
                                     id="bio"
-                                    placeholder="Write something about yourself..."
-                                    className="w-full p-2 text-sm text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                    value={data.profile_bio}
+                                    onChange={(e) => setData('profile_bio', e.target.value)}
+                                    placeholder="Ceritakan tentang diri Anda..."
+                                    className="w-full p-3 text-sm text-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none transition duration-200"
                                     rows={4}
                                 />
+                                <InputError className="mt-2" message={errors.profile_bio} />
+                                <p className="mt-1 text-xs text-gray-500 dark:text-white">Tuliskan deskripsi singkat tentang diri Anda, hobi, atau tujuan Anda.</p>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Services\FileNaming;
 
 class ProfileController extends Controller
 {
@@ -29,16 +30,32 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill($request->validated());
+
+        if ($request->hasFile('profile_image')) {
+            $image = $request->file('profile_image');
+
+            // Generate custom filename using your service
+            $filename = FileNaming::generateUserProfileName($user->id, $image->getClientOriginalExtension());
+
+            // Store the image with the new filename in 'public/user_profile' folder
+            $path = $image->storeAs('user_profile', $filename, 'public');
+
+            // Assign the new path to the user model
+            $user->profile_image = $path; // e.g. 'user_profile/GYM-UP-001-abc123-20250609123456.jpg'
         }
 
-        $request->user()->save();
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
 
         return to_route('profile.edit');
     }
+
 
     /**
      * Delete the user's account.
