@@ -13,16 +13,22 @@ class Transaction extends Pivot
 {
     protected $table = 'transactions';
 
+    protected $primaryKey = 'id';
+
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
     protected $fillable = [
-        'code',
-        'gym_class_date',
-        'amount',
-        'snap_token',
-        'payment_date',
-        'payment_status',
-        'purchasable_type',
-        'purchasable_id',
-        'user_id',
+            'code',
+            'gym_class_schedule_id',
+            'amount',
+            'snap_token',
+            'payment_date',
+            'payment_status',
+            'purchasable_type',
+            'purchasable_id',
+            'user_id',
     ];
 
     protected $casts = [
@@ -34,25 +40,24 @@ class Transaction extends Pivot
         parent::boot();
 
         static::creating(function ($model) {
-            $prefixMap = [
-                'membership_package' => 'MP',
-                'gym_class' => 'GC',
-                'personal_trainer_package' => 'PTP',
-            ];
-
             $type = $model->purchasable_type;
 
             if (str_contains($type, '\\')) {
                 $type = array_search($type, Relation::getMorphedModelAliases()) ?: class_basename($type);
             }
 
-            $prefix = $prefixMap[$type] ?? 'TX';
+            // Load the purchasable relation if not already loaded
+            if (!$model->relationLoaded('purchasable')) {
+                $model->load('purchasable');
+            }
+
+            $prefix = $model->purchasable->code ?? 'TX';
             $date = now()->format('Ymd');
             $random = strtoupper(Str::random(4));
 
             $userId = $model->user_id ?? '0';
 
-            $model->code = "{$prefix}-{$date}-U{$userId}-{$random}";
+            $model->code = "T{$prefix}-{$date}-U{$userId}-{$random}";
         });
     }
 
