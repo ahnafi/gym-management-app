@@ -15,6 +15,12 @@ export interface NavGroup {
     items: NavItem[];
 }
 
+
+export interface AlertMessage {
+    message: string;
+    type: 'info' | 'success' | 'warning' | 'error' | 'default'
+};
+
 export interface NavItem {
     title: string;
     href: string;
@@ -28,6 +34,7 @@ export interface SharedData {
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
+
     [key: string]: unknown;
 }
 
@@ -36,6 +43,8 @@ export interface User {
     name: string;
     role: string;
     email: string;
+    profile_image?: string;
+    profile_bio?: string;
     avatar?: string;
     email_verified_at: string | null;
     created_at: string;
@@ -249,3 +258,32 @@ export interface PersonalTrainingHistory {
     };
 }
 
+export interface GymClassSchedule {
+    date: string;
+    start_time: string;
+    end_time: string;
+}
+
+export type PurchasableType =
+    | 'membership_package'
+    | 'gym_class'
+    | 'personal_trainer_package';
+
+export type PaymentStatus = 'pending' | 'success' | 'failed';
+
+export interface PaymentHistory {
+    id: number;
+    code: string; // transaction code
+    amount: number;
+    snap_token: string | null;
+    payment_date: string | null;
+    payment_status: PaymentStatus;
+    purchasable_type: PurchasableType;
+    purchasable_id: number;
+    user_id: number;
+    created_at: string;
+
+    purchasable_name: string;
+    purchasable_code: string;
+    gym_class_schedule: GymClassSchedule | null;
+}
