@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { GymClassDetail } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -24,8 +24,18 @@ export default function GymClassDetails({ gymClass }: { gymClass: GymClassDetail
   const [selectedSchedule, setSelectedSchedule] = useState<null | {
     id: number;
     name: string;
+    schedule: string;
     price: number;
   }>(null);
+
+    const handleCheckout = (gcId: number, gcsId: number) => {
+        setSelectedSchedule(null);
+        router.post('/payments/checkout', {
+            purchasable_type: 'gym_class',
+            purchasable_id: gcId,
+            gym_class_schedule_id: gcsId,
+        });
+    };
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
@@ -39,7 +49,7 @@ export default function GymClassDetails({ gymClass }: { gymClass: GymClassDetail
         <div className="hidden md:flex w-1/2 pl-5">
           {gymClass.images && gymClass.images.length > 0 ? (
             <img
-              src={`/storage/gym_class/${gymClass.images[0]}`}
+              src={`/storage/${gymClass.images[0]}`}
               alt={gymClass.name}
               className="w-full h-full object-cover rounded-3xl"
             />
@@ -94,7 +104,8 @@ export default function GymClassDetails({ gymClass }: { gymClass: GymClassDetail
                           onClick={() =>
                             setSelectedSchedule({
                               id: schedule.id,
-                              name: `${dayName}, ${schedule.date} | ${schedule.start_time} - ${schedule.end_time}`,
+                              name: gymClass.name,
+                              schedule: `${dayName}, ${schedule.date} | ${schedule.start_time} - ${schedule.end_time}`,
                               price: gymClass.price,
                             })
                           }
@@ -119,18 +130,14 @@ export default function GymClassDetails({ gymClass }: { gymClass: GymClassDetail
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Konfirmasi Pembelian</AlertDialogTitle>
-              <AlertDialogDescription>
-                Apakah yakin Anda ingin membeli <strong>{selectedSchedule.name}</strong> dengan harga{' '}
-                <strong>Rp{selectedSchedule.price.toLocaleString('id-ID')}</strong>?
+              <AlertDialogDescription className="text-md">
+                Apakah Anda yakin ingin reservasi Kelas Gym "<strong className="text-primary font-semibold">{selectedSchedule.name}</strong>" dengan jadwal <strong className="text-primary font-semibold">{selectedSchedule.schedule}</strong> dengan harga{' '} <strong className="text-primary font-semibold">Rp{selectedSchedule.price.toLocaleString('id-ID')}</strong>?
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Batal</AlertDialogCancel>
               <AlertDialogAction
-                onClick={() => {
-                  alert(`Berhasil membeli jadwal id: ${selectedSchedule.id}`);
-                  setSelectedSchedule(null);
-                }}
+                onClick={() => handleCheckout( gymClass.id, selectedSchedule.id)}
               >
                 Konfirmasi
               </AlertDialogAction>

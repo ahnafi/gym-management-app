@@ -16,25 +16,6 @@ use Inertia\Inertia;
 
 class HistoryController extends Controller
 {
-    public function paymentHistory()
-    {
-        $paymentHistories = Transaction::query()
-            ->where('user_id', auth()->id())
-            ->with([
-                'purchasable' => function (MorphTo $morphTo) {
-                    $morphTo->morphWith([
-                        MembershipPackage::class => ['id', 'code', 'name'],
-                        GymClass::class => ['id', 'code', 'name'],
-                        PersonalTrainerPackage::class => ['id', 'code', 'name'],
-                    ]);
-                }
-            ])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return Inertia::render("history/paymentHistory/index", compact('paymentHistories'));
-    }
-
     public function gymClassHistory()
     {
         $gymClassHistories = GymClassAttendance::query()

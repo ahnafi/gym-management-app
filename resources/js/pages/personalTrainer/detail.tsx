@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, PersonalTrainerDetail } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -28,11 +28,22 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function PersonalTrainerDetails({ ptDetail }: { ptDetail: PersonalTrainerDetail }) {
   const [selectedPackage, setSelectedPackage] = useState<null | {
     id: number;
+    nickname: string;
     name: string;
+    duration: number;
     price: number;
   }>(null);
 
-  return (
+    const handleCheckout = (ptId: number) => {
+        setSelectedPackage(null);
+        router.post('/payments/checkout', {
+            purchasable_type: 'personal_trainer_package',
+            purchasable_id: ptId,
+        });
+    };
+
+
+    return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={`Personal Trainer - ${ptDetail.nickname}`} />
 
@@ -102,7 +113,9 @@ export default function PersonalTrainerDetails({ ptDetail }: { ptDetail: Persona
                       onClick={() =>
                         setSelectedPackage({
                           id: pkg.id,
+                          nickname: ptDetail.nickname,
                           name: pkg.name,
+                          duration: pkg.day_duration,
                           price: pkg.price,
                         })
                       }
@@ -125,19 +138,16 @@ export default function PersonalTrainerDetails({ ptDetail }: { ptDetail: Persona
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Konfirmasi Pembelian</AlertDialogTitle>
-              <AlertDialogDescription>
-                Apakah Anda yakin ingin membeli paket <strong>{selectedPackage.name}</strong> dengan harga{' '}
-                <strong>Rp{selectedPackage.price.toLocaleString('id-ID')}</strong>?
+              <AlertDialogDescription className="text-md">
+                Apakah Anda yakin ingin membeli paket Personal Training "<strong className="text-primary font-semibold">{selectedPackage.name}</strong>" bersama Coach <strong className="text-primary font-semibold">{selectedPackage.nickname}</strong> dengan harga{' '}
+                <strong className="text-primary font-semibold">Rp{selectedPackage.price.toLocaleString('id-ID')}</strong> untuk <strong className="text-primary font-semibold">{selectedPackage.duration}×</strong> pertemuan?
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Batal</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => {
-                  alert(`Berhasil membeli paket dengan id: ${selectedPackage.id}`);
-                  setSelectedPackage(null);
-                }}
-              >
+                <AlertDialogAction
+                    onClick={() => handleCheckout(selectedPackage.id)}
+                >
                 Konfirmasi
               </AlertDialogAction>
             </AlertDialogFooter>

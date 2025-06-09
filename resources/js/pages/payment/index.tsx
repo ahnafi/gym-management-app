@@ -2,15 +2,18 @@
 
 import { DatePicker } from '@/components/DatePicker';
 import { Button } from '@/components/ui/button';
+import DropdownSelect from '@/components/ui/DropdownSelect';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import SearchableSelect from '@/components/ui/SearchableSelect';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
+import { usePage } from '@inertiajs/react';
 import {
     type BreadcrumbItem,
-    MembershipHistory,
+    PaymentHistory,
+    AlertMessage,
     SimpleOption,
 } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -26,42 +29,52 @@ import {
     useReactTable,
     VisibilityState,
 } from '@tanstack/react-table';
-import { ChevronDown, Boxes, X } from 'lucide-react';
+import { ChevronDown, Boxes, X, Check } from 'lucide-react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { membershipColumnLabels, membershipColumns } from './tableConfig';
+import {
+    paymentColumnLabels,
+    getPaymentColumns,
+    // paymentStatusOptions,
+    purchasableTypeOptions
+} from './tableConfig';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Riwayat Membership',
-        href: '/gym-class-history',
+        title: 'Pembayaran',
+        href: '/payments',
     },
 ];
 
-export default function MembershipHistories({
-                                                membershipHistories,
-                                                membershipPackages,
+export default function Payments({
+                                                payments,
+                                                purchasables
                                             }: {
-    membershipHistories: MembershipHistory[];
-    membershipPackages: SimpleOption[];
+    payments: PaymentHistory[];
+    purchasables: SimpleOption[];
 }) {
-    // Submission Table State
-    const [membershipSorting, setMembershipSorting] = useState<SortingState>([]);
-    const [membershipFilters, setMembershipFilters] = useState<ColumnFiltersState>([]);
-    const [membershipVisibility, setMembershipVisibility] = useState<VisibilityState>({});
-    const [membershipSelection, setMembershipSelection] = useState({});
-    const [membershipRows, setMembershipRows] = useState<number>(10);
+    const { props } = usePage<{ flash?: { alert?: AlertMessage } }>();
+    console.log('Inertia props:', props.flash);
+
+    const [paymentSorting, setPaymentSorting] = useState<SortingState>([]);
+    const [paymentFilters, setPaymentFilters] = useState<ColumnFiltersState>([]);
+    const [paymentVisibility, setPaymentVisibility] = useState<VisibilityState>({});
+    const [paymentSelection, setPaymentSelection] = useState({});
+    const [paymentRows, setPaymentRows] = useState<number>(10);
 
     // Submission Table Filter State
-    const [membershipSelectedPackage, setMembershipSelectedPackage] = useState<SimpleOption | null>(null);
+    const [paymentSelectedType, setPaymentSelectedType] = useState<SimpleOption | null>(null);
+    const [paymentSelectedPurchasable, setPaymentPurchasable] = useState<SimpleOption | null>(null);
 
-    const [membershipInitialDate, setMembershipInitialDate] = useState<Date | undefined>();
-    const [membershipFinalDate, setMembershipFinalDate] = useState<Date | undefined>();
-    const [membershipFinalDateKey, setMembershipFinalDateKey] = useState<number>(Date.now());
+    const [paymentInitialDate, setPaymentInitialDate] = useState<Date | undefined>();
+    const [paymentFinalDate, setPaymentFinalDate] = useState<Date | undefined>();
+    const [paymentFinalDateKey, setPaymentFinalDateKey] = useState<number>(Date.now());
 
     // Alert State
-    const [alertMessage, setAlertMessage] = useState<string | null>(null);
+    const [alertMessage, setAlertMessage] = useState<AlertMessage | null>(null);
+
+    const paymentColumns = getPaymentColumns(setAlertMessage);
 
     // Initial Date Select Handlers
     const handleInitialDateSelect = (
@@ -76,7 +89,10 @@ export default function MembershipHistories({
         if (!finalDate || (date && finalDate.getTime() === selected.getTime())) {
             setFinalDate(selected);
         } else if (selected.getTime() > finalDate.getTime()) {
-            setAlertMessage('Tanggal awal tidak boleh lebih besar dari tanggal akhir');
+            setAlertMessage({
+                message: 'Tanggal awal tidak boleh lebih besar daripada tanggal akhir',
+                type: 'error',
+            });
             setFinalDate(selected);
         } else {
             setAlertMessage(null);
@@ -89,7 +105,7 @@ export default function MembershipHistories({
         initialDate: Date | undefined,
         setInitialDate: (date: Date | undefined) => void,
         setFinalDate: (date: Date | undefined) => void,
-        setAlertMessage: (msg: string | null) => void,
+        setAlertMessage: (msg: AlertMessage | null) => void,
         setFinalDateKey: (key: number) => void,
     ) => {
         if (!initialDate || !date) {
@@ -107,7 +123,10 @@ export default function MembershipHistories({
         if (date.getTime() === initialDate.getTime()) {
             setFinalDate(date);
         } else if (date.getTime() < initialDate.getTime()) {
-            setAlertMessage('Tanggal akhir tidak boleh lebih kecil dari tanggal awal');
+            setAlertMessage({
+                message: 'Tanggal akhir tidak boleh lebih kecil daripada tanggal awal',
+                type: 'error',
+            });
             setFinalDate(initialDate);
             setFinalDateKey(Date.now());
         } else {
@@ -116,22 +135,22 @@ export default function MembershipHistories({
         }
     };
 
-    const membershipTable = useReactTable<MembershipHistory>({
-        data: membershipHistories,
-        columns: membershipColumns,
-        onSortingChange: setMembershipSorting,
-        onColumnFiltersChange: setMembershipFilters,
+    const paymentTable = useReactTable<PaymentHistory>({
+        data: payments,
+        columns: paymentColumns,
+        onSortingChange: setPaymentSorting,
+        onColumnFiltersChange: setPaymentFilters,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setMembershipVisibility,
-        onRowSelectionChange: setMembershipSelection,
+        onColumnVisibilityChange: setPaymentVisibility,
+        onRowSelectionChange: setPaymentSelection,
         state: {
-            sorting: membershipSorting,
-            columnFilters: membershipFilters,
-            columnVisibility: membershipVisibility,
-            rowSelection: membershipSelection,
+            sorting: paymentSorting,
+            columnFilters: paymentFilters,
+            columnVisibility: paymentVisibility,
+            rowSelection: paymentSelection,
         },
     });
 
@@ -148,15 +167,15 @@ export default function MembershipHistories({
 
     // Submission Date Column Filter Effect
     useEffect(() => {
-        if (membershipInitialDate) {
-            updateColumnFilter(setMembershipFilters, 'start_date', {
-                start: membershipInitialDate,
-                end: membershipFinalDate ?? membershipInitialDate,
+        if (paymentInitialDate) {
+            updateColumnFilter(setPaymentFilters, 'created_at', {
+                start: paymentInitialDate,
+                end: paymentFinalDate ?? paymentInitialDate,
             });
         } else {
-            updateColumnFilter(setMembershipFilters, 'start_date', undefined);
+            updateColumnFilter(setPaymentFilters, 'created_at', undefined);
         }
-    }, [membershipInitialDate, membershipFinalDate]);
+    }, [paymentInitialDate, paymentFinalDate]);
 
     const useColumnFilterEffect = (
         selectedOption: SimpleOption | null,
@@ -172,14 +191,13 @@ export default function MembershipHistories({
         }, [selectedOption, columnId, setFilters]);
     };
 
-    // MembersshipPackage Lab Column Filter Effect
     useEffect(() => {
-        if (membershipSelectedPackage?.name) {
-            updateColumnFilter(setMembershipFilters, 'membership_package_name', membershipSelectedPackage.name);
+        if (paymentSelectedPurchasable?.name) {
+            updateColumnFilter(setPaymentFilters, 'payment_package_name', paymentSelectedPurchasable.name);
         } else {
-            updateColumnFilter(setMembershipFilters, 'membership_package_name', undefined);
+            updateColumnFilter(setPaymentFilters, 'payment_package_name', undefined);
         }
-    }, [membershipSelectedPackage]);
+    }, [paymentSelectedPurchasable]);
 
     // Row Pagination Effect
     const usePageSizeEffect = <T,>(table: TanStackTable<T>, rows: number) => {
@@ -188,24 +206,26 @@ export default function MembershipHistories({
         }, [rows, table]);
     };
 
-    // Submission Table Row Pagination Effect
-    usePageSizeEffect(membershipTable, membershipRows);
+    usePageSizeEffect(paymentTable, paymentRows);
 
     // Alert Message
     useEffect(() => {
-        if (alertMessage) {
-            toast.error(alertMessage, {
+        const messageToShow = alertMessage ?? props.flash?.alert ?? null;
+
+        if (messageToShow) {
+            toast(messageToShow.message, {
+                type: messageToShow.type,
                 position: 'top-center',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
             });
+
             setAlertMessage(null);
         }
-    }, [alertMessage]);
+    }, [alertMessage, props.flash?.alert]);
 
     // Filter Dialog State
     const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
@@ -216,17 +236,27 @@ export default function MembershipHistories({
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-xl p-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="submission col-span-full space-y-2">
+                    <div className="payment col-span-full space-y-2">
                         <h1 className="title font-semibold">Riwayat Membership</h1>
-                        <div className="membership-table-filters small-font-size mb-2 flex hidden justify-end gap-4 lg:mb-4 lg:flex lg:flex-wrap">
+                        <div className="payment-table-filters small-font-size mb-2 flex hidden justify-end gap-4 lg:mb-4 lg:flex lg:flex-wrap">
                             {/* Daftar filter untuk layar besar */}
+                            <div className="status-type">
+                                <DropdownSelect
+                                    label="Filter Jenis Pembelian"
+                                    options={purchasableTypeOptions}
+                                    selectedOption={paymentSelectedType}
+                                    setSelectedOption={setPaymentSelectedType}
+                                    placeholder="Filter Jenis Pembelian..."
+                                    icon={<Check size={18} />}
+                                />
+                            </div>
                             <div className="test-type">
                                 <SearchableSelect
-                                    label="Jenis Membership"
-                                    options={membershipPackages}
-                                    selectedOption={membershipSelectedPackage}
-                                    setSelectedOption={setMembershipSelectedPackage}
-                                    placeholder="Filter Jenis Membership..."
+                                    label="Jenis Produk"
+                                    options={purchasables}
+                                    selectedOption={paymentSelectedPurchasable}
+                                    setSelectedOption={setPaymentPurchasable}
+                                    placeholder="Filter Nama Produk..."
                                     searchIcon={<Boxes size={16} />}
                                 />
                             </div>
@@ -235,27 +265,27 @@ export default function MembershipHistories({
                                 <div className="flex gap-3">
                                     <div className="initial-date">
                                         <DatePicker
-                                            value={membershipInitialDate}
+                                            value={paymentInitialDate}
                                             placeholder="Pilih Tanggal Awal"
                                             onDateSelect={(date) =>
-                                                handleInitialDateSelect(date, setMembershipInitialDate, setMembershipFinalDate, membershipFinalDate)
+                                                handleInitialDateSelect(date, setPaymentInitialDate, setPaymentFinalDate, paymentFinalDate)
                                             }
                                         />
                                     </div>
                                     <div className="flex items-center justify-center">-</div>
                                     <div className="final-date">
                                         <DatePicker
-                                            key={membershipFinalDateKey}
-                                            value={membershipInitialDate}
+                                            key={paymentFinalDateKey}
+                                            value={paymentInitialDate}
                                             placeholder="Pilih Tanggal Akhir"
                                             onDateSelect={(date) =>
                                                 handleFinalDateSelect(
                                                     date,
-                                                    membershipInitialDate,
-                                                    setMembershipInitialDate,
-                                                    setMembershipFinalDate,
+                                                    paymentInitialDate,
+                                                    setPaymentInitialDate,
+                                                    setPaymentFinalDate,
                                                     setAlertMessage,
-                                                    setMembershipFinalDateKey,
+                                                    setPaymentFinalDateKey,
                                                 )
                                             }
                                         />
@@ -263,13 +293,13 @@ export default function MembershipHistories({
                                 </div>
 
 
-                                {(membershipInitialDate || membershipFinalDate) && (
+                                {(paymentInitialDate || paymentFinalDate) && (
                                     <button
                                         type="button"
                                         onClick={() => {
-                                            setMembershipInitialDate(undefined);
-                                            setMembershipFinalDate(undefined);
-                                            setMembershipFilters((prev) => prev.filter((f) => f.id !== 'test_submission_date'));
+                                            setPaymentInitialDate(undefined);
+                                            setPaymentFinalDate(undefined);
+                                            setPaymentFilters((prev) => prev.filter((f) => f.id !== 'created_at'));
                                         }}
                                         className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1"
                                     >
@@ -300,43 +330,43 @@ export default function MembershipHistories({
                                             <div className="flex justify-between gap-2">
                                                 <div className="initial-date flex flex-col">
                                                     <DatePicker
-                                                        value={membershipInitialDate}
+                                                        value={paymentInitialDate}
                                                         placeholder="Pilih Tanggal Awal"
                                                         onDateSelect={(date) =>
                                                             handleInitialDateSelect(
                                                                 date,
-                                                                setMembershipInitialDate,
-                                                                setMembershipFinalDate,
-                                                                membershipFinalDate,
+                                                                setPaymentInitialDate,
+                                                                setPaymentFinalDate,
+                                                                paymentFinalDate,
                                                             )
                                                         }
                                                     />
                                                 </div>
                                                 <div className="final-date flex flex-col">
                                                     <DatePicker
-                                                        key={membershipFinalDateKey}
-                                                        value={membershipInitialDate}
+                                                        key={paymentFinalDateKey}
+                                                        value={paymentInitialDate}
                                                         placeholder="Pilih Tanggal Akhir"
                                                         onDateSelect={(date) =>
                                                             handleFinalDateSelect(
                                                                 date,
-                                                                membershipInitialDate,
-                                                                setMembershipInitialDate,
-                                                                setMembershipFinalDate,
+                                                                paymentInitialDate,
+                                                                setPaymentInitialDate,
+                                                                setPaymentFinalDate,
                                                                 setAlertMessage,
-                                                                setMembershipFinalDateKey,
+                                                                setPaymentFinalDateKey,
                                                             )
                                                         }
                                                     />
                                                 </div>
                                             </div>
-                                            {(membershipInitialDate || membershipFinalDate) && (
+                                            {(paymentInitialDate || paymentFinalDate) && (
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setMembershipInitialDate(undefined);
-                                                        setMembershipFinalDate(undefined);
-                                                        setMembershipFilters((prev) => prev.filter((f) => f.id !== 'start_date'));
+                                                        setPaymentInitialDate(undefined);
+                                                        setPaymentFinalDate(undefined);
+                                                        setPaymentFilters((prev) => prev.filter((f) => f.id !== 'created_at'));
                                                     }}
                                                     className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1"
                                                 >
@@ -349,14 +379,14 @@ export default function MembershipHistories({
                                 </DialogContent>
                             </Dialog>
                         </div>
-                        <div className="submission-table-main">
-                            <div className="submission-table-option mb-2 flex justify-between lg:mb-4">
+                        <div className="payment-table-main">
+                            <div className="payment-table-option mb-2 flex justify-between lg:mb-4">
                                 <div className="flex w-full justify-end gap-2 flex-wrap">
                                     <div className="code-search flex flex-col">
                                         <Input
-                                            placeholder="Cari Kode Membership..."
-                                            value={(membershipTable.getColumn('code')?.getFilterValue() as string) ?? ''}
-                                            onChange={(e) => membershipTable.getColumn('code')?.setFilterValue(e.target.value)}
+                                            placeholder="Cari Kode Pembayaran..."
+                                            value={(paymentTable.getColumn('code')?.getFilterValue() as string) ?? ''}
+                                            onChange={(e) => paymentTable.getColumn('code')?.setFilterValue(e.target.value)}
                                             className="border-muted bg-background text-foreground focus:ring-primary small-font-size small-font-size w-full rounded-md border py-2 shadow-sm focus:ring-1 focus:outline-none"
                                         />
                                     </div>
@@ -368,7 +398,7 @@ export default function MembershipHistories({
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
-                                                {membershipTable
+                                                {paymentTable
                                                     .getAllColumns()
                                                     .filter((column) => column.getCanHide())
                                                     .map((column) => {
@@ -379,7 +409,7 @@ export default function MembershipHistories({
                                                                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
                                                                 className="small-font-size"
                                                             >
-                                                                {membershipColumnLabels[column.id] ?? column.id}
+                                                                {paymentColumnLabels[column.id] ?? column.id}
                                                             </DropdownMenuCheckboxItem>
                                                         );
                                                     })}
@@ -390,15 +420,15 @@ export default function MembershipHistories({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="outline" className="small-font-size ml-auto font-normal">
-                                                    Tampilkan {membershipRows} Baris <ChevronDown className="ml-1 h-4 w-4" />
+                                                    Tampilkan {paymentRows} Baris <ChevronDown className="ml-1 h-4 w-4" />
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
                                                 {[10, 25, 50, 100].map((size) => (
                                                     <DropdownMenuCheckboxItem
                                                         key={size}
-                                                        checked={membershipRows === size}
-                                                        onCheckedChange={() => setMembershipRows(size)}
+                                                        checked={paymentRows === size}
+                                                        onCheckedChange={() => setPaymentRows(size)}
                                                         className="small-font-size"
                                                     >
                                                         {size} baris
@@ -409,11 +439,11 @@ export default function MembershipHistories({
                                     </div>
                                 </div>
                             </div>
-                            <div className="submission-table-body">
+                            <div className="payment-table-body">
                                 <div className="rounded-md border">
                                     <Table className="small-font-size">
                                         <TableHeader>
-                                            {membershipTable.getHeaderGroups().map((headerGroup) => (
+                                            {paymentTable.getHeaderGroups().map((headerGroup) => (
                                                 <TableRow key={headerGroup.id}>
                                                     {headerGroup.headers.map((header) => {
                                                         return (
@@ -428,8 +458,8 @@ export default function MembershipHistories({
                                             ))}
                                         </TableHeader>
                                         <TableBody>
-                                            {membershipTable.getRowModel().rows?.length ? (
-                                                membershipTable.getRowModel().rows.map((row) => (
+                                            {paymentTable.getRowModel().rows?.length ? (
+                                                paymentTable.getRowModel().rows.map((row) => (
                                                     <TableRow key={row.id}>
                                                         {row.getVisibleCells().map((cell) => (
                                                             <TableCell key={cell.id}>
@@ -440,7 +470,7 @@ export default function MembershipHistories({
                                                 ))
                                             ) : (
                                                 <TableRow>
-                                                    <TableCell colSpan={membershipColumns.length} className="h-24 text-center">
+                                                    <TableCell colSpan={paymentColumns.length} className="h-24 text-center">
                                                         No results.
                                                     </TableCell>
                                                 </TableRow>
@@ -453,8 +483,8 @@ export default function MembershipHistories({
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => membershipTable.previousPage()}
-                                            disabled={!membershipTable.getCanPreviousPage()}
+                                            onClick={() => paymentTable.previousPage()}
+                                            disabled={!paymentTable.getCanPreviousPage()}
                                             className="small-font-size"
                                         >
                                             Previous
@@ -462,8 +492,8 @@ export default function MembershipHistories({
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => membershipTable.nextPage()}
-                                            disabled={!membershipTable.getCanNextPage()}
+                                            onClick={() => paymentTable.nextPage()}
+                                            disabled={!paymentTable.getCanNextPage()}
                                             className="small-font-size"
                                         >
                                             Next

@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { MembershipPackageCatalog } from '@/types';
 import { Head } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
+import { toast, ToastContainer } from 'react-toastify';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -29,17 +32,40 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function MembershipPackages({ mPackage }: { mPackage: MembershipPackageCatalog }) {
   const [openDialog, setOpenDialog] = useState(false);
+  const { errors } = usePage().props as unknown as { errors: Record<string, string[]> };  // Type this as needed
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
-  const handleConfirm = () => {
-    alert(`Paket "${mPackage.name}" berhasil dibeli!`);
-    setOpenDialog(false);
+    useEffect(() => {
+        if (errors && Object.keys(errors).length > 0) {
+            Object.values(errors).forEach((messages) => {
+                messages.forEach((message) => {
+                    toast.error(message, {
+                        position: 'top-center',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                    });
+                });
+            });
+        }
+    }, [errors]);
+
+    const handleCheckout = () => {
+    router.post('/payments/checkout', {
+        purchasable_type: 'membership_package',
+        purchasable_id: mPackage.id,
+    });
   };
 
-  return (
+
+    return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={`Paket Membership - ${mPackage.name}`} />
 
-      <section className="bg-white dark:bg-gray-900 rounded-xl p-4">
+      <section className="bg-white dark:bg-gray-500/20 mx-3 my-3 rounded-xl p-4">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto gap-8 lg:py-16 lg:grid-cols-12">
 
           {/* Kiri: Informasi detail */}
@@ -71,21 +97,20 @@ export default function MembershipPackages({ mPackage }: { mPackage: MembershipP
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Konfirmasi Pembelian</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Apakah Anda yakin ingin membeli <strong>{mPackage.name}</strong> seharga{' '}
+                    <AlertDialogDescription className="text-md">
+                      Apakah Anda yakin ingin membeli Paket Membership "<strong className="text-primary font-semibold">{mPackage.name}</strong>" seharga{' '}
                       <span className="text-primary font-semibold">Rp {mPackage.price.toLocaleString()}</span> untuk {mPackage.duration} hari ({mPackage.duration_in_months} bulan)?
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleConfirm}>Konfirmasi</AlertDialogAction>
+                    <AlertDialogAction onClick={handleCheckout}>Konfirmasi</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
             </div>
           </div>
 
-          {/* Kanan: Gambar */}
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             {mPackage.images && mPackage.images.length > 0 ? (
               <img
