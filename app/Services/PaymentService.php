@@ -7,6 +7,7 @@ use App\Models\MembershipPackage;
 use App\Models\GymClass;
 use App\Models\PersonalTrainerPackage;
 use Illuminate\Support\Str;
+use App\Services\AssignmentService;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentService
@@ -73,9 +74,39 @@ class PaymentService
 
     public function updatePaymentStatus(int $id, string $status)
     {
-        $transaction = Transaction::findOrFail($id);
-        $transaction->payment_status = $status;
-        $transaction->payment_date = now();
-        $transaction->save();
+        // Start a database transaction
+        DB::transaction(function () use ($id, $status) {
+            // Update the transaction status
+            $transaction = Transaction::findOrFail($id);
+            $transaction->update([
+                'payment_status' => $status,
+                'payment_date' => now(),
+            ]);
+
+            // Handle the assignment based on purchasable type
+            switch ($transaction->purchasable_type) {
+                case 'membership_package':
+                    AssignmentService::updateMembership(
+                        $transaction->user_id,
+                        $transaction->purchasable_id
+                    );
+                    break;
+
+                case 'gym_class':
+                    AssignmentService::assignGymClass(
+                        $transaction->user_id,
+                        $transaction->purchasable_id,
+                        $transaction->gym_class_schedule_id
+                    );
+                    break;
+
+                case 'personal_trainer_package':
+                    AssignmentService::assignPersonalTrainer(
+                        $transaction->user_id,
+                        $transaction->purchasable_id
+                    );
+                    break;
+            }
+        });
     }
 }
