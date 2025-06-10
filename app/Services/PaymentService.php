@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Transaction;
 use App\Models\MembershipPackage;
 use App\Models\GymClass;
+use Illuminate\Support\Facades\DB;
 use App\Models\PersonalTrainerPackage;
 use Illuminate\Support\Str;
 use App\Services\AssignmentService;
