@@ -41,16 +41,20 @@ export interface SharedData {
 export interface User {
     id: number;
     name: string;
-    role: string;
     email: string;
-    profile_image?: string;
-    profile_bio?: string;
-    avatar?: string;
+    phone: string | null;
+    role: 'member' | 'trainer' | 'admin';
+    membership_registered: 'unregistered' | 'registered';
+    membership_status: 'active' | 'inactive';
+    membership_end_date: string | null; // datetime in ISO format
+    profile_bio: string | null;
+    profile_image: string | null;
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
+    deleted_at: string | null;
 }
+
 
 export type MembershipPackageCatalog = {
     id: number;
@@ -189,7 +193,7 @@ export type MembershipPackageHistory = {
     updated_at: string;
 };
 
-export type MembershipHistory = {
+export type MembershipHistoryFull = {
     id: number;
     code: string | null;
     start_date: string;
@@ -269,7 +273,7 @@ export type PurchasableType =
     | 'gym_class'
     | 'personal_trainer_package';
 
-export type PaymentStatus = 'pending' | 'success' | 'failed';
+export type PaymentStatus = 'pending' | 'paid' | 'failed';
 
 export interface PaymentHistory {
     id: number;
@@ -286,4 +290,62 @@ export interface PaymentHistory {
     purchasable_name: string;
     purchasable_code: string;
     gym_class_schedule: GymClassSchedule | null;
+}
+
+interface GymClassAttendance {
+    id: number;
+    status: 'assigned' | 'attended' | 'missed';
+    attended_at: string | null; // ISO date string
+    user_id: number;
+    gym_class_schedule_id: number;
+    created_at: string; // ISO date string
+    updated_at: string; // ISO date string
+}
+
+interface MembershipHistory {
+    id: number;
+    code: string | null;
+    start_date: string;
+    end_date: string;
+    status: 'active' | 'expired';
+    user_id: number;
+    membership_package_id: number;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+}
+
+
+interface GymVisit {
+    id: number;
+    visit_date: string; // ISO date string
+    entry_time: string; // "HH:mm:ss"
+    exit_time: string | null; // "HH:mm:ss" or null if not checked out
+    status: 'in_gym' | 'left';
+    user_id: number;
+    created_at: string; // ISO date string
+    updated_at: string; // ISO date string
+}
+
+interface DashboardSummary {
+    visitCountInCurrentMonth: number;
+    visitCountInCurrentWeek: number;
+    gymClassCountInCurrentMonth: number;
+    averageVisitTimeInCurrentMonth: number | null;
+    averageVisitTimeFormatted: string | null;
+    currentMembership: MembershipHistory | null;
+    currentMembershipPackage: MembershipPackageHistory | null;
+}
+
+
+interface DashboardData {
+    user: User;
+    gymVisits: GymVisit[];
+    membershipHistories: MembershipHistoryFull[];
+    gymClassAttendances: GymClassHistory[];
+}
+
+interface DashboardProps {
+    summary: DashboardSummary;
+    data: DashboardData;
 }
