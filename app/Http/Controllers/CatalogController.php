@@ -27,6 +27,7 @@ class CatalogController extends Controller
                 });
         } else {
             $packages = MembershipPackage::active()
+                ->where('code', '!=', 'MP-001')
                 ->get()
                 ->map(function ($package) {
                     $package->duration_in_months = round($package->duration / 30, 1);
@@ -107,7 +108,13 @@ class CatalogController extends Controller
 
     public function gymClassDetail(GymClass $gymClass)
     {
-        $gymClass->load('gymClassSchedules');
+        $gymClass->load([
+            'gymClassSchedules' => function ($query) {
+                $query->where('date', '>=', now()->toDateString())
+                ->orderBy('date')
+                    ->orderBy('start_time');
+            }
+        ]);
 
         return Inertia::render('gymClasses/detail', [
             'gymClass' => [
