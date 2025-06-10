@@ -102,7 +102,7 @@ class PersonalTrainerSeeder extends Seeder
             [
                 'code' => 'PT015',
                 'nickname' => 'Dimas',
-                'description' => 'Terfokus pada pengembangan tulang punggung.',
+                'description' => 'Terfokus pada pelurusan tulang punggung.',
                 'metadata' => '{"experience_years": 15, "specialties": ["endurance"]}',
                 'images' => ['personal_trainer\/pt12.jpg'],
                 'user_personal_trainer_id' => 15,
@@ -125,7 +125,7 @@ class PersonalTrainerSeeder extends Seeder
             ],
             [
                 'code' => 'PT018',
-                'nickname' => 'Hana',
+                'nickname' => 'Doremi',
                 'description' => 'Berpengalaman dengan atlet profesional.',
                 'metadata' => '{"experience_years": 13, "specialties": ["yoga", "strength"]}',
                 'images' => ['personal_trainer\/pt15.jpg'],
