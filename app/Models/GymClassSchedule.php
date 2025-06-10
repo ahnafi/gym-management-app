@@ -15,6 +15,7 @@ class GymClassSchedule extends Model
         'start_time',
         'end_time',
         'slot',
+        'available_slot',
         'gym_class_id'
     ];
 

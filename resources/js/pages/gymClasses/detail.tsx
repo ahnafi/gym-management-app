@@ -74,53 +74,60 @@ export default function GymClassDetails({ gymClass }: { gymClass: GymClassDetail
             </div>
           </div>
 
-          {/* Schedule Section */}
-          <div className="flex-1 overflow-y-auto mt-6 space-y-4 pr-2">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Jadwal Kelas</h2>
-            {gymClass.gymClassSchedules.length > 0 ? (
-              <ul className="space-y-4">
-                {gymClass.gymClassSchedules.map((schedule) => {
-                  const dayName = new Date(schedule.date).toLocaleDateString('id-ID', {
-                    weekday: 'long',
-                  });
+            {/* Schedule Section */}
+            <div className="flex-1 overflow-y-auto mt-6 space-y-4 pr-2">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Jadwal Kelas</h2>
+                {gymClass.gymClassSchedules.length > 0 ? (
+                    <ul className="space-y-4">
+                        {gymClass.gymClassSchedules.map((schedule) => {
+                            const dayName = new Date(schedule.date).toLocaleDateString('id-ID', {
+                                weekday: 'long',
+                            });
+                            const isSlotAvailable = schedule.available_slot > 0;
 
-                  return (
-                    <li
-                      key={schedule.id}
-                      className="border border-gray-200 dark:border-neutral-700 rounded-xl p-4 space-y-2 bg-white dark:bg-neutral-900"
-                    >
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-medium text-gray-800 dark:text-white">
-                            {dayName}, {schedule.date} | {schedule.start_time} - {schedule.end_time}
-                          </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            Slot: {schedule.slot} | Tersedia: {schedule.available_slot}
-                          </div>
-                        </div>
-                        <Button
-                          variant="default"
-                          className="bg-[#F61501] text-white hover:bg-[#d31300]"
-                          onClick={() =>
-                            setSelectedSchedule({
-                              id: schedule.id,
-                              name: gymClass.name,
-                              schedule: `${dayName}, ${schedule.date} | ${schedule.start_time} - ${schedule.end_time}`,
-                              price: gymClass.price,
-                            })
-                          }
-                        >
-                          Buy
-                        </Button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="text-gray-500 dark:text-gray-400">Belum ada jadwal untuk kelas ini.</p>
-            )}
-          </div>
+                            return (
+                                <li
+                                    key={schedule.id}
+                                    className="border border-gray-200 dark:border-neutral-700 rounded-xl p-4 space-y-2 bg-white dark:bg-neutral-900"
+                                >
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <div className="font-medium text-gray-800 dark:text-white">
+                                                {dayName}, {schedule.date} | {schedule.start_time} - {schedule.end_time}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                                Slot: {schedule.slot} | Tersedia: {schedule.available_slot}
+                                            </div>
+                                        </div>
+                                        {isSlotAvailable ? (
+                                            <Button
+                                                variant="default"
+                                                className="bg-[#F61501] text-white hover:bg-[#d31300]"
+                                                onClick={() =>
+                                                    setSelectedSchedule({
+                                                        id: schedule.id,
+                                                        name: gymClass.name,
+                                                        schedule: `${dayName}, ${schedule.date} | ${schedule.start_time} - ${schedule.end_time}`,
+                                                        price: gymClass.price,
+                                                    })
+                                                }
+                                            >
+                                                Reservasi
+                                            </Button>
+                                        ) : (
+                                            <span className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                  Slot Penuh
+                </span>
+                                        )}
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                ) : (
+                    <p className="text-gray-500 dark:text-gray-400">Belum ada jadwal untuk kelas ini.</p>
+                )}
+            </div>
         </div>
       </div>
 

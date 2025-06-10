@@ -53,6 +53,12 @@ class GymClassScheduleResource extends Resource
                     ->required()
                     ->numeric()
                     ->minValue(1),
+
+                TextInput::make('available_slot')
+                    ->label('Slot Tersedia')
+                    ->required()
+                    ->numeric()
+                    ->minValue(0),
             ]);
     }
 
@@ -67,7 +73,7 @@ class GymClassScheduleResource extends Resource
 
                 TextColumn::make('date')
                     ->label('Tanggal')
-                    ->date()
+                    ->date('l, d F Y')
                     ->sortable(),
 
                 TextColumn::make('start_time')
@@ -80,7 +86,15 @@ class GymClassScheduleResource extends Resource
 
                 TextColumn::make('slot')
                     ->label('Slot')
+                    ->verticallyAlignCenter()
+                    ->alignCenter()
                     ->numeric(),
+
+                TextColumn::make('available_slot')
+                    ->label('Slot Tersedia')
+                    ->verticallyAlignCenter()
+                    ->alignCenter()
+                    ->numeric()
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('gym_class_id')
