@@ -28,6 +28,7 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'profile_image' => ['nullable', 'image'], // max 2MB image
             'profile_bio' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string', 'max:20'],
         ];
     }
 }
