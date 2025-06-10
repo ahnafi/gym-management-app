@@ -138,9 +138,8 @@ class TransactionResource extends Resource
                     ->formatStateUsing(fn($state) => $state ? $state->format('Y-m-d') : '-'),
 
                 TextColumn::make('amount')
-                    ->money('IDR')
                     ->label('Nominal Pembayaran')
-                    ->formatStateUsing(fn($state) => $state ?? '-'),
+                    ->money('IDR'),
 
                 TextColumn::make('payment_status')
                     ->badge()
