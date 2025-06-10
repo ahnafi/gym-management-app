@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('day_left');
             $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->datetime('end_date')->nullable();
             $table->enum('status', ['active', 'cancelled', 'completed'])->default('active');
 
             $table->foreignId('user_id')->constrained('users');
@@ -24,7 +24,6 @@ return new class extends Migration
 
             $table->timestamps();
         });
-
     }
 
     /**
