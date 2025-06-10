@@ -42,10 +42,10 @@ class AssignmentService
             $membershipHistory->start_date = $now;
             $user->membership_status = 'active';
         } else {
-            $membershipHistory->start_date = $last_membership_end_date->copy()->addDay();
+            $membershipHistory->start_date = Carbon::parse($last_membership_end_date)->copy()->addDay();
         }
 
-        $membershipHistory->end_date = $membershipHistory->start_date->copy()->addDays($day_of_membership);
+        $membershipHistory->end_date = Carbon::parse($membershipHistory->start_date)->copy()->addDays($day_of_membership);
 
         $user->membership_end_date = $membershipHistory->end_date;
 

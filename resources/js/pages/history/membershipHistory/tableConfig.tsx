@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { MembershipHistory } from '@/types';
+import { MembershipHistoryFull } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { format, parseISO } from 'date-fns';
 import { ArrowUpDown } from 'lucide-react';
@@ -16,7 +16,7 @@ export const membershipColumnLabels: Record<string, string> = {
 };
 
 // Submission Columns Definition
-export const membershipColumns: ColumnDef<MembershipHistory>[] = [
+export const membershipColumns: ColumnDef<MembershipHistoryFull>[] = [
     {
         header: '#',
         cell: ({ row }) => row.index + 1,
