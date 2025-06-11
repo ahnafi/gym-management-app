@@ -27,6 +27,14 @@ class PersonalTrainerSchedule extends Pivot
         'check_out_time' => 'datetime',
     ];
 
+    public function scopeForTrainer($query, $trainerId)
+    {
+        return $query->whereHas('personalTrainerAssignment', function ($q) use ($trainerId) {
+            $q->where('personal_trainer_id', $trainerId);
+        });
+    }
+
+
     public function personalTrainerAssignment(): BelongsTo
     {
         return $this->belongsTo(PersonalTrainerAssignment::class, 'personal_trainer_assignment_id');
