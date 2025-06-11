@@ -80,7 +80,7 @@ const riwayatItems: NavItem[] = [
 const personalTrainerItems: NavItem[] = [
     {
         title: 'Personal Trainer Dashboard',
-        href: '/personal-trainer-dashboard',
+        href: '/personal-trainer',
         icon: PersonStanding,
     }
 ];
