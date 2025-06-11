@@ -349,3 +349,48 @@ interface DashboardProps {
     summary: DashboardSummary;
     data: DashboardData;
 }
+
+export interface DashboardSummary {
+    currentMonthSchedulesCount: number;
+    currentWeekSchedulesCount: number;
+    totalSchedules: number;
+    completedSessions: number;
+    cancelledSessions: number;
+    missedSessions: number;
+    totalAssignedClients: number;
+    inProgressAssignments: number;
+    completedAssignments: number;
+}
+
+// Each trainee with package and user info
+export interface MemberTrainee {
+    id: number;
+    day_left: number;
+    start_date: string;
+    end_date: string | null;
+    status: 'active' | 'cancelled' | 'completed';
+    user_id: number;
+    personal_trainer_id: number;
+    personal_trainer_package_id: number;
+    created_at: string;
+    updated_at: string;
+
+    user: User;
+    personalTrainerPackage: PersonalTrainerPackage;
+}
+
+// Package usage count (note: renamed 'package' to 'pkg' to avoid reserved keyword issues)
+export interface PackageUsageSummary {
+    count: number;
+    package: PersonalTrainerPackage;
+}
+
+// Final props for your `personalTrainerDashboard/index` page
+export interface PersonalTrainerDashboardProps {
+    summary: DashboardSummary;
+    memberTrainee: MemberTrainee[];
+    packageSummary: {
+        mostTakenPackage: PackageUsageSummary | null; // changed from `undefined` to allow Laravel nulls
+        allPackageCounts: PackageUsageSummary[];
+    };
+}
