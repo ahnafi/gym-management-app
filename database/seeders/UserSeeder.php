@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             // 25 Trainer
 
             [
-                'name' => 'Trainer One',
+                'name' => 'Athallah',
                 'email' => 'trainer1@example.com',
                 'password' => Hash::make('qwerty123'),
                 'email_verified_at' => now(),
@@ -344,7 +344,7 @@ class UserSeeder extends Seeder
 
             // 25 Member
              [
-                'name' => 'Member 1',
+                'name' => 'Supri',
                 'email' => 'member@example.com',
                 'password' => Hash::make('qwerty123'),
                 'email_verified_at' => now(),
@@ -353,7 +353,7 @@ class UserSeeder extends Seeder
                 'membership_status' => 'inactive',
                 'membership_end_date' => now()->addDays(135),
                 'profile_bio' => 'Aktif mengikuti kelas zumba.',
-                'profile_image' => 'user_profile\/default-user_profile.jpg',
+                'profile_image' => 'user_profile\/m1.jpg',
             ],
             [
                 'name' => 'Member 2',
