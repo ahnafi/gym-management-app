@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
 use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
