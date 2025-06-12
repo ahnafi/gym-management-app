@@ -99,20 +99,6 @@ class PersonalTrainerResource extends Resource
 
                 TextColumn::make('userPersonalTrainer.name')
                     ->label('Personal Trainer'),
-
-                TextColumn::make('metadata')
-                    ->label('Metadata')
-                    ->formatStateUsing(function ($state, $record) {
-                        $decoded = $record->metadata; // use casted model field
-
-                        if (!is_array($decoded)) return '-';
-
-                        return collect($decoded)
-                            ->map(fn($value, $key) => "<strong>{$key}</strong>: {$value}")
-                            ->implode('<br>');
-                    })
-                    ->html()
-                    ->wrap()
         ])
             ->actions([
                 Tables\Actions\EditAction::make(),

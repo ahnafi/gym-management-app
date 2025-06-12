@@ -3,6 +3,7 @@
 namespace App\Filament\PersonalTrainer\Resources\PersonalTrainerAssignmentResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -37,10 +38,11 @@ class PersonalTrainerSchedulesRelationManager extends RelationManager
                 Forms\Components\TimePicker::make('check_out_time')
                     ->label('Waktu Keluar'),
 
-                Forms\Components\Textarea::make('training_log')
-                    ->label('Log Latihan (JSON Opsional)')
-                    ->rows(4)
-                    ->helperText('Masukkan data dalam format JSON jika diperlukan.'),
+                Forms\Components\KeyValue::make('training_log')
+                    ->label('Log Pelatihan')
+                    ->keyLabel('Kunci')
+                    ->valueLabel('Isi')
+                    ->addActionLabel('Tambah Data'),
 
                 Forms\Components\Textarea::make('trainer_notes')
                     ->label('Catatan Pelatih')

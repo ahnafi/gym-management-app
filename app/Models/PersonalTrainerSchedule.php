@@ -22,6 +22,7 @@ class PersonalTrainerSchedule extends Pivot
     ];
 
     protected $casts = [
+        'training_log' => 'array',
         'scheduled_at' => 'datetime',
         'check_in_time' => 'datetime',
         'check_out_time' => 'datetime',

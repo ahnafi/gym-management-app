@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonalTrainerAssignmentResource\Pages;
+use App\Filament\Resources\PersonalTrainerAssignmentResource\RelationManagers\PersonalTrainerSchedulesRelationManager;
 use App\Models\PersonalTrainerAssignment;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -136,7 +137,7 @@ class PersonalTrainerAssignmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PersonalTrainerSchedulesRelationManager::class
         ];
     }
 
