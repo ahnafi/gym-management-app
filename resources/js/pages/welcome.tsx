@@ -1,10 +1,12 @@
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import AppearanceToggle from '@/components/appearance-compact';
 import { PageProps } from '@/types';
 
 export default function Welcome({ auth }: PageProps<{ auth: any }>) {
     return (
-        <div className="relative max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <>
+            <Head title="Welcome to Platinum Gym" />
+            <div className="relative max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
 
             {/* Appearance Toggle Positioned Top-Right */}
             <div className="absolute top-4 right-4 z-50">
@@ -57,5 +59,6 @@ export default function Welcome({ auth }: PageProps<{ auth: any }>) {
                 </div>
             </div>
         </div>
-    );
+        </>
+        );
 }

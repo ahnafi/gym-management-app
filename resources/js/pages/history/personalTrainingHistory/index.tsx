@@ -30,7 +30,7 @@ import { ChevronDown, X, Search, Filter, User, CheckCircle, AlertCircle, Trophy,
 import type * as React from "react"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
-import { personalTrainingColumnLabels, personalTrainingColumns } from "./tableConfig"
+import { personalTrainingColumnLabels, getPersonalTrainingColumns } from "./tableConfig"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -48,6 +48,8 @@ export default function PersonalTrainerHistories({
     personalTrainers: SimpleOption[]
     personalTrainerPackages: SimpleOption[]
 }) {
+    const personalTrainingColumns = getPersonalTrainingColumns()
+
     // Personal Training Table State
     const [PTSorting, setPTSorting] = useState<SortingState>([])
     const [PTFilters, setPTFilters] = useState<ColumnFiltersState>([])

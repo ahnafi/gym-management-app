@@ -30,7 +30,7 @@ import { ChevronDown, Boxes, X, Search, Filter, CreditCard, Users, Clock, CheckC
 import type * as React from "react"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
-import { membershipColumnLabels, membershipColumns } from "./tableConfig"
+import { membershipColumnLabels, getMembershipColumns} from "./tableConfig"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -46,6 +46,8 @@ export default function MembershipHistories({
     membershipHistories: MembershipHistoryFull[]
     membershipPackages: SimpleOption[]
 }) {
+    const membershipColumns = getMembershipColumns();
+
     // Membership Table State
     const [membershipSorting, setMembershipSorting] = useState<SortingState>([])
     const [membershipFilters, setMembershipFilters] = useState<ColumnFiltersState>([])

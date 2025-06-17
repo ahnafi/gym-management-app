@@ -30,7 +30,7 @@ import { ChevronDown, X, Dumbbell, Search, Filter, Clock, CheckCircle, AlertCirc
 import type * as React from "react"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
-import { gymClassColumnLabels, gymClassColumns } from "./tableConfig"
+import { gymClassColumnLabels, getGymClassColumns } from "./tableConfig"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -46,6 +46,9 @@ export default function GymClassHistories({
     gymClassHistories: GymClassHistory[]
     gymClasses: SimpleOption[]
 }) {
+
+    const gymClassColumns = getGymClassColumns()
+
     // Gym Class Table State
     const [gymClassSorting, setGymClassSorting] = useState<SortingState>([])
     const [gymClassFilters, setGymClassFilters] = useState<ColumnFiltersState>([])
