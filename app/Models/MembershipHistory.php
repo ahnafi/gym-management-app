@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -11,7 +12,7 @@ use Illuminate\Support\Str;
 
 class MembershipHistory extends Pivot
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'membership_histories';
 
