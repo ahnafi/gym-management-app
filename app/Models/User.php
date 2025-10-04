@@ -35,7 +35,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'membership_status',
         'membership_end_date',
         'profile_bio',
-        'profile_image'
+        'profile_image',
+        'email_verified_at'
     ];
 
     /**
@@ -131,7 +132,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function personalTrainer(): HasOne
     {
-        return $this->hasOne(PersonalTrainer::class);
+        // PersonalTrainer model uses `user_personal_trainer_id` as the FK
+        return $this->hasOne(PersonalTrainer::class, 'user_personal_trainer_id');
     }
 
     public function personalTrainerAssignments(): HasMany
